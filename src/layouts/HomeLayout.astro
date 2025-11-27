@@ -1,0 +1,99 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | Pixelhada</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-home">
+      <div class="navbar-container">
+        <a href="/" class="navbar-logo">
+          <span class="logo-mark">✦</span>
+          <span class="logo-text">Pixelhada</span>
+        </a>
+
+        <button class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="navbar-menu">
+          <li>
+            <a href="#servicios" class="nav-link">
+              <span>Servicios</span>
+            </a>
+          </li>
+          <li>
+            <a href="#equipo" class="nav-link">
+              <span>Talento</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contacto" class="nav-link">
+              <span>Contacto</span>
+            </a>
+          </li>
+          <li>
+            <a href="/talento/oswaldo-teran" class="nav-link nav-link-cta">
+              <span>Ver portafolios</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="page-wrapper">
+      <slot />
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>© 2025 Pixelhada. Todos los derechos reservados.</p>
+        <div class="footer-links">
+          <a href="#privacidad">Privacidad</a>
+          <a href="#terminos">Términos</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.querySelector('.navbar-toggle') as HTMLButtonElement;
+        const menu = document.querySelector('.navbar-menu') as HTMLElement;
+        
+        if (toggle && menu) {
+          toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            menu.setAttribute('data-visible', String(!isExpanded));
+          });
+
+          const navLinks = menu.querySelectorAll('.nav-link');
+          navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+              toggle.setAttribute('aria-expanded', 'false');
+              menu.setAttribute('data-visible', 'false');
+            });
+          });
+
+          document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target as Node) && !toggle.contains(e.target as Node)) {
+              toggle.setAttribute('aria-expanded', 'false');
+              menu.setAttribute('data-visible', 'false');
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
+
+

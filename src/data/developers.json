@@ -1,0 +1,110 @@
+[
+    {
+      "slug": "oswaldo-teran",
+      "nombre": "Oswaldo",
+      "apellido": "Terán",
+      "roles": ["Desarrollador Web", "Maquetador Web"],
+      "bio": "Soy estudiante de Inteligencia Artificial y desarrollador web. Me apasiona crear, aprender y llevar mis ideas a la realidad a través de la programación y creatividad.",
+      "foto": "/src/assets/images/Oswaldo Teran.svg",
+      "skills": [
+        { "name": "HTML5", "level": 95 },
+        { "name": "CSS3", "level": 90 },
+        { "name": "JavaScript", "level": 85 },
+        { "name": "React", "level": 80 },
+        { "name": "TypeScript", "level": 75 },
+        { "name": "Node.js", "level": 70 },
+        { "name": "Git", "level": 85 },
+        { "name": "Figma", "level": 75 }
+      ],
+      "proyectos": [
+        {
+          "title": "E-commerce Moderno",
+          "description": "Plataforma de comercio electrónico con carrito de compras y pasarela de pagos integrada.",
+          "tags": ["React", "Node.js", "MongoDB"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=E-commerce",
+          "link": "#"
+        },
+        {
+          "title": "Dashboard Analytics",
+          "description": "Panel de control con visualización de datos en tiempo real y gráficos interactivos.",
+          "tags": ["React", "TypeScript", "Chart.js"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Dashboard",
+          "link": "#"
+        },
+        {
+          "title": "Landing Page Corporativa",
+          "description": "Sitio web corporativo con diseño responsive y animaciones fluidas.",
+          "tags": ["HTML5", "CSS3", "JavaScript"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Landing",
+          "link": "#"
+        },
+        {
+          "title": "App de Tareas",
+          "description": "Aplicación de gestión de tareas con sincronización en la nube.",
+          "tags": ["React", "Firebase", "CSS3"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Todo+App",
+          "link": "#"
+        },
+        {
+          "title": "Portafolio Creativo",
+          "description": "Sitio web portafolio con galería interactiva y efectos visuales modernos.",
+          "tags": ["HTML5", "CSS3", "JavaScript"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Portfolio",
+          "link": "#"
+        },
+        {
+          "title": "API REST",
+          "description": "API RESTful con autenticación JWT y documentación completa.",
+          "tags": ["Node.js", "Express", "MongoDB"],
+          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=API",
+          "link": "#"
+        }
+      ],
+      "educacion": [
+        {
+          "titulo": "Ingeniería en Sistemas",
+          "institucion": "Universidad Tecnológica",
+          "periodo": "2018 - 2022",
+          "descripcion": "Especialización en desarrollo de software y arquitectura de sistemas."
+        },
+        {
+          "titulo": "Técnico en Programación",
+          "institucion": "Instituto Técnico Superior",
+          "periodo": "2016 - 2018",
+          "descripcion": "Formación técnica en lenguajes de programación y bases de datos."
+        }
+      ],
+      "cursos": [
+        {
+          "titulo": "React Avanzado",
+          "plataforma": "Udemy",
+          "año": "2023",
+          "horas": 40
+        },
+        {
+          "titulo": "TypeScript Masterclass",
+          "plataforma": "Platzi",
+          "año": "2023",
+          "horas": 30
+        },
+        {
+          "titulo": "Diseño UI/UX",
+          "plataforma": "Coursera",
+          "año": "2022",
+          "horas": 50
+        },
+        {
+          "titulo": "Node.js Backend Development",
+          "plataforma": "Udemy",
+          "año": "2022",
+          "horas": 35
+        },
+        {
+          "titulo": "Git y GitHub Profesional",
+          "plataforma": "Platzi",
+          "año": "2021",
+          "horas": 20
+        }
+      ]
+    }
+  ]

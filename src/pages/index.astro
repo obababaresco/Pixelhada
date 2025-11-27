@@ -1,16 +1,57 @@
 ---
-
+import HomeLayout from '../layouts/HomeLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+
+<HomeLayout title="Inicio">
+  <main class="main-container">
+    <section class="hero-section">
+      <h1 class="hero-title">
+        Bienvenidos a <span class="highlight">Pixelhada</span>
+      </h1>
+      <p class="hero-subtitle">
+        Desarrollamos el futuro de la web con creatividad e innovación.
+      </p>
+    </section>
+    
+    <section id="servicios" class="content-section">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3 class="service-card-title">Desarrollo Web</h3>
+          <p class="service-card-text">Creamos experiencias web modernas y funcionales.</p>
+        </div>
+        <div class="service-card">
+          <h3 class="service-card-title">Diseño UI/UX</h3>
+          <p class="service-card-text">Diseños intuitivos que conectan con tus usuarios.</p>
+        </div>
+        <div class="service-card">
+          <h3 class="service-card-title">Consultoría</h3>
+          <p class="service-card-text">Asesoramiento estratégico para tu proyecto digital.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="equipo" class="content-section">
+      <h2 class="section-title">Nuestro Talento</h2>
+      <div class="section-content">
+        <p class="section-text">
+          Conoce a nuestro equipo de profesionales apasionados por la tecnología.
+        </p>
+        <a href="/talento/juan-perez" class="btn-primary">
+          Ver portafolio de Juan
+        </a>
+      </div>
+    </section>
+
+    <section id="contacto" class="content-section section-content">
+      <h2 class="section-title">¿Listo para comenzar?</h2>
+      <p class="section-text-large">
+        Contáctanos y convirtamos tus ideas en realidad.
+      </p>
+      <a href="mailto:contacto@pixelhada.com" class="btn-secondary">
+        Contactar
+      </a>
+    </section>
+  </main>
+</HomeLayout>
