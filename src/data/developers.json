@@ -77,7 +77,7 @@
           "title": "E-commerce Tecnológico",
           "description": "Tienda virtual completa con diseño a medida, gestión de inventario y optimización de conversión.",
           "tags": ["WordPress", "Elementor", "WooCommerce", "Figma"],
-          "image": "/images/Proyectos/compujob.png",
+          "image": "/images/Proyectos/compu-job.png",
           "link": "https://compujob.com.ec/",
           "pais": "Ecuador"
         },
@@ -93,7 +93,7 @@
           "title": "Web Corporativa Data Science",
           "description": "Sitio informativo optimizado para agencias de tecnología con enfoque en velocidad y SEO.",
           "tags": ["WordPress", "Figma", "Elementor"],
-          "image": "/images/Proyectos/fasrdatascience.png",
+          "image": "/images/Proyectos/fastdatascience.png",
           "link": "https://fastdatascience.com/",
           "pais": "Estados Unidos"
         },
