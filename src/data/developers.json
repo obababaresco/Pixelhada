@@ -5,7 +5,14 @@
       "apellido": "Terán",
       "roles": ["Web Developer", "Web Designer", "WordPress Developer"],
       "bio": "Soy ingeniero de sistemas y desarrollador web. Me apasiona crear, aprender y llevar mis ideas a la realidad a través de la programación y creatividad.",
-      "foto": "/src/assets/images/oswaldo.png",
+      "foto": "/src/assets/images/Oswaldo Teran.png",
+      "social": {
+        "instagram": "https://www.instagram.com/obababaresco/",
+        "linkedin": "https://www.linkedin.com/in/oswaldo-ramon-teran-babaresco/",
+        "github": "https://github.com/obababaresco"
+      },
+      "whatsapp": "+585781984",
+      "cv": "/src/assets/cv/oswaldo-teran-cv.pdf",
       "skills": [
         { "name": "HTML5", "level": 95 },
         { "name": "CSS3", "level": 90 },
@@ -19,92 +26,174 @@
       ],
       "proyectos": [
         {
-          "title": "Software educativo",
-          "description": "Plataforma de comercio electrónico con carrito de compras y pasarela de pagos integrada.",
-          "tags": ["React", "Node.js", "MongoDB"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=E-commerce",
-          "link": "#"
+          "title": "Software educativo online",
+          "description": "Diseño y maquetación de componentes UI responsivos aplicando buenas prácticas para documentar el código. ",
+          "tags": ["Angular", "TypeScript", "Bootstrap", "Figma", "UI Design", "HTML5 & CSS3"],
+          "image": "/src/assets/images/Proyectos/Salware.png",
+          "link": "https://app.fundacionsalware.org/auth/login",
+          "pais": "España"
         },
         {
-          "title": "Dashboard Analytics",
-          "description": "Panel de control con visualización de datos en tiempo real y gráficos interactivos.",
-          "tags": ["React", "TypeScript", "Chart.js"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Dashboard",
-          "link": "#"
+          "title": "CMS Dinámico HubSpot",
+          "description": "Desarrollo de temas personalizados, módulos dinámicos y consumo de API para integración de vacantes IT.",
+          "tags": ["HubSpot", "API Integration", "JavaScript", "HTML5 & CSS3"],
+          "image": "/src/assets/images/Proyectos/Interfell.png",
+          "link": "https://www.interfell.com/",
+          "pais": "Colombia"
         },
         {
-          "title": "Landing Page Corporativa",
-          "description": "Sitio web corporativo con diseño responsive y animaciones fluidas.",
-          "tags": ["HTML5", "CSS3", "JavaScript"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Landing",
-          "link": "#"
+          "title": "Sistema de Gestión Académica Intisana",
+          "description": "Maquetación de flujos de UI completos para 4 roles de usuario (Admin, Profesor, Padres, Alumnos) y dashboards de métricas.",
+          "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap"],
+          "image": "/src/assets/images/Proyectos/Intisana.png",
+          "link": "#",
+          "pais": "Ecuador"
         },
         {
-          "title": "App de Tareas",
-          "description": "Aplicación de gestión de tareas con sincronización en la nube.",
-          "tags": ["React", "Firebase", "CSS3"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Todo+App",
-          "link": "#"
+          "title": "Sitio Web de Diseño Interior",
+          "description": "Portal corporativo con diseño personalizado de alto impacto visual y optimización SEO.",
+          "tags": ["WordPress", "Elementor", "Figma"],
+          "image": "/src/assets/images/Proyectos/Alexandrias Design.png",
+          "link": "https://alexandriasdesign.com/",
+          "pais": "Estados Unidos"
         },
         {
-          "title": "Portafolio Creativo",
-          "description": "Sitio web portafolio con galería interactiva y efectos visuales modernos.",
-          "tags": ["HTML5", "CSS3", "JavaScript"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=Portfolio",
-          "link": "#"
+          "title": "Portal de servicio técnico industrial",
+          "description": "Web informativa con custom post types a la medida y diseño personalizado",
+          "tags": ["WordPress", "Elementor", "Figma"],
+          "image": "/src/assets/images/Proyectos/ORBIT.png",
+          "link": "https://orbitvibra.com/",
+          "pais": "Venezuela"
         },
         {
-          "title": "API REST",
-          "description": "API RESTful con autenticación JWT y documentación completa.",
-          "tags": ["Node.js", "Express", "MongoDB"],
-          "image": "https://via.placeholder.com/400x250/2BE4C2/1E1E1E?text=API",
-          "link": "#"
-        }
-      ],
-      "educacion": [
-        {
-          "titulo": "Ingeniería en Sistemas",
-          "institucion": "Universidad Tecnológica",
-          "periodo": "2018 - 2022",
-          "descripcion": "Especialización en desarrollo de software y arquitectura de sistemas."
+          "title": "Directorio Turístico Geolocalizado",
+          "description": "Plataforma de gestión de locales con filtrado avanzado, integración de mapas y rutas en tiempo real.",
+          "tags": ["WordPress", "Elementor", "API Integration", "JavaScript"],
+          "image": "/src/assets/images/Proyectos/devuelta al centro.jpg",
+          "link": "https://www.devueltaalcentro.com/",
+          "pais": "Ecuador"
         },
         {
-          "titulo": "Técnico en Programación",
-          "institucion": "Instituto Técnico Superior",
-          "periodo": "2016 - 2018",
-          "descripcion": "Formación técnica en lenguajes de programación y bases de datos."
+          "title": "E-commerce Tecnológico",
+          "description": "Tienda virtual completa con diseño a medida, gestión de inventario y optimización de conversión.",
+          "tags": ["WordPress", "Elementor", "WooCommerce", "Figma"],
+          "image": "/src/assets/images/Proyectos/Compujob.png",
+          "link": "https://compujob.com.ec/",
+          "pais": "Ecuador"
+        },
+        {
+          "title": "Interfaz de Software ATM",
+          "description": "Maquetación integral de 400 pantallas para telecajero, abarcando flujos transaccionales complejos y módulos de mantenimiento.",
+          "tags": ["HTML5 & CSS3", "Figma", "UI Design"],
+          "image": "/src/assets/images/Proyectos/Telecajero.png",
+          "link": "#",
+          "pais": "Ecuador"
+        },
+        {
+          "title": "Web Corporativa Data Science",
+          "description": "Sitio informativo optimizado para agencias de tecnología con enfoque en velocidad y SEO.",
+          "tags": ["WordPress", "Figma", "Elementor"],
+          "image": "/src/assets/images/Proyectos/Fasrdatascience.png",
+          "link": "https://fastdatascience.com/",
+          "pais": "Estados Unidos"
+        },
+        {
+          "title": "Plataforma E-Learning GMAT",
+          "description": "Sistema educativo con aulas virtuales en vivo, simulación de exámenes y paneles administrativos.",
+          "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap", "Angular", "UI Design"],
+          "image": "/src/assets/images/Proyectos/Gmatdudes.png",
+          "link": "https://gmat.gmatdudes.com/",
+          "pais": "Perú"
+        },
+        {
+          "title": "Sistema de Entrenamiento MLM",
+          "description": "Software para reclutamiento y capacitación de distribuidores con gestión de usuarios multinivel.",
+          "tags": ["HTML5 & CSS3","JavaScript", "Bootstrap", "Angular", "UI Design"],
+          "image": "/src/assets/images/Proyectos/myhbl.png",
+          "link": "https://myhbl.com/",
+          "pais": "Colombia"
+        },
+        {
+          "title": "Web Marca Personal",
+          "description": "Desarrollo frontend de alto rendimiento enfocado en la identidad digital y posicionamiento web.",
+          "tags": ["HTML5 & CSS3", "JavaScript", "Figma", "UI Design"],
+          "image": "/src/assets/images/Proyectos/Alex Fernandez.png",
+          "link": "https://alexfernandez.com/",
+          "pais": "Estados Unidos"
+        },
+        {
+          "title": "Sistema de Gestión Gubernamental",
+          "description": "Análisis, modelado de datos y arquitectura de software para administración de recursos estatales (SIARE).",
+          "tags": ["Angular", "TypeScript", "Data Analysis"],
+          "image": "/src/assets/images/Proyectos/Siare.png",
+          "link": "#",
+          "pais": "México"
         }
       ],
       "cursos": [
         {
-          "titulo": "React Avanzado",
-          "plataforma": "Udemy",
-          "año": "2023",
-          "horas": 40
-        },
-        {
-          "titulo": "TypeScript Masterclass",
+          "titulo": "Fundamentos de Angular",
           "plataforma": "Platzi",
-          "año": "2023",
-          "horas": 30
+          "año": "2022",
+          "horas": 15
         },
         {
-          "titulo": "Diseño UI/UX",
-          "plataforma": "Coursera",
+          "titulo": "FrontEnd Developer",
+          "plataforma": "Platzi",
           "año": "2022",
-          "horas": 50
+          "horas": 15
         },
         {
-          "titulo": "Node.js Backend Development",
-          "plataforma": "Udemy",
-          "año": "2022",
-          "horas": 35
+          "titulo": "Curso práctico de WordPress",
+          "plataforma": "Platzi",
+          "año": "2025",
+          "horas": 15
+        },
+        {
+          "titulo": "Curso práctico de HTML y CSS",
+          "plataforma": "Platzi",
+          "año": "2025",
+          "horas": 16
         },
         {
           "titulo": "Git y GitHub Profesional",
           "plataforma": "Platzi",
-          "año": "2021",
-          "horas": 20
+          "año": "2023",
+          "horas": 22
+        },
+        {
+          "titulo": "Maquetación Mobile First",
+          "plataforma": "Platzi",
+          "año": "2025",
+          "horas": 25
+        },
+        {
+          "titulo": "Creación de Páginas Web",
+          "plataforma": "Platzi",
+          "año": "2025",
+          "horas": 14
+        },
+        {
+          "titulo": "Universidad Computense de Madrid",
+          "plataforma": "Platzi",
+          "año": "2015",
+          "horas": 40
+        }
+      ],
+      "recomendaciones": [
+        {
+          "autor": "Génesis Andreina Durán Linárez",
+          "cargo": "Graphic designer | UX UI designer | Digital design",
+          "relacion": "Trabajó con Oswaldo en el mismo equipo",
+          "fecha": "2 de mayo de 2023",
+          "mensaje": "Tengo la oportunidad de dar mi opinión personal y profesional sobre Oswaldo. En lo personal puedo decir que es una persona ordenada, comprometida, extremadamente responsable. En lo profesional podría extenderme, tener a Oswaldo en un equipo de trabajo significa que nada estará hecho por estar hecho porque su atención al detalle es increíble, se preocupa porque todo esté perfecto."
+        },
+        {
+          "autor": "Gerson Abdiel Vera Morales",
+          "cargo": "Gestor de Proyectos de Software | Desarrollo y Gestión de Equipos Remotos",
+          "relacion": "Supervisó directamente a Oswaldo",
+          "fecha": "2 de mayo de 2023",
+          "mensaje": "Es un placer recomendar a Oswaldo Terán Babaresco como desarrollador Front-End. Con su sólido conocimiento en plataformas como Hubspot, Wordpress y SEO, ha demostrado ser un talento valioso para cualquier proyecto. Su habilidad para el desarrollo web es excepcional, pero lo que realmente lo distingue es su enfoque en el diseño y la experiencia de usuario."
         }
       ]
     }

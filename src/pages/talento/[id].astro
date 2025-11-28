@@ -13,14 +13,8 @@ interface Proyecto {
   description: string;
   tags: string[];
   image: string;
-  link: string;
-}
-
-interface Educacion {
-  titulo: string;
-  institucion: string;
-  periodo: string;
-  descripcion: string;
+  link?: string;
+  pais: string;
 }
 
 interface Curso {
@@ -30,6 +24,20 @@ interface Curso {
   horas: number;
 }
 
+interface SocialLinks {
+  instagram?: string;
+  linkedin?: string;
+  github?: string;
+}
+
+interface Recommendation {
+  autor: string;
+  cargo: string;
+  relacion?: string;
+  fecha?: string;
+  mensaje: string;
+}
+
 interface Developer {
   slug: string;
   nombre: string;
@@ -37,10 +45,13 @@ interface Developer {
   roles: string[];
   bio: string;
   foto?: string;
+  social?: SocialLinks;
+  whatsapp?: string;
+  cv?: string;
   skills: Skill[];
   proyectos: Proyecto[];
-  educacion: Educacion[];
   cursos: Curso[];
+  recomendaciones?: Recommendation[];
 }
 
 interface Props {
@@ -61,6 +72,8 @@ const { dev } = Astro.props;
 
 // Extraer todos los tags únicos de los proyectos
 const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
+const hasRecommendations = dev.recomendaciones && dev.recomendaciones.length > 0;
+const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.length > 3;
 ---
 
 <Layout title={`Portafolio de ${dev.nombre} ${dev.apellido}`}>
@@ -77,40 +90,63 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
             {dev.bio}
           </p>
           <div class="hero-buttons">
-            <a href="#contacto" class="btn-hire">
-              <span>→</span> Contratar
-            </a>
-            <a href="#" class="btn-cv">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              Descargar CV
-            </a>
+            {dev.whatsapp ? (
+              <a href={`https://wa.me/${dev.whatsapp.replace(/[^0-9]/g, '')}`} class="btn-hire" target="_blank" rel="noopener noreferrer">
+                <span>→</span> Contactar
+              </a>
+            ) : (
+              <a href="#contacto" class="btn-hire">
+                <span>→</span> Contactar
+              </a>
+            )}
+            {dev.cv ? (
+              <a href={dev.cv} class="btn-cv" download>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Descargar CV
+              </a>
+            ) : (
+              <a href="#" class="btn-cv">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Descargar CV
+              </a>
+            )}
           </div>
           <div class="hero-social">
             <span class="social-label">SÍGUEME</span>
             <div class="social-icons">
-              <a href="#" class="social-icon" aria-label="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              <a href="#" class="social-icon" aria-label="LinkedIn">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-              <a href="#" class="social-icon" aria-label="GitHub">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
+              {dev.social?.instagram && (
+                <a href={dev.social.instagram} class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+              )}
+              {dev.social?.linkedin && (
+                <a href={dev.social.linkedin} class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg>
+                </a>
+              )}
+              {dev.social?.github && (
+                <a href={dev.social.github} class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -129,7 +165,7 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
     </header>
 
     <!-- Skills Section -->
-    <section class="skills-section section-bg" id="skills">
+    <section class="skills-section" id="skills">
       <div class="section-container">
         <h2 class="section-title">Habilidades Técnicas</h2>
         <div class="skills-grid">
@@ -140,7 +176,7 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
                 <span class="skill-percentage">{skill.level}%</span>
               </div>
               <div class="skill-bar">
-                <div class="skill-progress" style={`width: ${skill.level}%`}></div>
+                <div class="skill-progress" data-level={skill.level} style="width: 0%"></div>
               </div>
             </div>
           ))}
@@ -159,18 +195,22 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
           ))}
         </div>
         <div class="projects-grid" id="projects-grid">
-          {dev.proyectos.map((proyecto) => (
-            <article class="project-card" data-tags={JSON.stringify(proyecto.tags)}>
+          {dev.proyectos.map((proyecto, index) => (
+            <article class="project-card" data-tags={JSON.stringify(proyecto.tags)} data-index={index} style={index >= 6 ? "display: none;" : ""}>
               <div class="project-image-wrapper">
                 <img src={proyecto.image} alt={proyecto.title} class="project-image" />
-                <div class="project-overlay">
-                  <a href={proyecto.link} class="project-link" target="_blank" rel="noopener">
-                    Ver Proyecto →
-                  </a>
-                </div>
+                {proyecto.link && proyecto.link !== "#" && proyecto.link.trim() !== "" && (
+                  <div class="project-overlay">
+                    <a href={proyecto.link} class="project-link" target="_blank" rel="noopener">
+                      Ver Proyecto →
+                    </a>
+                  </div>
+                )}
               </div>
               <div class="project-content">
-                <h3 class="project-title">{proyecto.title}</h3>
+                <div class="project-header">
+                  <h3 class="project-title">{proyecto.title}</h3>
+                </div>
                 <p class="project-description">{proyecto.description}</p>
                 <div class="project-tags">
                   {proyecto.tags.map((tag) => (
@@ -178,54 +218,96 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
                   ))}
                 </div>
               </div>
+              <div class="project-country-wrapper">
+                <span class="project-country">{proyecto.pais}</span>
+              </div>
             </article>
+          ))}
+        </div>
+        {dev.proyectos.length > 6 && (
+          <div class="load-more-container">
+            <button class="load-more-btn" id="load-more-projects">
+              <span>Ver más proyectos</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section" id="cursos">
+      <div class="section-container">
+        <h2 class="section-title">Cursos Realizados</h2>
+        <div class="courses-grid">
+          {dev.cursos.map((curso) => (
+            <div class="course-card">
+              <div class="course-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+              <div class="course-content">
+                <h3 class="course-title">{curso.titulo}</h3>
+                <div class="course-info">
+                  <span class="course-platform">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                      <line x1="8" y1="21" x2="16" y2="21"></line>
+                      <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                    {curso.plataforma}
+                  </span>
+                  <span class="course-year">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {curso.año}
+                  </span>
+                  <span class="course-hours">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    {curso.horas}h
+                  </span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Education & Courses Section -->
-    <section class="education-section" id="estudios">
-      <div class="section-container">
-        <div class="education-grid">
-          <!-- Education -->
-          <div class="education-column">
-            <h2 class="section-title">Educación</h2>
-            <div class="education-list">
-              {dev.educacion.map((edu) => (
-                <div class="education-item">
-                  <div class="education-header">
-                    <h3 class="education-title">{edu.titulo}</h3>
-                    <span class="education-period">{edu.periodo}</span>
+    {hasRecommendations && (
+      <section class="recommendations-section" id="recomendaciones">
+        <div class="section-container">
+          <h2 class="section-title">Recomendaciones</h2>
+          <div class={`recommendations-wrapper ${hasRecommendationCarousel ? 'carousel-active' : ''}`} data-carousel={hasRecommendationCarousel ? 'true' : 'false'}>
+            <div class={`recommendations-list ${hasRecommendationCarousel ? 'is-carousel' : ''}`}>
+              {dev.recomendaciones?.map((rec) => (
+                <article class="recommendation-card">
+                  <div class="recommendation-header">
+                    <div>
+                      <h3 class="recommendation-author">{rec.autor}</h3>
+                      <p class="recommendation-role">{rec.cargo}</p>
+                    </div>
+                    {rec.fecha && <span class="recommendation-date">{rec.fecha}</span>}
                   </div>
-                  <p class="education-institution">{edu.institucion}</p>
-                  <p class="education-description">{edu.descripcion}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <!-- Courses -->
-          <div class="courses-column">
-            <h2 class="section-title">Cursos Realizados</h2>
-            <div class="courses-list">
-              {dev.cursos.map((curso) => (
-                <div class="course-item">
-                  <div class="course-header">
-                    <h3 class="course-title">{curso.titulo}</h3>
-                    <span class="course-year">{curso.año}</span>
-                  </div>
-                  <div class="course-meta">
-                    <span class="course-platform">{curso.plataforma}</span>
-                    <span class="course-hours">{curso.horas}h</span>
-                  </div>
-                </div>
+                  {rec.relacion && <p class="recommendation-relationship">{rec.relacion}</p>}
+                  <p class="recommendation-message">{rec.mensaje}</p>
+                </article>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
   </div>
 </Layout>
 
@@ -311,46 +393,88 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
     setTimeout(typeWriter, 1000);
   });
 
-  // Filtros de proyectos
+  // Filtros de proyectos y Load More
   document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
-    
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Actualizar botones activos
-        filterButtons.forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
+    const loadMoreBtn = document.getElementById('load-more-projects') as HTMLButtonElement;
+    const totalProjects = projectCards.length;
+    let visibleCount = 6;
+    let currentFilter = 'all';
+
+    // Función para actualizar la visibilidad de proyectos basado en el filtro y el contador
+    const updateProjectsVisibility = (filter: string, resetCount = false) => {
+      if (resetCount) {
+        visibleCount = 6;
+      }
+
+      const cardsArray = Array.from(projectCards) as HTMLElement[];
+      let visibleInFilter = 0;
+
+      cardsArray.forEach((card, index) => {
+        const cardElement = card as HTMLElement;
+        const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+        const matchesFilter = filter === 'all' || tags.includes(filter);
         
-        const filter = button.getAttribute('data-filter');
-        
-        projectCards.forEach(card => {
-          const cardElement = card as HTMLElement;
-          if (filter === 'all') {
+        if (matchesFilter) {
+          visibleInFilter++;
+          // Mostrar solo si está dentro del rango visible
+          if (visibleInFilter <= visibleCount) {
             cardElement.style.display = 'block';
             setTimeout(() => {
               cardElement.style.opacity = '1';
               cardElement.style.transform = 'translateY(0)';
             }, 10);
           } else {
-            const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
-            if (tags.includes(filter)) {
-              cardElement.style.display = 'block';
-              setTimeout(() => {
-                cardElement.style.opacity = '1';
-                cardElement.style.transform = 'translateY(0)';
-              }, 10);
-            } else {
-              cardElement.style.opacity = '0';
-              cardElement.style.transform = 'translateY(20px)';
-              setTimeout(() => {
-                cardElement.style.display = 'none';
-              }, 300);
-            }
+            // Ocultar proyectos que están fuera del rango visible
+            cardElement.style.display = 'none';
+            cardElement.style.opacity = '0';
+            cardElement.style.transform = 'translateY(20px)';
           }
-        });
+        } else {
+          // Ocultar proyectos que no coinciden con el filtro
+          cardElement.style.opacity = '0';
+          cardElement.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            cardElement.style.display = 'none';
+          }, 300);
+        }
+      });
+
+      // Mostrar/ocultar botón "mostrar más"
+      if (loadMoreBtn) {
+        if (visibleInFilter > visibleCount) {
+          loadMoreBtn.classList.remove('hidden');
+        } else {
+          loadMoreBtn.classList.add('hidden');
+        }
+      }
+    };
+
+    // Función para mostrar más proyectos
+    const showMoreProjects = () => {
+      visibleCount += 6;
+      updateProjectsVisibility(currentFilter, false);
+    };
+
+    // Event listeners para filtros
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        
+        currentFilter = button.getAttribute('data-filter') || 'all';
+        updateProjectsVisibility(currentFilter, true);
       });
     });
+
+    // Event listener para botón "mostrar más"
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', showMoreProjects);
+    }
+
+    // Inicializar visibilidad
+    updateProjectsVisibility('all', true);
   });
 
   // Scroll Spy para el menú
@@ -436,6 +560,185 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
       });
     });
   });
+
+  // Carrusel de recomendaciones
+  document.addEventListener('DOMContentLoaded', () => {
+    const carouselWrappers = document.querySelectorAll('.recommendations-wrapper[data-carousel="true"]');
+
+    carouselWrappers.forEach(wrapperNode => {
+      const wrapper = wrapperNode as HTMLElement;
+      const list = wrapper.querySelector('.recommendations-list.is-carousel') as HTMLElement | null;
+      const cards = wrapper.querySelectorAll('.recommendation-card') as NodeListOf<HTMLElement>;
+      if (!list || cards.length <= 3) return;
+
+      let currentIndex = 0;
+      let visibleCards = 3;
+      let cardWidth = 0;
+      let gap = 0;
+      let maxIndex = 0;
+      let maxTranslate = 0;
+      let currentTranslate = 0;
+      let intervalId: ReturnType<typeof setInterval> | null = null;
+      let isDragging = false;
+      let startX = 0;
+      let startTranslate = 0;
+      let isHovering = false;
+      const defaultTransition = 'transform 1.2s ease';
+
+      const getGap = () => {
+        const styles = window.getComputedStyle(list);
+        const rawGap = styles.columnGap || styles.gap || '0';
+        return parseFloat(rawGap) || 0;
+      };
+
+      const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+      const applyTranslate = (translate: number, animate = false) => {
+        currentTranslate = clamp(translate, 0, maxTranslate);
+        list.style.transition = animate ? defaultTransition : 'none';
+        list.style.transform = `translateX(-${currentTranslate}px)`;
+      };
+
+      const updateMetrics = () => {
+        const firstCard = cards[0];
+        if (!firstCard) return;
+        cardWidth = firstCard.clientWidth;
+        gap = getGap();
+        const totalCardWidth = cardWidth + gap;
+        visibleCards = Math.max(1, Math.round(wrapper.clientWidth / totalCardWidth));
+        maxIndex = Math.max(0, cards.length - visibleCards);
+        maxTranslate = totalCardWidth * maxIndex;
+      };
+
+      const goTo = (index: number, animate = true) => {
+        currentIndex = clamp(index, 0, maxIndex);
+        const targetTranslate = (cardWidth + gap) * currentIndex;
+        applyTranslate(targetTranslate, animate);
+      };
+
+      const startAutoSlide = () => {
+        if (isHovering) return;
+        stopAutoSlide();
+        if (maxIndex <= 0) return;
+        intervalId = setInterval(() => {
+          let nextIndex = currentIndex + 1;
+          if (nextIndex > maxIndex) {
+            nextIndex = 0;
+          }
+          goTo(nextIndex, true);
+        }, 6000);
+      };
+
+      const stopAutoSlide = () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      };
+
+      const handlePointerDown = (event: PointerEvent) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        event.preventDefault();
+        isDragging = true;
+        list.setPointerCapture(event.pointerId);
+        list.classList.add('is-grabbing');
+        startX = event.clientX;
+        startTranslate = currentTranslate;
+        list.style.transition = 'none';
+        stopAutoSlide();
+      };
+
+      const handlePointerMove = (event: PointerEvent) => {
+        if (!isDragging) return;
+        const delta = event.clientX - startX;
+        const nextTranslate = startTranslate - delta;
+        applyTranslate(nextTranslate, false);
+      };
+
+      const endDrag = (event: PointerEvent) => {
+        if (!isDragging) return;
+        isDragging = false;
+        if (list.hasPointerCapture && list.hasPointerCapture(event.pointerId)) {
+          list.releasePointerCapture(event.pointerId);
+        }
+        list.classList.remove('is-grabbing');
+        const nearestIndex = Math.round(currentTranslate / (cardWidth + gap));
+        goTo(nearestIndex, true);
+        if (!isHovering) {
+          startAutoSlide();
+        }
+      };
+
+      list.addEventListener('pointerdown', handlePointerDown);
+      list.addEventListener('pointermove', handlePointerMove);
+      list.addEventListener('pointerup', endDrag);
+      list.addEventListener('pointercancel', endDrag);
+      list.addEventListener('pointerleave', (event: PointerEvent) => {
+        if (isDragging) {
+          endDrag(event);
+        }
+      });
+
+      wrapper.addEventListener('mouseenter', () => {
+        isHovering = true;
+        stopAutoSlide();
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        isHovering = false;
+        startAutoSlide();
+      });
+
+      window.addEventListener('resize', () => {
+        updateMetrics();
+        goTo(currentIndex, false);
+      });
+
+      updateMetrics();
+      goTo(0, false);
+      startAutoSlide();
+    });
+  });
+
+  // Animación de barras de progreso al hacer scroll (se repite cada vez que la sección es visible)
+  document.addEventListener('DOMContentLoaded', () => {
+    const skillsSection = document.querySelector('.skills-section');
+    const skillProgressBars = document.querySelectorAll('.skill-progress');
+    
+    if (!skillsSection || skillProgressBars.length === 0) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3 // Se activa cuando el 30% de la sección es visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Animar las barras cuando la sección entra en el viewport
+          skillProgressBars.forEach((bar) => {
+            const progressBar = bar as HTMLElement;
+            const level = parseInt(progressBar.getAttribute('data-level') || '0');
+            // Forzar reflow para reiniciar la animación
+            progressBar.style.width = '0%';
+            // Pequeño delay para asegurar que el reflow se complete
+            setTimeout(() => {
+              progressBar.style.width = `${level}%`;
+            }, 10);
+          });
+        } else {
+          // Resetear las barras cuando la sección sale del viewport
+          skillProgressBars.forEach((bar) => {
+            const progressBar = bar as HTMLElement;
+            progressBar.style.width = '0%';
+          });
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(skillsSection);
+  });
 </script>
 
 <style>
@@ -463,8 +766,7 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
     right: 0;
     bottom: 0;
     background: 
-      radial-gradient(circle at 20% 50%, rgba(43, 228, 194, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 50%, rgba(252, 246, 3, 0.1) 0%, transparent 50%);
+      radial-gradient(circle at 20% 50%, rgba(43, 228, 194, 0.15) 0%, transparent 50%);
     animation: backgroundPulse 8s ease-in-out infinite;
     pointer-events: none;
   }
@@ -838,9 +1140,10 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
     opacity: 1;
     transform: translateY(0);
+    position: relative;
   }
 
   .project-card:hover {
@@ -902,13 +1205,48 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
 
   .project-content {
     padding: 2rem;
+    position: relative;
+    padding-bottom: 4rem;
+  }
+
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .project-title {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin: 0;
     color: var(--color-text-white);
     font-family: var(--font-heading);
+  }
+
+  .project-country {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: rgba(43, 228, 194, 0.1);
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .project-country::before {
+    content: '🌍';
+    font-size: 1rem;
+  }
+
+  .project-country-wrapper {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1;
   }
 
   .project-description {
@@ -939,97 +1277,285 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
     background: rgba(43, 228, 194, 0.1);
   }
 
-  /* Education Section */
-  .education-section {
+  /* Load More Button */
+  .load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: var(--color-bg-sections);
+    color: var(--color-text-white);
+    border: 2px solid var(--color-primary);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-paragraph);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .load-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-primary);
+    transition: left 0.3s ease;
+    z-index: 0;
+  }
+
+  .load-more-btn span,
+  .load-more-btn svg {
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .load-more-btn:hover {
+    color: var(--color-text-button-selected);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(43, 228, 194, 0.3);
+  }
+
+  .load-more-btn:hover::before {
+    left: 0;
+  }
+
+  .load-more-btn:hover svg {
+    color: var(--color-text-button-selected);
+    transform: translateY(3px);
+  }
+
+  .load-more-btn svg {
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .load-more-btn.hidden {
+    display: none;
+  }
+
+  /* Courses Section */
+  .courses-section {
     padding: 6rem 0;
     scroll-margin-top: 100px;
+    background: var(--color-bg-sections);
   }
 
-  .education-grid {
+  .courses-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-  }
-
-  .education-list,
-  .courses-list {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
   }
 
-  .education-item,
-  .course-item {
-    background: var(--color-bg-sections);
-    padding: 2rem;
-    border-radius: 12px;
+  .course-card {
+    background: var(--color-bg-main);
+    border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .course-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-primary), var(--color-emphasis));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .course-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary);
+    box-shadow: 0 15px 40px rgba(43, 228, 194, 0.25);
+  }
+
+  .course-card:hover::before {
+    opacity: 1;
+  }
+
+  .course-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(43, 228, 194, 0.1);
+    border: 2px solid var(--color-primary);
+    border-radius: 12px;
+    color: var(--color-primary);
     transition: all 0.3s ease;
   }
 
-  .education-item:hover,
-  .course-item:hover {
-    transform: translateX(10px);
-    border-color: var(--color-primary);
-    box-shadow: 0 10px 30px rgba(43, 228, 194, 0.2);
+  .course-card:hover .course-icon {
+    background: var(--color-primary);
+    color: var(--color-text-button-selected);
+    transform: scale(1.1) rotate(5deg);
   }
 
-  .education-header,
-  .course-header {
+  .course-content {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1rem;
   }
 
-  .education-title,
   .course-title {
     font-size: 1.3rem;
     color: var(--color-text-white);
     font-family: var(--font-heading);
     margin: 0;
+    line-height: 1.3;
   }
 
-  .education-period,
-  .course-year {
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .education-institution {
-    color: var(--color-primary);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .education-description {
-    opacity: 0.8;
-    line-height: 1.6;
-    font-size: 0.95rem;
-  }
-
-  .course-meta {
+  .course-info {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
     align-items: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .course-platform {
-    color: var(--color-text-white);
-    opacity: 0.7;
-    font-size: 0.9rem;
+  .course-platform,
+  .course-year,
+  .course-hours {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .course-platform svg,
+  .course-year svg,
+  .course-hours svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-primary);
   }
 
   .course-hours {
     color: var(--color-primary);
     font-weight: 600;
+  }
+
+  /* Recommendations Section */
+  .recommendations-section {
+    padding: 6rem 0 8rem;
+    scroll-margin-top: 100px;
+    background: var(--color-bg-main);
+  }
+
+  .recommendations-wrapper {
+    position: relative;
+  }
+
+  .recommendations-wrapper.carousel-active {
+    overflow: hidden;
+  }
+
+  .recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .recommendations-list.is-carousel {
+    display: flex;
+    gap: 1.5rem;
+    grid-template-columns: none;
+    transition: transform 1.2s ease;
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .recommendations-list.is-carousel .recommendation-card {
+    flex: 0 0 calc(33.333% - 1rem);
+    min-width: 280px;
+  }
+
+  .recommendations-list.is-carousel.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .recommendation-card {
+    background: var(--color-bg-sections);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .recommendation-card::before {
+    content: '“';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 5rem;
+    color: rgba(43, 228, 194, 0.15);
+    font-family: var(--font-heading);
+  }
+
+  .recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .recommendation-author {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--color-text-white);
+  }
+
+  .recommendation-role {
+    margin: 0.25rem 0 0;
     font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .recommendation-date {
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .recommendation-relationship {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .recommendation-message {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
   }
 
   /* Responsive */
@@ -1048,13 +1574,16 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
       order: 1;
     }
 
-    .education-grid {
-      grid-template-columns: 1fr;
-      gap: 3rem;
+    .courses-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     }
 
     .projects-grid {
       grid-template-columns: 1fr;
+    }
+
+    .recommendations-list.is-carousel .recommendation-card {
+      flex: 0 0 calc(50% - 1rem);
     }
   }
 
@@ -1084,6 +1613,14 @@ const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
 
     .skills-grid {
       grid-template-columns: 1fr;
+    }
+
+    .courses-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .recommendations-list.is-carousel .recommendation-card {
+      flex: 0 0 100%;
     }
   }
 </style>
