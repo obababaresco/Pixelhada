@@ -89,6 +89,20 @@ export async function getStaticPaths() {
 
 const { dev } = Astro.props;
 
+// Obtiene la base (/Pixelhada/) o cadena vacía si es local
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const resolvePath = (path: string | undefined) => {
+  if (!path) return '#';
+  if (path.startsWith('http')) return path; // Si es enlace externo (Instagram, etc), no tocar
+  // Si la ruta ya tiene la base, no la repetimos
+  if (path.startsWith(BASE_URL)) return path;
+  
+  // Aseguramos que la ruta empiece con /
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_URL}${cleanPath}`;
+};
+
 // Extraer todos los tags únicos de los proyectos
 const allTags = Array.from(new Set(dev.proyectos.flatMap(p => p.tags)));
 const hasRecommendations = dev.recomendaciones && dev.recomendaciones.length > 0;
@@ -119,7 +133,7 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
               </a>
             )}
             {dev.cv ? (
-              <a href={dev.cv} class="btn-cv" download>
+              <a href={resolvePath(dev.cv)} class="btn-cv" download>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
@@ -172,7 +186,7 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
         <div class="hero-image-wrapper">
           {dev.foto ? (
             <div class="image-container">
-              <img src={dev.foto} alt={dev.nombre} class="dev-photo" />
+              <img src={resolvePath(dev.foto)} alt={dev.nombre} class="dev-photo" />
             </div>
           ) : (
             <div class="image-placeholder">
@@ -217,7 +231,7 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
           {dev.proyectos.map((proyecto, index) => (
             <article class="project-card" data-tags={JSON.stringify(proyecto.tags)} data-index={index} style={index >= 6 ? "display: none;" : ""}>
               <div class="project-image-wrapper">
-                <img src={proyecto.image} alt={proyecto.title} class="project-image" />
+                <img src={resolvePath(proyecto.image)} alt={proyecto.title} class="project-image" />
                 {proyecto.link && proyecto.link !== "#" && proyecto.link.trim() !== "" && (
                   <div class="project-overlay">
                     <a href={proyecto.link} class="project-link" target="_blank" rel="noopener">
