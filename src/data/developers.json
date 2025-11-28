@@ -5,7 +5,7 @@
       "apellido": "Terán",
       "roles": ["Web Developer", "Web Designer", "WordPress Developer"],
       "bio": "Soy ingeniero de sistemas y desarrollador web. Me apasiona crear, aprender y llevar mis ideas a la realidad a través de la programación y creatividad.",
-      "foto": "/src/assets/images/Oswaldo Teran.png",
+      "foto": "/Pixelhada/images/Oswaldo Teran.png",
       "social": {
         "instagram": "https://www.instagram.com/obababaresco/",
         "linkedin": "https://www.linkedin.com/in/oswaldo-ramon-teran-babaresco/",
@@ -29,7 +29,7 @@
           "title": "Software educativo online",
           "description": "Diseño y maquetación de componentes UI responsivos aplicando buenas prácticas para documentar el código. ",
           "tags": ["Angular", "TypeScript", "Bootstrap", "Figma", "UI Design", "HTML5 & CSS3"],
-          "image": "/src/assets/images/Proyectos/Salware.png",
+          "image": "/Pixelhada/images/Proyectos/Salware.png",
           "link": "https://app.fundacionsalware.org/auth/login",
           "pais": "España"
         },
@@ -37,7 +37,7 @@
           "title": "CMS Dinámico HubSpot",
           "description": "Desarrollo de temas personalizados, módulos dinámicos y consumo de API para integración de vacantes IT.",
           "tags": ["HubSpot", "API Integration", "JavaScript", "HTML5 & CSS3"],
-          "image": "/src/assets/images/Proyectos/Interfell.png",
+          "image": "/Pixelhada/images/Proyectos/Interfell.png",
           "link": "https://www.interfell.com/",
           "pais": "Colombia"
         },
@@ -45,7 +45,7 @@
           "title": "Sistema de Gestión Académica Intisana",
           "description": "Maquetación de flujos de UI completos para 4 roles de usuario (Admin, Profesor, Padres, Alumnos) y dashboards de métricas.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap"],
-          "image": "/src/assets/images/Proyectos/Intisana.png",
+          "image": "/Pixelhada/images/Proyectos/Intisana.png",
           "link": "#",
           "pais": "Ecuador"
         },
@@ -53,7 +53,7 @@
           "title": "Sitio Web de Diseño Interior",
           "description": "Portal corporativo con diseño personalizado de alto impacto visual y optimización SEO.",
           "tags": ["WordPress", "Elementor", "Figma"],
-          "image": "/src/assets/images/Proyectos/Alexandrias Design.png",
+          "image": "/Pixelhada/images/Proyectos/Alexandrias Design.png",
           "link": "https://alexandriasdesign.com/",
           "pais": "Estados Unidos"
         },
@@ -61,7 +61,7 @@
           "title": "Portal de servicio técnico industrial",
           "description": "Web informativa con custom post types a la medida y diseño personalizado",
           "tags": ["WordPress", "Elementor", "Figma"],
-          "image": "/src/assets/images/Proyectos/ORBIT.png",
+          "image": "/Pixelhada/images/Proyectos/ORBIT.png",
           "link": "https://orbitvibra.com/",
           "pais": "Venezuela"
         },
@@ -69,7 +69,7 @@
           "title": "Directorio Turístico Geolocalizado",
           "description": "Plataforma de gestión de locales con filtrado avanzado, integración de mapas y rutas en tiempo real.",
           "tags": ["WordPress", "Elementor", "API Integration", "JavaScript"],
-          "image": "/src/assets/images/Proyectos/devuelta al centro.jpg",
+          "image": "/Pixelhada/images/Proyectos/devuelta al centro.jpg",
           "link": "https://www.devueltaalcentro.com/",
           "pais": "Ecuador"
         },
@@ -77,7 +77,7 @@
           "title": "E-commerce Tecnológico",
           "description": "Tienda virtual completa con diseño a medida, gestión de inventario y optimización de conversión.",
           "tags": ["WordPress", "Elementor", "WooCommerce", "Figma"],
-          "image": "/src/assets/images/Proyectos/Compujob.png",
+          "image": "/Pixelhada/images/Proyectos/Compujob.png",
           "link": "https://compujob.com.ec/",
           "pais": "Ecuador"
         },
@@ -85,7 +85,7 @@
           "title": "Interfaz de Software ATM",
           "description": "Maquetación integral de 400 pantallas para telecajero, abarcando flujos transaccionales complejos y módulos de mantenimiento.",
           "tags": ["HTML5 & CSS3", "Figma", "UI Design"],
-          "image": "/src/assets/images/Proyectos/Telecajero.png",
+          "image": "/Pixelhada/images/Proyectos/Telecajero.png",
           "link": "#",
           "pais": "Ecuador"
         },
@@ -93,7 +93,7 @@
           "title": "Web Corporativa Data Science",
           "description": "Sitio informativo optimizado para agencias de tecnología con enfoque en velocidad y SEO.",
           "tags": ["WordPress", "Figma", "Elementor"],
-          "image": "/src/assets/images/Proyectos/Fasrdatascience.png",
+          "image": "/Pixelhada/images/Proyectos/Fasrdatascience.png",
           "link": "https://fastdatascience.com/",
           "pais": "Estados Unidos"
         },
@@ -101,7 +101,7 @@
           "title": "Plataforma E-Learning GMAT",
           "description": "Sistema educativo con aulas virtuales en vivo, simulación de exámenes y paneles administrativos.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap", "Angular", "UI Design"],
-          "image": "/src/assets/images/Proyectos/Gmatdudes.png",
+          "image": "/Pixelhada/images/Proyectos/Gmatdudes.png",
           "link": "https://gmat.gmatdudes.com/",
           "pais": "Perú"
         },
@@ -109,7 +109,7 @@
           "title": "Sistema de Entrenamiento MLM",
           "description": "Software para reclutamiento y capacitación de distribuidores con gestión de usuarios multinivel.",
           "tags": ["HTML5 & CSS3","JavaScript", "Bootstrap", "Angular", "UI Design"],
-          "image": "/src/assets/images/Proyectos/myhbl.png",
+          "image": "/Pixelhada/images/Proyectos/myhbl.png",
           "link": "https://myhbl.com/",
           "pais": "Colombia"
         },
@@ -117,7 +117,7 @@
           "title": "Web Marca Personal",
           "description": "Desarrollo frontend de alto rendimiento enfocado en la identidad digital y posicionamiento web.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Figma", "UI Design"],
-          "image": "/src/assets/images/Proyectos/Alex Fernandez.png",
+          "image": "/Pixelhada/images/Proyectos/Alex Fernandez.png",
           "link": "https://alexfernandez.com/",
           "pais": "Estados Unidos"
         },
@@ -125,7 +125,7 @@
           "title": "Sistema de Gestión Gubernamental",
           "description": "Análisis, modelado de datos y arquitectura de software para administración de recursos estatales (SIARE).",
           "tags": ["Angular", "TypeScript", "Data Analysis"],
-          "image": "/src/assets/images/Proyectos/Siare.png",
+          "image": "/Pixelhada/images/Proyectos/Siare.png",
           "link": "#",
           "pais": "México"
         }
