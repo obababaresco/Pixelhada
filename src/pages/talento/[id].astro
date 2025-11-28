@@ -58,9 +58,28 @@ interface Props {
   dev: Developer;
 }
 
-export function getStaticPaths() {
-  // Convertimos los datos importados al tipo Developer[]
+export async function getStaticPaths() {
+  // 🔁 Ajuste temporal para GitHub Pages:
+  //    Cambia GH_PAGES_ONLY a false para volver al comportamiento dinámico.
+  const GH_PAGES_ONLY = true;
+  const GH_PAGES_SLUGS = ['oswaldo-teran'];
+
   const developers = developersData as Developer[];
+
+  if (GH_PAGES_ONLY) {
+    return GH_PAGES_SLUGS.map((slug) => {
+      const dev = developers.find((developer) => developer.slug === slug);
+
+      if (!dev) {
+        throw new Error(`No se encontró el talento con el slug "${slug}" en developers.json`);
+      }
+
+      return {
+        params: { id: slug },
+        props: { dev },
+      };
+    });
+  }
 
   return developers.map((dev) => ({
     params: { id: dev.slug },
