@@ -12,7 +12,7 @@
         "github": "https://github.com/obababaresco"
       },
       "whatsapp": "+585781984",
-      "cv": "/cv/oswaldo-teran-cv.pdf",
+      "cv": "/cv/cv-oswaldo-teran",
       "skills": [
         { "name": "HTML5", "level": 95 },
         { "name": "CSS3", "level": 90 },
@@ -172,12 +172,6 @@
           "plataforma": "Platzi",
           "año": "2025",
           "horas": 14
-        },
-        {
-          "titulo": "Universidad Computense de Madrid",
-          "plataforma": "Platzi",
-          "año": "2015",
-          "horas": 40
         }
       ],
       "recomendaciones": [
