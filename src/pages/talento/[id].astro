@@ -61,7 +61,7 @@ interface Props {
 export async function getStaticPaths() {
   // 🔁 Ajuste temporal para GitHub Pages:
   //    Cambia GH_PAGES_ONLY a false para volver al comportamiento dinámico.
-  const GH_PAGES_ONLY = true;
+  const GH_PAGES_ONLY = false;
   const GH_PAGES_SLUGS = ['oswaldo-teran'];
 
   const developers = developersData as Developer[];
@@ -94,7 +94,7 @@ const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const resolvePath = (path: string | undefined) => {
   if (!path) return '#';
-  if (path.startsWith('http')) return path; // Si es enlace externo (Instagram, etc), no tocar
+  if (path.startsWith('http')) return path;
   // Si la ruta ya tiene la base, no la repetimos
   if (path.startsWith(BASE_URL)) return path;
   
