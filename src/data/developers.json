@@ -14,15 +14,15 @@
       "whatsapp": "+585781984",
       "cv": "/cv/cv-oswaldo-teran.pdf",
       "skills": [
-        { "name": "HTML5", "level": 95 },
-        { "name": "CSS3", "level": 90 },
-        { "name": "JavaScript", "level": 85 },
-        { "name": "Angular", "level": 60 },
-        { "name": "TypeScript", "level": 60 },
-        { "name": "WordPress", "level": 80 },
-        { "name": "Hubspot", "level": 80 },
-        { "name": "Git", "level": 85 },
-        { "name": "Figma", "level": 75 }
+        { "name": "HTML5", "icon": "/images/skills/html.svg", "years": 5 },
+        { "name": "CSS3", "icon": "/images/skills/css3.svg", "years": 5 },
+        { "name": "JavaScript", "icon": "/images/skills/javascript.svg", "years": 4 },
+        { "name": "Angular", "icon": "/images/skills/angularjs.svg", "years": 2 },
+        { "name": "TypeScript", "icon": "/images/skills/typescript.svg", "years": 2 },
+        { "name": "WordPress", "icon": "/images/skills/wordpress.svg", "years": 4 },
+        { "name": "Hubspot", "icon": "/images/skills/hubspot.png", "years": 3 },
+        { "name": "Git", "icon": "/images/skills/git.svg", "years": 4 },
+        { "name": "Figma", "icon": "/images/skills/figma.svg", "years": 3 }
       ],
       "proyectos": [
         {

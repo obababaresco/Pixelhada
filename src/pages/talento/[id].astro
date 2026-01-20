@@ -5,7 +5,8 @@ import developersData from '../../data/developers.json';
 // Definimos el tipo para un desarrollador
 interface Skill {
   name: string;
-  level: number;
+  icon?: string; // SVG path o nombre de icono
+  years: number; // Años de experiencia
 }
 
 interface Proyecto {
@@ -201,16 +202,16 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     <section class="skills-section" id="skills">
       <div class="section-container">
         <h2 class="section-title">Habilidades Técnicas</h2>
-        <div class="skills-grid">
+        <div class="skills-tags">
           {dev.skills.map((skill) => (
-            <div class="skill-card">
-              <div class="skill-header">
-                <span class="skill-name">{skill.name}</span>
-                <span class="skill-percentage">{skill.level}%</span>
-              </div>
-              <div class="skill-bar">
-                <div class="skill-progress" data-level={skill.level} style="width: 0%"></div>
-              </div>
+            <div class="skill-tag">
+              {skill.icon ? (
+                <img src={resolvePath(skill.icon)} alt={skill.name} class="skill-icon" />
+              ) : (
+                <span class="skill-icon-text">{skill.name.charAt(0)}</span>
+              )}
+              <span class="skill-tag-name">{skill.name}</span>
+              <span class="skill-tag-years">{skill.years} {skill.years === 1 ? 'año' : 'años'}</span>
             </div>
           ))}
         </div>
@@ -733,45 +734,6 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     });
   });
 
-  // Animación de barras de progreso al hacer scroll (se repite cada vez que la sección es visible)
-  document.addEventListener('DOMContentLoaded', () => {
-    const skillsSection = document.querySelector('.skills-section');
-    const skillProgressBars = document.querySelectorAll('.skill-progress');
-    
-    if (!skillsSection || skillProgressBars.length === 0) return;
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.3 // Se activa cuando el 30% de la sección es visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Animar las barras cuando la sección entra en el viewport
-          skillProgressBars.forEach((bar) => {
-            const progressBar = bar as HTMLElement;
-            const level = parseInt(progressBar.getAttribute('data-level') || '0');
-            // Forzar reflow para reiniciar la animación
-            progressBar.style.width = '0%';
-            // Pequeño delay para asegurar que el reflow se complete
-            setTimeout(() => {
-              progressBar.style.width = `${level}%`;
-            }, 10);
-          });
-        } else {
-          // Resetear las barras cuando la sección sale del viewport
-          skillProgressBars.forEach((bar) => {
-            const progressBar = bar as HTMLElement;
-            progressBar.style.width = '0%';
-          });
-        }
-      });
-    }, observerOptions);
-
-    observer.observe(skillsSection);
-  });
 </script>
 
 <style>
@@ -1064,64 +1026,63 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     scroll-margin-top: 100px;
   }
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-
-  .skill-card {
-    background: var(--color-bg-main);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-  }
-
-  .skill-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-primary);
-    box-shadow: 0 10px 30px rgba(43, 228, 194, 0.2);
-  }
-
-  .skill-header {
+  .skills-tags {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
   }
 
-  .skill-name {
+  .skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--color-bg-sections);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-family: var(--font-tag);
+  }
+
+  .skill-tag:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-primary);
+    background: rgba(43, 228, 194, 0.1);
+    box-shadow: 0 5px 20px rgba(43, 228, 194, 0.2);
+  }
+
+  .skill-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .skill-icon-text {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .skill-tag-name {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--color-text-white);
   }
 
-  .skill-percentage {
-    font-weight: 600;
-    color: var(--color-primary);
-    font-size: 0.9rem;
-  }
-
-  .skill-bar {
-    width: 100%;
-    height: 8px;
-    background: var(--color-bg-sections);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-emphasis));
-    border-radius: 4px;
-    transition: width 1s ease-out;
-    animation: progressGlow 2s ease-in-out infinite;
-  }
-
-  @keyframes progressGlow {
-    0%, 100% { box-shadow: 0 0 5px var(--color-primary); }
-    50% { box-shadow: 0 0 15px var(--color-primary); }
+  .skill-tag-years {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    padding-left: 0.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   /* Projects Section */
@@ -1644,8 +1605,24 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
       padding: 0 1.5rem;
     }
 
-    .skills-grid {
-      grid-template-columns: 1fr;
+    .skills-tags {
+      justify-content: flex-start;
+    }
+
+    .skill-tag {
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .skill-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .skill-icon-text {
+      width: 18px;
+      height: 18px;
+      font-size: 0.85rem;
     }
 
     .courses-grid {
