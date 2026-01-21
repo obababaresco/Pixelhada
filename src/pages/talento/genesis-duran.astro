@@ -1,0 +1,448 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const resolvePath = (path: string | undefined) => {
+  if (!path) return '#';
+  if (path.startsWith('http')) return path;
+  if (path.startsWith(BASE_URL)) return path;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${BASE_URL}${cleanPath}`;
+};
+---
+
+<Layout title="Portafolio de Génesis Durán">
+  <div class="portfolio-container-persona2">
+    <!-- Secci?n Hero -->
+    <header class="hero-section-genesis" id="acerca-de">
+      <div class="hero-banner-genesis">
+        <div class="hero-content-genesis">
+          <div class="hero-text-genesis">
+            <h1 class="hero-greeting-genesis">HOLA, SOY</h1>
+            <h1 class="hero-name-genesis">
+              GÉNESIS
+            </h1>
+            <p class="hero-subtitle-genesis" data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.">
+              Diseñador UX/UI y creativa visual.<br>Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.
+            </p>
+            <div class="hero-buttons-genesis">
+              <a href="#contacto" class="btn-contact-genesis">
+                Hablemos de ideas
+              </a>
+              <a href="#" class="btn-cv-genesis">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Descargar CV
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image-genesis">
+          <img src="/images/oswaldo-teran.png" alt="Génesis Durán" class="genesis-photo" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Secci?n Skills -->
+    <section class="skills-section-persona2" id="skills">
+      <div class="section-container-persona2">
+        <h2 class="section-title-persona2">Habilidades</h2>
+        <div class="skills-container-persona2">
+          <!-- Se desarrollar? m?s adelante -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Secci?n Proyectos -->
+    <section class="projects-section-persona2" id="proyectos">
+      <div class="section-container-persona2">
+        <h2 class="section-title-persona2">Proyectos</h2>
+        <div class="projects-container-persona2">
+          <!-- Se desarrollar? m?s adelante -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Secci?n Cursos -->
+    <section class="courses-section-persona2" id="cursos">
+      <div class="section-container-persona2">
+        <h2 class="section-title-persona2">Cursos</h2>
+        <div class="courses-container-persona2">
+          <!-- Se desarrollar? m?s adelante -->
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  // Animación de entrada del hero
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroSection = document.querySelector('.hero-section-genesis') as HTMLElement;
+    const heroBanner = document.querySelector('.hero-banner-genesis') as HTMLElement;
+    const heroContent = document.querySelector('.hero-content-genesis') as HTMLElement;
+    const heroText = document.querySelector('.hero-text-genesis') as HTMLElement;
+    const heroName = document.querySelector('.hero-name-genesis') as HTMLElement;
+    const heroSubtitle = document.querySelector('.hero-subtitle-genesis') as HTMLElement;
+    
+    if (!heroSection || !heroBanner || !heroContent || !heroText || !heroName || !heroSubtitle) return;
+
+    // Calcular la altura del contenido completo antes de ocultar elementos
+    // Primero guardamos el texto original del subtítulo
+    const bio = heroSubtitle.getAttribute('data-bio') || heroSubtitle.textContent || '';
+    
+    // Creamos un elemento temporal con todo el contenido para medir
+    const tempDiv = document.createElement('div');
+    tempDiv.style.visibility = 'hidden';
+    tempDiv.style.position = 'absolute';
+    tempDiv.style.width = heroText.offsetWidth + 'px';
+    tempDiv.style.padding = window.getComputedStyle(heroText).padding;
+    tempDiv.style.fontSize = window.getComputedStyle(heroText).fontSize;
+    tempDiv.style.fontFamily = window.getComputedStyle(heroText).fontFamily;
+    tempDiv.style.lineHeight = window.getComputedStyle(heroText).lineHeight;
+    
+    const tempGreeting = heroName.previousElementSibling?.cloneNode(true) as HTMLElement;
+    const tempName = heroName.cloneNode(true) as HTMLElement;
+    const tempSubtitle = heroSubtitle.cloneNode(true) as HTMLElement;
+    
+    if (tempGreeting) tempDiv.appendChild(tempGreeting);
+    tempDiv.appendChild(tempName);
+    if (tempSubtitle) {
+      // Reemplazar el marcador [BR] con un <br> real para calcular la altura correcta
+      const bioWithBr = bio.replace(/\[BR\]/g, '<br>');
+      tempSubtitle.innerHTML = bioWithBr;
+      // Asegurar que el tempSubtitle tenga los mismos estilos que el original
+      tempSubtitle.style.width = window.getComputedStyle(heroSubtitle).width;
+      tempSubtitle.style.fontSize = window.getComputedStyle(heroSubtitle).fontSize;
+      tempSubtitle.style.lineHeight = window.getComputedStyle(heroSubtitle).lineHeight;
+      tempSubtitle.style.fontFamily = window.getComputedStyle(heroSubtitle).fontFamily;
+      tempSubtitle.style.marginBottom = window.getComputedStyle(heroSubtitle).marginBottom;
+      tempDiv.appendChild(tempSubtitle);
+    }
+    
+    document.body.appendChild(tempDiv);
+    const calculatedHeight = tempDiv.offsetHeight;
+    const subtitleHeight = tempSubtitle ? tempSubtitle.offsetHeight : 0;
+    document.body.removeChild(tempDiv);
+    
+    // Establecer la altura mínima calculada en el contenedor de texto
+    // Usar la altura real calculada del subtítulo completo
+    heroText.style.minHeight = calculatedHeight + 'px';
+    heroSubtitle.style.minHeight = subtitleHeight + 'px';
+
+    // El nombre ya está oculto inicialmente por CSS, solo limpiamos el subtítulo
+    heroSubtitle.style.opacity = '0';
+    heroSubtitle.textContent = '';
+
+    // Nombre aparece a los 1 segundo (1000ms) desde la izquierda
+    // La transición ya está definida en CSS, solo cambiamos los valores
+    setTimeout(() => {
+      heroName.style.opacity = '1';
+      heroName.style.transform = 'translateX(0)';
+    }, 1000);
+
+    // Subtítulo aparece letra por letra después del nombre
+    // Primero hacemos visible el contenedor del subtítulo
+    heroSubtitle.style.opacity = '1';
+    
+    let currentCharIndex = 0;
+    const showNextChar = () => {
+      if (currentCharIndex < bio.length) {
+        // Verificar si es un marcador de salto de línea
+        if (bio.substring(currentCharIndex, currentCharIndex + 4) === '[BR]') {
+          const br = document.createElement('br');
+          heroSubtitle.appendChild(br);
+          currentCharIndex += 4;
+          setTimeout(showNextChar, 100);
+          return;
+        }
+        
+        const char = bio[currentCharIndex];
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.opacity = '0';
+        span.style.display = 'inline';
+        heroSubtitle.appendChild(span);
+        
+        setTimeout(() => {
+          span.style.transition = 'opacity 0.2s ease-in-out';
+          span.style.opacity = '1';
+        }, 10);
+
+        currentCharIndex++;
+        // Velocidad de lectura: delay entre letras
+        const delay = char === ' ' ? 100 : 50; // Pausa más larga en espacios
+        setTimeout(showNextChar, delay);
+      }
+    };
+
+    // Iniciar animación del subtítulo después del nombre (1 segundos + un poco más)
+    setTimeout(() => {
+      showNextChar();
+    }, 1900);
+  });
+</script>
+
+<style>
+  .portfolio-container-persona2 {
+    padding: 0;
+  }
+
+  .hero-section-genesis {
+    padding: 0;
+    background: #31323b;
+    scroll-margin-top: 100px;
+    position: relative;
+    min-height: 600px;
+    overflow: hidden;
+  }
+
+  .hero-banner-genesis {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 600px;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .hero-content-genesis {
+    display: flex;
+    align-items: center;
+    padding: 4rem 3rem;
+    position: relative;
+    z-index: 2;
+    grid-column: 1;
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-text-genesis {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-greeting-genesis {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-family: var(--font-heading);
+    color: var(--color-text-white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .hero-name-genesis {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    margin: 0;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .hero-subtitle-genesis {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text-white);
+    margin-bottom: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+    font-family: var(--font-paragraph);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    min-height: calc(1.8em * 2); /* Altura mínima de 2 líneas */
+  }
+
+  .hero-subtitle-genesis span {
+    display: inline;
+  }
+
+  .hero-buttons-genesis {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-contact-genesis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background-color: #ffffff;
+    color: var(--color-text-button-selected);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: var(--font-button-selected);
+    box-sizing: border-box;
+    min-width: 200px;
+    height: 48px;
+  }
+
+  .btn-contact-genesis:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-cv-genesis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: var(--color-bg-main);
+    color: var(--color-text-white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: var(--font-button-selected);
+    box-sizing: border-box;
+    min-width: 200px;
+    height: 48px;
+  }
+
+  .btn-cv-genesis:hover {
+    background: var(--color-bg-sections);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .btn-cv-genesis svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hero-image-genesis {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    overflow: hidden;
+    grid-column: 2;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-image-genesis::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to left, rgba(49, 50, 59, 0.9) 0%, rgba(49, 50, 59, 0.5) 50%, transparent 100%);
+    z-index: 1;
+  }
+
+  .genesis-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    filter: grayscale(20%) brightness(0.7);
+    opacity: 0.8;
+    position: relative;
+    z-index: 0;
+  }
+
+  .section-container-persona2 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-title-persona2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-text-white);
+  }
+
+  .skills-section-persona2,
+  .projects-section-persona2,
+  .courses-section-persona2 {
+    padding: 6rem 0;
+    scroll-margin-top: 100px;
+  }
+
+  .skills-container-persona2,
+  .projects-container-persona2,
+  .courses-container-persona2 {
+    /* Estilos se a?adir?n m?s adelante */
+  }
+
+  @media (max-width: 968px) {
+    .hero-banner-genesis {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-image-genesis {
+      grid-column: 1;
+      min-height: 400px;
+      order: 1;
+    }
+
+    .hero-content-genesis {
+      grid-column: 1;
+      order: 2;
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero-content-genesis {
+      padding: 2rem 1.5rem;
+    }
+
+    .hero-name-genesis {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle-genesis {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons-genesis {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-contact-genesis,
+    .btn-cv-genesis {
+      width: 100%;
+      min-width: auto;
+    }
+
+    .section-container-persona2 {
+      padding: 0 1.5rem;
+    }
+  }
+</style>
