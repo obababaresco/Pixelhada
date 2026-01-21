@@ -1,37 +1,47 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
-const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, '');
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const resolvePath = (path: string | undefined) => {
-  if (!path) return '#';
-  if (path.startsWith('http')) return path;
+  if (!path) return "#";
+  if (path.startsWith("http")) return path;
   if (path.startsWith(BASE_URL)) return path;
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return `${BASE_URL}${cleanPath}`;
 };
 ---
 
 <Layout title="Portafolio de Génesis Durán">
-  <div class="portfolio-container-persona2">
+  <div class="portfolio-container">
     <!-- Secci?n Hero -->
     <header class="hero-section-genesis" id="acerca-de">
       <div class="hero-banner-genesis">
         <div class="hero-content-genesis">
           <div class="hero-text-genesis">
             <h1 class="hero-greeting-genesis">HOLA, SOY</h1>
-            <h1 class="hero-name-genesis">
-              GÉNESIS
-            </h1>
-            <p class="hero-subtitle-genesis" data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.">
-              Diseñador UX/UI y creativa visual.<br>Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.
+            <h1 class="hero-name-genesis">GÉNESIS</h1>
+            <p
+              class="hero-subtitle-genesis"
+              data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan."
+            >
+              Diseñador UX/UI y creativa visual.<br />Creo en el diseño que
+              combina estética + estrategia + propósito para crear experiencias
+              digitales que realmente funcionan.
             </p>
             <div class="hero-buttons-genesis">
               <a href="#contacto" class="btn-contact-genesis">
                 Hablemos de ideas
               </a>
               <a href="#" class="btn-cv-genesis">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -42,36 +52,89 @@ const resolvePath = (path: string | undefined) => {
           </div>
         </div>
         <div class="hero-image-genesis">
-          <img src="/images/oswaldo-teran.png" alt="Génesis Durán" class="genesis-photo" />
+          <img
+            src="/images/oswaldo-teran.png"
+            alt="Génesis Durán"
+            class="genesis-photo"
+          />
         </div>
       </div>
     </header>
 
-    <!-- Secci?n Skills -->
-    <section class="skills-section-persona2" id="skills">
-      <div class="section-container-persona2">
-        <h2 class="section-title-persona2">Habilidades</h2>
-        <div class="skills-container-persona2">
-          <!-- Se desarrollar? m?s adelante -->
+    <!-- Secci?n Proyectos -->
+    <section class="projects-section" id="proyectos">
+      <div class="section-container">
+        <div class="projects-header">
+          <h2 class="projects-title">
+            <span class="projects-title-line1">EXPERIENCIAS DISEÑADAS</span>
+            <span class="projects-title-line2">
+              CON PROPÓSITO.
+              <img
+                src="/images/estrella.png"
+                alt="Estrella"
+                class="star-icon"
+              />
+            </span>
+          </h2>
+          <p class="projects-subtitle">
+            Cada experiencia responde a un contexto distinto.
+          </p>
+        </div>
+
+        <!-- Filtros de categoría -->
+        <div class="projects-filters">
+          <button class="filter-btn active" data-category="all"
+            >Todos los proyectos</button
+          >
+          <button class="filter-btn" data-category="web">Web</button>
+          <button class="filter-btn" data-category="social"
+            >Social Media</button
+          >
+          <button class="filter-btn" data-category="sales"
+            >Sales</button
+          >
+          <button class="filter-btn" data-category="otros"
+            >Otros</button
+          >
+        </div>
+
+        <!-- Contenedor de proyectos con carrusel -->
+        <div class="projects-carousel-wrapper">
+          <div class="projects-carousel-container">
+            <div class="projects-track">
+              <div class="project-card" data-category="web">
+                <!-- Contenido del proyecto se agregará más adelante -->
+              </div>
+              <div class="project-card" data-category="social">
+                <!-- Contenido del proyecto se agregará más adelante -->
+              </div>
+              <div class="project-card" data-category="sales">
+                <!-- Contenido del proyecto se agregará más adelante -->
+              </div>
+              <div class="project-card" data-category="web">
+                <!-- Contenido del proyecto se agregará más adelante -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Secci?n Proyectos -->
-    <section class="projects-section-persona2" id="proyectos">
-      <div class="section-container-persona2">
-        <h2 class="section-title-persona2">Proyectos</h2>
-        <div class="projects-container-persona2">
+    <!-- Secci?n Skills -->
+    <section class="skills-section" id="skills">
+      <div class="section-container">
+        <h2 class="section-title">Habilidades</h2>
+        <div class="skills-container">
           <!-- Se desarrollar? m?s adelante -->
         </div>
       </div>
     </section>
 
     <!-- Secci?n Cursos -->
-    <section class="courses-section-persona2" id="cursos">
-      <div class="section-container-persona2">
-        <h2 class="section-title-persona2">Cursos</h2>
-        <div class="courses-container-persona2">
+    <section class="courses-section" id="cursos">
+      <div class="section-container">
+        <h2 class="section-title">Cursos</h2>
+        <div class="courses-container">
           <!-- Se desarrollar? m?s adelante -->
         </div>
       </div>
@@ -81,101 +144,128 @@ const resolvePath = (path: string | undefined) => {
 
 <script>
   // Animación de entrada del hero
-  document.addEventListener('DOMContentLoaded', () => {
-    const heroSection = document.querySelector('.hero-section-genesis') as HTMLElement;
-    const heroBanner = document.querySelector('.hero-banner-genesis') as HTMLElement;
-    const heroContent = document.querySelector('.hero-content-genesis') as HTMLElement;
-    const heroText = document.querySelector('.hero-text-genesis') as HTMLElement;
-    const heroName = document.querySelector('.hero-name-genesis') as HTMLElement;
-    const heroSubtitle = document.querySelector('.hero-subtitle-genesis') as HTMLElement;
-    
-    if (!heroSection || !heroBanner || !heroContent || !heroText || !heroName || !heroSubtitle) return;
+  document.addEventListener("DOMContentLoaded", () => {
+    const heroSection = document.querySelector(
+      ".hero-section-genesis",
+    ) as HTMLElement;
+    const heroBanner = document.querySelector(
+      ".hero-banner-genesis",
+    ) as HTMLElement;
+    const heroContent = document.querySelector(
+      ".hero-content-genesis",
+    ) as HTMLElement;
+    const heroText = document.querySelector(
+      ".hero-text-genesis",
+    ) as HTMLElement;
+    const heroName = document.querySelector(
+      ".hero-name-genesis",
+    ) as HTMLElement;
+    const heroSubtitle = document.querySelector(
+      ".hero-subtitle-genesis",
+    ) as HTMLElement;
+
+    if (
+      !heroSection ||
+      !heroBanner ||
+      !heroContent ||
+      !heroText ||
+      !heroName ||
+      !heroSubtitle
+    )
+      return;
 
     // Calcular la altura del contenido completo antes de ocultar elementos
     // Primero guardamos el texto original del subtítulo
-    const bio = heroSubtitle.getAttribute('data-bio') || heroSubtitle.textContent || '';
-    
+    const bio =
+      heroSubtitle.getAttribute("data-bio") || heroSubtitle.textContent || "";
+
     // Creamos un elemento temporal con todo el contenido para medir
-    const tempDiv = document.createElement('div');
-    tempDiv.style.visibility = 'hidden';
-    tempDiv.style.position = 'absolute';
-    tempDiv.style.width = heroText.offsetWidth + 'px';
+    const tempDiv = document.createElement("div");
+    tempDiv.style.visibility = "hidden";
+    tempDiv.style.position = "absolute";
+    tempDiv.style.width = heroText.offsetWidth + "px";
     tempDiv.style.padding = window.getComputedStyle(heroText).padding;
     tempDiv.style.fontSize = window.getComputedStyle(heroText).fontSize;
     tempDiv.style.fontFamily = window.getComputedStyle(heroText).fontFamily;
     tempDiv.style.lineHeight = window.getComputedStyle(heroText).lineHeight;
-    
-    const tempGreeting = heroName.previousElementSibling?.cloneNode(true) as HTMLElement;
+
+    const tempGreeting = heroName.previousElementSibling?.cloneNode(
+      true,
+    ) as HTMLElement;
     const tempName = heroName.cloneNode(true) as HTMLElement;
     const tempSubtitle = heroSubtitle.cloneNode(true) as HTMLElement;
-    
+
     if (tempGreeting) tempDiv.appendChild(tempGreeting);
     tempDiv.appendChild(tempName);
     if (tempSubtitle) {
       // Reemplazar el marcador [BR] con un <br> real para calcular la altura correcta
-      const bioWithBr = bio.replace(/\[BR\]/g, '<br>');
+      const bioWithBr = bio.replace(/\[BR\]/g, "<br>");
       tempSubtitle.innerHTML = bioWithBr;
       // Asegurar que el tempSubtitle tenga los mismos estilos que el original
       tempSubtitle.style.width = window.getComputedStyle(heroSubtitle).width;
-      tempSubtitle.style.fontSize = window.getComputedStyle(heroSubtitle).fontSize;
-      tempSubtitle.style.lineHeight = window.getComputedStyle(heroSubtitle).lineHeight;
-      tempSubtitle.style.fontFamily = window.getComputedStyle(heroSubtitle).fontFamily;
-      tempSubtitle.style.marginBottom = window.getComputedStyle(heroSubtitle).marginBottom;
+      tempSubtitle.style.fontSize =
+        window.getComputedStyle(heroSubtitle).fontSize;
+      tempSubtitle.style.lineHeight =
+        window.getComputedStyle(heroSubtitle).lineHeight;
+      tempSubtitle.style.fontFamily =
+        window.getComputedStyle(heroSubtitle).fontFamily;
+      tempSubtitle.style.marginBottom =
+        window.getComputedStyle(heroSubtitle).marginBottom;
       tempDiv.appendChild(tempSubtitle);
     }
-    
+
     document.body.appendChild(tempDiv);
     const calculatedHeight = tempDiv.offsetHeight;
     const subtitleHeight = tempSubtitle ? tempSubtitle.offsetHeight : 0;
     document.body.removeChild(tempDiv);
-    
+
     // Establecer la altura mínima calculada en el contenedor de texto
     // Usar la altura real calculada del subtítulo completo
-    heroText.style.minHeight = calculatedHeight + 'px';
-    heroSubtitle.style.minHeight = subtitleHeight + 'px';
+    heroText.style.minHeight = calculatedHeight + "px";
+    heroSubtitle.style.minHeight = subtitleHeight + "px";
 
     // El nombre ya está oculto inicialmente por CSS, solo limpiamos el subtítulo
-    heroSubtitle.style.opacity = '0';
-    heroSubtitle.textContent = '';
+    heroSubtitle.style.opacity = "0";
+    heroSubtitle.textContent = "";
 
     // Nombre aparece a los 1 segundo (1000ms) desde la izquierda
     // La transición ya está definida en CSS, solo cambiamos los valores
     setTimeout(() => {
-      heroName.style.opacity = '1';
-      heroName.style.transform = 'translateX(0)';
+      heroName.style.opacity = "1";
+      heroName.style.transform = "translateX(0)";
     }, 1000);
 
     // Subtítulo aparece letra por letra después del nombre
     // Primero hacemos visible el contenedor del subtítulo
-    heroSubtitle.style.opacity = '1';
-    
+    heroSubtitle.style.opacity = "1";
+
     let currentCharIndex = 0;
     const showNextChar = () => {
       if (currentCharIndex < bio.length) {
         // Verificar si es un marcador de salto de línea
-        if (bio.substring(currentCharIndex, currentCharIndex + 4) === '[BR]') {
-          const br = document.createElement('br');
+        if (bio.substring(currentCharIndex, currentCharIndex + 4) === "[BR]") {
+          const br = document.createElement("br");
           heroSubtitle.appendChild(br);
           currentCharIndex += 4;
           setTimeout(showNextChar, 100);
           return;
         }
-        
+
         const char = bio[currentCharIndex];
-        const span = document.createElement('span');
-        span.textContent = char === ' ' ? '\u00A0' : char;
-        span.style.opacity = '0';
-        span.style.display = 'inline';
+        const span = document.createElement("span");
+        span.textContent = char === " " ? "\u00A0" : char;
+        span.style.opacity = "0";
+        span.style.display = "inline";
         heroSubtitle.appendChild(span);
-        
+
         setTimeout(() => {
-          span.style.transition = 'opacity 0.2s ease-in-out';
-          span.style.opacity = '1';
+          span.style.transition = "opacity 0.2s ease-in-out";
+          span.style.opacity = "1";
         }, 10);
 
         currentCharIndex++;
         // Velocidad de lectura: delay entre letras
-        const delay = char === ' ' ? 100 : 50; // Pausa más larga en espacios
+        const delay = char === " " ? 100 : 50; // Pausa más larga en espacios
         setTimeout(showNextChar, delay);
       }
     };
@@ -185,16 +275,272 @@ const resolvePath = (path: string | undefined) => {
       showNextChar();
     }, 1900);
   });
+
+  // Carrusel y filtrado de proyectos
+  document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+    const projectsTrack = document.querySelector(
+      ".projects-track",
+    ) as HTMLElement;
+
+    if (!filterButtons.length || !projectCards.length || !projectsTrack) return;
+
+    let currentIndex = 0;
+    let visibleCards: HTMLElement[] = [];
+
+    // Función para obtener las tarjetas visibles según el filtro
+    const getVisibleCards = (category: string): HTMLElement[] => {
+      return Array.from(projectCards)
+        .filter((card) => {
+          const cardCategory = card.getAttribute("data-category");
+          return category === "all" || cardCategory === category;
+        })
+        .map((card) => card as HTMLElement);
+    };
+
+    // Variables para el arrastre
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
+
+    // Función para actualizar el carrusel
+    const updateCarousel = (useTransition = true) => {
+      if (visibleCards.length === 0) return;
+
+      // Asegurar que el índice esté dentro del rango
+      if (currentIndex >= visibleCards.length) {
+        currentIndex = visibleCards.length - 1;
+      }
+      if (currentIndex < 0) {
+        currentIndex = 0;
+      }
+
+      // Calcular el ancho de la tarjeta y el gap
+      const cardWidth = visibleCards[0]?.offsetWidth || 320;
+      const gap = window.innerWidth <= 640 ? 24 : 32; // 1.5rem o 2rem
+      const translateX = -(currentIndex * (cardWidth + gap)) + currentTranslate;
+
+      if (useTransition) {
+        projectsTrack.style.transition = "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
+      } else {
+        projectsTrack.style.transition = "none";
+      }
+      projectsTrack.style.transform = `translateX(${translateX}px)`;
+
+      // Aplicar efecto de tarjetas de naipes según la posición
+      visibleCards.forEach((card, index) => {
+        const distance = Math.abs(index - currentIndex);
+        
+        if (distance === 0) {
+          // Tarjeta activa - escala completa y opacidad total
+          card.style.opacity = "1";
+          card.style.transform = "scale(1)";
+          card.style.zIndex = "10";
+        } else if (distance === 1) {
+          // Tarjetas adyacentes - ligeramente reducidas
+          card.style.opacity = "0.8";
+          card.style.transform = "scale(0.95)";
+          card.style.zIndex = "5";
+        } else {
+          // Tarjetas más lejanas - más reducidas
+          card.style.opacity = "0.6";
+          card.style.transform = "scale(0.9)";
+          card.style.zIndex = "1";
+        }
+      });
+    };
+
+    // Función para obtener la posición del evento
+    const getPositionX = (event: MouseEvent | TouchEvent): number => {
+      return event.type.includes("mouse") 
+        ? (event as MouseEvent).clientX 
+        : (event as TouchEvent).touches[0].clientX;
+    };
+
+    // Función para iniciar el arrastre
+    const startDrag = (event: MouseEvent | TouchEvent) => {
+      startX = getPositionX(event);
+      isDragging = true;
+      prevTranslate = currentTranslate;
+      
+      const carouselContainer = document.querySelector(
+        ".projects-carousel-container"
+      ) as HTMLElement;
+      if (carouselContainer) {
+        carouselContainer.style.cursor = "grabbing";
+      }
+      cancelAnimationFrame(animationID);
+    };
+
+    // Función para mover durante el arrastre
+    const drag = (event: MouseEvent | TouchEvent) => {
+      if (!isDragging) return;
+      
+      event.preventDefault();
+      const currentPosition = getPositionX(event);
+      currentTranslate = prevTranslate + currentPosition - startX;
+      
+      updateCarousel(false);
+    };
+
+    // Función para finalizar el arrastre
+    const endDrag = () => {
+      if (!isDragging) return;
+      
+      isDragging = false;
+      const carouselContainer = document.querySelector(
+        ".projects-carousel-container"
+      ) as HTMLElement;
+      if (carouselContainer) {
+        carouselContainer.style.cursor = "grab";
+      }
+      
+      const cardWidth = visibleCards[0]?.offsetWidth || 320;
+      const gap = window.innerWidth <= 640 ? 24 : 32;
+      const cardWidthWithGap = cardWidth + gap;
+      
+      // Determinar si debe moverse a la siguiente/anterior tarjeta
+      const movedBy = currentTranslate;
+      const threshold = cardWidthWithGap * 0.3; // 30% del ancho de la tarjeta
+      
+      if (Math.abs(movedBy) > threshold) {
+        if (movedBy > 0 && currentIndex > 0) {
+          currentIndex--;
+        } else if (movedBy < 0 && currentIndex < visibleCards.length - 1) {
+          currentIndex++;
+        }
+      }
+      
+      // Resetear el desplazamiento y actualizar
+      currentTranslate = 0;
+      prevTranslate = 0;
+      updateCarousel(true);
+    };
+
+    // Función para agregar event listeners de arrastre al contenedor
+    const addDragListeners = () => {
+      const carouselContainer = document.querySelector(
+        ".projects-carousel-container"
+      ) as HTMLElement;
+      
+      if (!carouselContainer) return;
+
+      // Remover listeners anteriores si existen
+      const existingStart = (carouselContainer as any).__dragStart;
+      const existingDrag = (carouselContainer as any).__dragMove;
+      const existingEnd = (carouselContainer as any).__dragEnd;
+      
+      if (existingStart) {
+        carouselContainer.removeEventListener("mousedown", existingStart);
+        carouselContainer.removeEventListener("touchstart", existingStart);
+      }
+      if (existingDrag) {
+        carouselContainer.removeEventListener("mousemove", existingDrag);
+        carouselContainer.removeEventListener("touchmove", existingDrag);
+      }
+      if (existingEnd) {
+        carouselContainer.removeEventListener("mouseup", existingEnd);
+        carouselContainer.removeEventListener("mouseleave", existingEnd);
+        carouselContainer.removeEventListener("touchend", existingEnd);
+      }
+
+      // Mouse events
+      carouselContainer.addEventListener("mousedown", startDrag);
+      carouselContainer.addEventListener("mousemove", drag);
+      carouselContainer.addEventListener("mouseup", endDrag);
+      carouselContainer.addEventListener("mouseleave", endDrag);
+      
+      // Touch events para móviles
+      carouselContainer.addEventListener("touchstart", startDrag, { passive: false });
+      carouselContainer.addEventListener("touchmove", drag, { passive: false });
+      carouselContainer.addEventListener("touchend", endDrag);
+      
+      // Guardar referencias
+      (carouselContainer as any).__dragStart = startDrag;
+      (carouselContainer as any).__dragMove = drag;
+      (carouselContainer as any).__dragEnd = endDrag;
+      
+      // Cursor grab
+      carouselContainer.style.cursor = "grab";
+    };
+
+    // Función para reorganizar tarjetas según el filtro
+    const reorganizeCards = (category: string) => {
+      visibleCards = getVisibleCards(category);
+
+      // Reorganizar visualmente las tarjetas en el DOM
+      projectCards.forEach((card) => {
+        const cardElement = card as HTMLElement;
+        const cardCategory = card.getAttribute("data-category");
+        const shouldShow = category === "all" || cardCategory === category;
+
+        if (shouldShow) {
+          cardElement.style.display = "block";
+          cardElement.style.opacity = "1";
+          cardElement.style.transform = "translateX(0) scale(1)";
+        } else {
+          cardElement.style.display = "none";
+        }
+      });
+
+      // Reorganizar el orden en el DOM para que las visibles estén primero
+      visibleCards.forEach((card, index) => {
+        projectsTrack.appendChild(card);
+        card.style.order = index.toString();
+      });
+
+      // Resetear índice y actualizar carrusel después de que el DOM se actualice
+      currentIndex = 0;
+      
+      // Esperar a que el navegador recalcule los tamaños
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          // Resetear variables de arrastre
+          currentTranslate = 0;
+          prevTranslate = 0;
+          isDragging = false;
+          
+          updateCarousel();
+          // Actualizar visibleCards y agregar listeners
+          visibleCards = getVisibleCards(category);
+          addDragListeners();
+        }, 100);
+      });
+    };
+
+    // Event listeners para filtros
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.getAttribute("data-category") || "all";
+
+        // Actualizar botones activos
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // Reorganizar tarjetas
+        reorganizeCards(category);
+      });
+    });
+
+    // Inicializar con "Todos los proyectos"
+    reorganizeCards("all");
+    
+    // Agregar listeners iniciales
+    addDragListeners();
+  });
 </script>
 
 <style>
-  .portfolio-container-persona2 {
+  .portfolio-container {
     padding: 0;
   }
 
   .hero-section-genesis {
     padding: 0;
-    background: #31323b;
+    background-color: var(--color-bg-sections);
     scroll-margin-top: 100px;
     position: relative;
     min-height: 600px;
@@ -246,7 +592,6 @@ const resolvePath = (path: string | undefined) => {
     font-family: var(--font-heading);
     color: var(--color-primary);
     margin: 0;
-    margin-bottom: 2rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -254,7 +599,9 @@ const resolvePath = (path: string | undefined) => {
     will-change: transform, opacity;
     opacity: 0;
     transform: translateX(-100px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
   }
 
   .hero-subtitle-genesis {
@@ -345,17 +692,24 @@ const resolvePath = (path: string | undefined) => {
     grid-column: 2;
     max-width: 100%;
     box-sizing: border-box;
+    border-bottom-right-radius: 120px;
   }
 
   .hero-image-genesis::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to left, rgba(49, 50, 59, 0.9) 0%, rgba(49, 50, 59, 0.5) 50%, transparent 100%);
+    background: linear-gradient(
+      to left,
+      rgba(49, 50, 59, 0.9) 0%,
+      rgba(49, 50, 59, 0.5) 50%,
+      transparent 100%
+    );
     z-index: 1;
+    border-bottom-right-radius: 120px;
   }
 
   .genesis-photo {
@@ -367,15 +721,16 @@ const resolvePath = (path: string | undefined) => {
     opacity: 0.8;
     position: relative;
     z-index: 0;
+    border-bottom-right-radius: 120px;
   }
 
-  .section-container-persona2 {
-    max-width: 1200px;
+  .section-container {
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
   }
 
-  .section-title-persona2 {
+  .section-title {
     font-size: clamp(2rem, 4vw, 3rem);
     font-family: var(--font-heading);
     text-align: center;
@@ -383,18 +738,139 @@ const resolvePath = (path: string | undefined) => {
     color: var(--color-text-white);
   }
 
-  .skills-section-persona2,
-  .projects-section-persona2,
-  .courses-section-persona2 {
+  .skills-section,
+  .courses-section {
     padding: 6rem 0;
     scroll-margin-top: 100px;
   }
 
-  .skills-container-persona2,
-  .projects-container-persona2,
-  .courses-container-persona2 {
-    /* Estilos se a?adir?n m?s adelante */
+  .projects-section {
+    padding: 6rem 0;
+    scroll-margin-top: 100px;
+    background-color: var(--color-bg-sections);
   }
+
+  .skills-container,
+  .courses-container {
+    /* Estilos se agregarán más adelante */
+  }
+
+  .projects-header {
+    margin-bottom: 3rem;
+  }
+
+  .projects-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .projects-title-line1 {
+    color: var(--color-text-white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+  }
+
+  .projects-title-line2 {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .star-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .projects-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-family: var(--font-paragraph);
+    color: var(--color-text-white);
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .projects-filters {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-white);
+    font-family: var(--font-paragraph);
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .filter-btn:hover {
+    opacity: 0.8;
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-button-selected);
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+  }
+
+  .projects-carousel-wrapper {
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .projects-carousel-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    padding-right: 4rem; /* Espacio para mostrar parcialmente el siguiente card */
+  }
+
+  .projects-track {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .project-card {
+    background-color: #d8d8d8;
+    border-radius: 20px;
+    min-height: 400px;
+    width: 320px;
+    flex-shrink: 0;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.6s ease;
+    transform-origin: center;
+    display: block;
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+  }
+
 
   @media (max-width: 968px) {
     .hero-banner-genesis {
@@ -441,8 +917,43 @@ const resolvePath = (path: string | undefined) => {
       min-width: auto;
     }
 
-    .section-container-persona2 {
+    .section-container {
       padding: 0 1.5rem;
+    }
+
+    .projects-title {
+      font-size: 2rem;
+    }
+
+    .star-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .projects-subtitle {
+      font-size: 0.95rem;
+    }
+
+    .projects-filters {
+      gap: 1rem;
+    }
+
+    .filter-btn {
+      font-size: 0.9rem;
+    }
+
+    .filter-btn.active {
+      padding: 0.5rem 1.25rem;
+    }
+
+
+    .project-card {
+      width: 280px;
+      min-height: 350px;
+    }
+
+    .projects-track {
+      gap: 1.5rem;
     }
   }
 </style>
