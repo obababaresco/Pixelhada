@@ -53,7 +53,7 @@ const resolvePath = (path: string | undefined) => {
         </div>
         <div class="hero-image-genesis">
           <img
-            src="/images/oswaldo-teran.png"
+            src="/images/Genesis-duran.png"
             alt="Génesis Durán"
             class="genesis-photo"
           />
@@ -116,6 +116,52 @@ const resolvePath = (path: string | undefined) => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secci?n Texto - Dise?o -->
+    <section class="text-section-design" id="diseño">
+      <div class="section-container">
+        <div class="text-section-content">
+          <h2 class="text-section-title">
+            <span class="title-line title-line-1">NO LLEGUÉ AL DISEÑO</span>
+            <span class="title-line title-line-2">POR CASUALIDAD.</span>
+            <span class="title-line title-line-3">LLEGUÉ BUSCANDO</span>
+            <span class="title-line title-line-4">
+              RESPUESTAS.
+              <img
+                src="/images/paleta-de-color.png"
+                alt="Paleta de colores"
+                class="palette-icon"
+              />
+            </span>
+          </h2>
+          <p class="text-section-paragraph">
+            Siempre me ha interesado entender por qué las personas hacen lo que hacen, qué las frustra, qué las confunde y qué las hace sentir tranquilas cuando interactúan con un producto digital. El diseño se convirtió para mi, en el punto donde pude unir <strong class="highlight-word" data-word="lógica">lógica</strong>, <strong class="highlight-word" data-word="sensibilidad">sensibilidad</strong> y <strong class="highlight-word" data-word="estructura">estructura</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secci?n Texto - Dise?o para que -->
+    <section class="text-section-design-work" id="diseño-para-que">
+      <div class="section-container">
+        <div class="text-section-content">
+          <h2 class="text-section-title-work">
+            <span class="title-part-static">DISEÑO PARA QUE</span>
+            <span class="title-part-dynamic-wrapper">
+              <span class="title-part-dynamic" data-phrase="0">FUNCIONE</span>
+              <img
+                src="/images/modelo-3d.png"
+                alt="Modelo 3D"
+                class="model-3d-icon"
+              />
+            </span>
+          </h2>
+          <p class="text-section-paragraph">
+            Trabajo en UX/UI desde hace más de 6 años, principalmente en <strong>entornos remotos</strong> y multidisciplinarios. Me enfoco en simplificar lo complejo, tomar decisiones con criterio y crear experiencias que se sientan claras, humanas y posibles de usar en la vida real.
+          </p>
         </div>
       </div>
     </section>
@@ -531,6 +577,155 @@ const resolvePath = (path: string | undefined) => {
     // Agregar listeners iniciales
     addDragListeners();
   });
+
+  // Efecto de iluminación suave en scroll para palabras destacadas
+  document.addEventListener("DOMContentLoaded", () => {
+    const textSection = document.querySelector(
+      ".text-section-design",
+    ) as HTMLElement;
+    const highlightWords = document.querySelectorAll(
+      ".highlight-word",
+    ) as NodeListOf<HTMLElement>;
+
+    if (!textSection || !highlightWords.length) return;
+
+    const words = Array.from(highlightWords);
+    const wordOrder = ["lógica", "sensibilidad", "estructura"];
+    
+    // Ordenar las palabras según el orden especificado
+    const orderedWords = wordOrder.map((word) =>
+      words.find((w) => w.getAttribute("data-word") === word),
+    ).filter(Boolean) as HTMLElement[];
+
+    // Función para calcular el progreso del scroll
+    const updateHighlight = () => {
+      const rect = textSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calcular cuando la sección está visible
+      const sectionTop = rect.top;
+      const sectionBottom = rect.bottom;
+
+      // La sección está visible cuando está en la ventana
+      if (sectionTop < windowHeight && sectionBottom > 0) {
+        // Calcular el progreso del scroll dentro de la sección
+        // Empezamos a iluminar cuando la sección entra en el tercio superior de la ventana
+        const startPoint = windowHeight * 0.6;
+        const endPoint = windowHeight * 0.1;
+        const totalRange = startPoint - endPoint;
+        
+        // Progreso de 0 a 1 a medida que scrolleamos
+        const scrollProgress = Math.max(
+          0,
+          Math.min(1, (startPoint - sectionTop) / totalRange),
+        );
+
+        // Iluminar palabras una a una según el progreso
+        const wordsCount = orderedWords.length;
+        const progressPerWord = 1 / wordsCount;
+
+        orderedWords.forEach((word, index) => {
+          const wordStart = index * progressPerWord;
+          const wordEnd = (index + 1) * progressPerWord;
+          
+          // Si el progreso está en el rango de esta palabra
+          if (scrollProgress >= wordStart) {
+            // Calcular la intensidad de iluminación para esta palabra
+            const wordProgress = Math.min(
+              1,
+              (scrollProgress - wordStart) / progressPerWord,
+            );
+            
+            // Aplicar iluminación suave - sin animación llamativa
+            // La intensidad va de 0 a 1 suavemente
+            const intensity = wordProgress;
+            const glowIntensity = intensity * 15; // Brillo máximo de 15px
+            const glowOpacity = intensity * 0.5; // Opacidad máxima de 0.5
+            
+            // Color que va del blanco al color primario suavemente
+            const colorMix = intensity;
+            const r = Math.round(255 * (1 - colorMix) + 43 * colorMix);
+            const g = Math.round(255 * (1 - colorMix) + 228 * colorMix);
+            const b = Math.round(255 * (1 - colorMix) + 194 * colorMix);
+            
+            word.style.textShadow = `0 0 ${glowIntensity}px rgba(43, 228, 194, ${glowOpacity})`;
+            word.style.color = `rgb(${r}, ${g}, ${b})`;
+            word.classList.add("highlighted");
+          } else {
+            // Restablecer estado inicial
+            word.style.textShadow = "none";
+            word.style.color = "";
+            word.classList.remove("highlighted");
+          }
+        });
+      } else {
+        // Si la sección no está visible, resetear
+        orderedWords.forEach((word) => {
+          word.style.textShadow = "none";
+          word.style.color = "";
+          word.classList.remove("highlighted");
+        });
+      }
+    };
+
+    // Throttle para mejorar rendimiento
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateHighlight();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    // Ejecutar una vez al cargar
+    updateHighlight();
+  });
+
+  // Interacción hover para cambiar frase en título "Diseño para que"
+  document.addEventListener("DOMContentLoaded", () => {
+    const dynamicText = document.querySelector(
+      ".title-part-dynamic",
+    ) as HTMLElement;
+    const titleSection = document.querySelector(
+      ".text-section-title-work",
+    ) as HTMLElement;
+
+    if (!dynamicText || !titleSection) return;
+
+    const phrases = [
+      "FUNCIONE",
+      "se entienda",
+      "no frustre",
+      "fluya",
+    ];
+
+    let currentPhraseIndex = 0;
+    let isChanging = false;
+
+    const changePhrase = () => {
+      if (isChanging) return;
+      
+      isChanging = true;
+      // Avanzar a la siguiente frase
+      currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+      dynamicText.style.opacity = "0";
+      
+      setTimeout(() => {
+        dynamicText.textContent = phrases[currentPhraseIndex];
+        dynamicText.style.opacity = "1";
+        isChanging = false;
+      }, 150);
+    };
+
+    // Hover solo en el título - cambia a la siguiente frase
+    titleSection.addEventListener("mouseenter", () => {
+      changePhrase();
+    });
+  });
 </script>
 
 <style>
@@ -539,7 +734,7 @@ const resolvePath = (path: string | undefined) => {
   }
 
   .hero-section-genesis {
-    padding: 0;
+    padding: 6rem 0;
     background-color: var(--color-bg-sections);
     scroll-margin-top: 100px;
     position: relative;
@@ -689,27 +884,7 @@ const resolvePath = (path: string | undefined) => {
     height: 100%;
     min-height: 600px;
     overflow: hidden;
-    grid-column: 2;
     max-width: 100%;
-    box-sizing: border-box;
-    border-bottom-right-radius: 120px;
-  }
-
-  .hero-image-genesis::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to left,
-      rgba(49, 50, 59, 0.9) 0%,
-      rgba(49, 50, 59, 0.5) 50%,
-      transparent 100%
-    );
-    z-index: 1;
-    border-bottom-right-radius: 120px;
   }
 
   .genesis-photo {
@@ -717,11 +892,8 @@ const resolvePath = (path: string | undefined) => {
     height: 100%;
     object-fit: cover;
     object-position: center right;
-    filter: grayscale(20%) brightness(0.7);
-    opacity: 0.8;
     position: relative;
     z-index: 0;
-    border-bottom-right-radius: 120px;
   }
 
   .section-container {
@@ -748,6 +920,126 @@ const resolvePath = (path: string | undefined) => {
     padding: 6rem 0;
     scroll-margin-top: 100px;
     background-color: var(--color-bg-sections);
+  }
+
+  .text-section-design {
+    padding: 6rem 0;
+    scroll-margin-top: 100px;
+    background-color: var(--color-bg-sections);
+    position: relative;
+  }
+
+  .text-section-design-work {
+    padding: 6rem 0;
+    scroll-margin-top: 100px;
+    background-color: var(--color-bg-sections);
+    position: relative;
+  }
+
+  .text-section-content {
+    width: 100%;
+  }
+
+  .text-section-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    letter-spacing: 1px;
+  }
+
+  .title-line {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .title-line-1,
+  .title-line-2 {
+    color: var(--color-text-white);
+  }
+
+  .title-line-3 {
+    color: var(--color-primary);
+  }
+
+  .title-line-4 {
+    color: var(--color-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .palette-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .text-section-title-work {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    letter-spacing: 1px;
+  }
+
+  .title-part-static {
+    color: var(--color-text-white);
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .title-part-dynamic-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .title-part-dynamic {
+    color: var(--color-primary);
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+    display: inline-block;
+    opacity: 1;
+  }
+
+  .model-3d-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .text-section-paragraph {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-family: var(--font-paragraph);
+    color: var(--color-text-white);
+    line-height: 1.8;
+    font-weight: 400;
+    margin: 0;
+    opacity: 0.95;
+  }
+
+  .text-section-paragraph strong.highlight-word {
+    font-weight: 700;
+    color: var(--color-text-white);
+    transition: text-shadow 0.4s ease-out, color 0.4s ease-out;
+    display: inline;
+  }
+
+  .text-section-paragraph strong.highlight-word.highlighted {
+    /* El estilo se aplica dinámicamente via JavaScript */
   }
 
   .skills-container,
@@ -954,6 +1246,38 @@ const resolvePath = (path: string | undefined) => {
 
     .projects-track {
       gap: 1.5rem;
+    }
+
+    .text-section-design {
+      padding: 4rem 0;
+    }
+
+    .text-section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .palette-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .text-section-paragraph {
+      font-size: 0.95rem;
+    }
+
+    .text-section-design-work {
+      padding: 4rem 0;
+    }
+
+    .text-section-title-work {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .model-3d-icon {
+      width: 24px;
+      height: 24px;
     }
   }
 </style>
