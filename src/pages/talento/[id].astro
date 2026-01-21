@@ -349,29 +349,71 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
 
 <script>
   // Efecto Typewriter para los roles
-  document.addEventListener('DOMContentLoaded', () => {
+  async function initTypewriter() {
+    // Esperar a que las fuentes estén cargadas
+    if (document.fonts && document.fonts.ready) {
+      await document.fonts.ready;
+    }
+    // Esperar un frame adicional para asegurar que todo esté renderizado
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    await new Promise(resolve => setTimeout(resolve, 50));
+    
     const typewriterElement = document.querySelector('.typewriter-role') as HTMLElement;
     if (!typewriterElement) return;
     
     const roles = JSON.parse(typewriterElement.getAttribute('data-roles') || '[]');
     if (roles.length === 0) return;
     
-    // Calcular el ancho máximo basado en el rol más largo
+    // Obtener todos los estilos computados del elemento real
+    const computedStyle = window.getComputedStyle(typewriterElement);
+    
+    // Crear un elemento temporal idéntico al elemento real
     const tempSpan = document.createElement('span');
     tempSpan.style.visibility = 'hidden';
     tempSpan.style.position = 'absolute';
-    tempSpan.style.fontSize = window.getComputedStyle(typewriterElement).fontSize;
-    tempSpan.style.fontFamily = window.getComputedStyle(typewriterElement).fontFamily;
-    tempSpan.style.fontWeight = window.getComputedStyle(typewriterElement).fontWeight;
-    tempSpan.style.padding = window.getComputedStyle(typewriterElement).padding;
-    tempSpan.style.height = window.getComputedStyle(typewriterElement).height;
-    tempSpan.style.lineHeight = window.getComputedStyle(typewriterElement).lineHeight;
+    tempSpan.style.top = '-9999px';
+    tempSpan.style.left = '-9999px';
+    tempSpan.style.display = 'inline-flex';
+    tempSpan.style.alignItems = 'center';
+    tempSpan.style.fontSize = computedStyle.fontSize;
+    tempSpan.style.fontFamily = computedStyle.fontFamily;
+    tempSpan.style.fontWeight = computedStyle.fontWeight;
+    tempSpan.style.fontStyle = computedStyle.fontStyle;
+    tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+    tempSpan.style.padding = computedStyle.padding;
+    tempSpan.style.paddingLeft = computedStyle.paddingLeft;
+    tempSpan.style.paddingRight = computedStyle.paddingRight;
+    tempSpan.style.paddingTop = computedStyle.paddingTop;
+    tempSpan.style.paddingBottom = computedStyle.paddingBottom;
+    tempSpan.style.borderLeft = computedStyle.borderLeft;
+    tempSpan.style.borderRight = computedStyle.borderRight;
+    tempSpan.style.borderTop = computedStyle.borderTop;
+    tempSpan.style.borderBottom = computedStyle.borderBottom;
+    tempSpan.style.border = computedStyle.border;
+    tempSpan.style.borderRadius = computedStyle.borderRadius;
+    tempSpan.style.boxSizing = computedStyle.boxSizing;
+    tempSpan.style.whiteSpace = 'nowrap';
+    tempSpan.style.lineHeight = computedStyle.lineHeight;
+    tempSpan.style.height = computedStyle.height;
+    tempSpan.style.minHeight = computedStyle.minHeight;
+    tempSpan.style.width = 'auto';
+    tempSpan.style.minWidth = 'auto';
+    tempSpan.style.maxWidth = 'none';
+    
     document.body.appendChild(tempSpan);
     
     let maxWidth = 0;
     roles.forEach((role: string) => {
       tempSpan.textContent = role;
-      const width = tempSpan.offsetWidth;
+      // Forzar reflow para obtener medidas precisas
+      void tempSpan.offsetWidth;
+      void tempSpan.offsetHeight;
+      // Usar scrollWidth para obtener el ancho completo del contenido
+      // y getBoundingClientRect para incluir padding y border
+      const scrollWidth = tempSpan.scrollWidth;
+      const rect = tempSpan.getBoundingClientRect();
+      // Usar el mayor entre scrollWidth y rect.width para asegurar precisión
+      const width = Math.max(scrollWidth, rect.width);
       if (width > maxWidth) {
         maxWidth = width;
       }
@@ -379,12 +421,15 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     
     document.body.removeChild(tempSpan);
     
-    // Establecer el ancho fijo del contenedor (mantener altura fija)
+    // Establecer el ancho exacto del contenedor (sin margen adicional innecesario)
     const isMobile = window.innerWidth <= 640;
     const fixedHeight = isMobile ? '50px' : '60px';
     
-    typewriterElement.style.width = `${maxWidth + 20}px`;
-    typewriterElement.style.minWidth = `${maxWidth + 20}px`;
+    // Usar el ancho calculado exactamente, solo agregar 2px mínimo para evitar problemas de redondeo
+    const finalWidth = Math.ceil(maxWidth) + 2;
+    
+    typewriterElement.style.width = `${finalWidth}px`;
+    typewriterElement.style.minWidth = `${finalWidth}px`;
     typewriterElement.style.height = fixedHeight;
     typewriterElement.style.minHeight = fixedHeight;
     
@@ -427,7 +472,9 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     }
     
     setTimeout(typeWriter, 1000);
-  });
+  }
+  
+  document.addEventListener('DOMContentLoaded', initTypewriter);
 
   // Filtros de proyectos y Load More
   document.addEventListener('DOMContentLoaded', () => {
@@ -1120,6 +1167,7 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     display: flex;
     align-items: center;
     width: 100%;
+    overflow: hidden;
   }
 
   .typewriter-role {
@@ -1140,6 +1188,9 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
     min-height: 60px;
     height: 60px;
     line-height: 1.2;
+    overflow: hidden;
+    min-width: 150px;
+    max-width: 100%;
   }
 
   @keyframes blink {
