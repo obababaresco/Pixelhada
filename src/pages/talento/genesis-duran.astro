@@ -284,6 +284,19 @@ const resolvePath = (path: string | undefined) => {
                   </button>
                 </div>
               </div>
+              <!-- Flechas de navegación para móvil -->
+              <div class="carousel-arrows-mobile">
+                <button class="carousel-arrow carousel-arrow-prev" id="arrow-prev" aria-label="Anterior">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="carousel-arrow carousel-arrow-next" id="arrow-next" aria-label="Siguiente">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -901,6 +914,8 @@ const resolvePath = (path: string | undefined) => {
     const pixelhadaWrapper = document.getElementById("pixelhada-wrapper") as HTMLElement;
     const btnBack = document.getElementById("btn-back") as HTMLButtonElement;
     const btnForward = document.getElementById("btn-forward") as HTMLButtonElement;
+    const arrowPrev = document.getElementById("arrow-prev") as HTMLButtonElement;
+    const arrowNext = document.getElementById("arrow-next") as HTMLButtonElement;
     const floatingMessages = pixelhadaWrapper.querySelectorAll(".floating-message") as NodeListOf<HTMLElement>;
 
     if (!processStart || !processPath || !btnStart || !pathCells || !pixelhadaWrapper || !btnBack || !btnForward) return;
@@ -1020,6 +1035,15 @@ const resolvePath = (path: string | undefined) => {
       } else {
         btnForward.style.opacity = "1";
         btnForward.style.cursor = "pointer";
+      }
+
+      // Actualizar estado de las flechas de carrusel (si existen)
+      if (arrowPrev && arrowNext) {
+        // La flecha anterior siempre está habilitada (puede volver al inicio desde celda 3)
+        arrowPrev.disabled = false;
+        
+        // Si estamos en la última posición, deshabilitar flecha siguiente
+        arrowNext.disabled = currentPosition === targetCells.length - 1;
       }
     };
 
@@ -1253,6 +1277,14 @@ const resolvePath = (path: string | undefined) => {
     // Event listeners para los botones de navegación
     btnForward.addEventListener("click", moveForward);
     btnBack.addEventListener("click", moveBack);
+
+    // Event listeners para las flechas de carrusel (móvil)
+    if (arrowPrev) {
+      arrowPrev.addEventListener("click", moveBack);
+    }
+    if (arrowNext) {
+      arrowNext.addEventListener("click", moveForward);
+    }
 
     // Event listener para el scroll del mouse
     window.addEventListener("wheel", handleWheel, { passive: false });
@@ -2082,6 +2114,11 @@ const resolvePath = (path: string | undefined) => {
     min-height: 400px;
   }
 
+  /* Flechas de carrusel - ocultas por defecto */
+  .carousel-arrows-mobile {
+    display: none;
+  }
+
   /* Ajustar gap en pantallas más pequeñas */
   @media (max-width: 1200px) {
     .path-cells {
@@ -2479,8 +2516,8 @@ const resolvePath = (path: string | undefined) => {
     }
 
     .path-cells {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(6, auto);
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, auto);
       gap: 1rem;
       max-width: 100%;
     }
@@ -2500,36 +2537,88 @@ const resolvePath = (path: string | undefined) => {
       padding: 1rem 0;
     }
 
-    /* Patrón Z: horizontal arriba, diagonal, horizontal abajo */
-    /* Botón Volver siempre primero */
-    .btn-back.path-cell-btn {
-      grid-column: 1;
+    /* Ocultar celdas 1, 2, 4, 5, 7, 8 en móvil */
+    .path-cell[data-cell-index="1"],
+    .path-cell[data-cell-index="2"],
+    .path-cell[data-cell-index="4"],
+    .path-cell[data-cell-index="5"],
+    .path-cell[data-cell-index="7"],
+    .path-cell[data-cell-index="8"] {
+      display: none;
+    }
+
+    /* Ocultar botones Volver y Avanzar en móvil */
+    .btn-back.path-cell-btn,
+    .btn-forward.path-cell-btn {
+      display: none;
+    }
+
+    /* Mostrar flechas de carrusel en móvil */
+    .carousel-arrows-mobile {
+      display: flex;
+    }
+    
+    /* Celda 3: columna 2, fila 1 */
+    .path-cell[data-cell-index="3"] {
+      grid-column: 2;
       grid-row: 1;
     }
     
-    /* Fila 1: Horizontal (parte superior de la Z) */
-    .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
-    .path-cell:nth-child(3) { grid-column: 3; grid-row: 1; }
+    /* Celda 6: columna 1, fila 2 */
+    .path-cell[data-cell-index="6"] {
+      grid-column: 1;
+      grid-row: 2;
+    }
     
-    /* Diagonal de la Z (columna 3 hacia abajo) */
-    .path-cell:nth-child(4) { grid-column: 3; grid-row: 2; }
-    .path-cell:nth-child(5) { grid-column: 3; grid-row: 3; }
+    /* Celda 9: columna 2, fila 3 */
+    .path-cell[data-cell-index="9"] {
+      grid-column: 2;
+      grid-row: 3;
+    }
     
-    /* Parte central de la Z (horizontal) */
-    .path-cell:nth-child(6) { grid-column: 2; grid-row: 3; }
-    .path-cell:nth-child(7) { grid-column: 1; grid-row: 3; }
-    
-    /* Continuación diagonal (columna 1 hacia abajo) */
-    .path-cell:nth-child(8) { grid-column: 1; grid-row: 4; }
-    .path-cell:nth-child(9) { grid-column: 1; grid-row: 5; }
-    
-    /* Última celda en columna 2, fila 5 */
-    .path-cell:nth-child(10) { grid-column: 2; grid-row: 5; }
-    
-    /* Botón Avanzar en columna 3, fila 5 */
+    /* Botón Avanzar: columna 1, fila 3 */
     .btn-forward.path-cell-btn {
-      grid-column: 3;
-      grid-row: 5;
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    /* Flechas de carrusel para móvil */
+    .carousel-arrows-mobile {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+
+    .carousel-arrow {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #ffffff;
+    }
+
+    .carousel-arrow:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    .carousel-arrow:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .carousel-arrow svg {
+      width: 24px;
+      height: 24px;
     }
 
     /* Mensaje flotante de la celda 3 - lado izquierdo en móvil */
