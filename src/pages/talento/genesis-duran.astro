@@ -1,5 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import GenesisLayout from "../../layouts/GenesisLayout.astro";
 import genesisData from "../../data/genesis-duran.json";
 
 interface Recommendation {
@@ -25,7 +25,7 @@ const hasRecommendations = recomendaciones.length > 0;
 const hasRecommendationCarousel = recomendaciones.length > 3;
 ---
 
-<Layout title="Portafolio de Génesis Durán">
+<GenesisLayout title="Portafolio de Génesis Durán">
   <div class="portfolio-container">
     <!-- Secci?n Hero -->
     <header class="hero-section-genesis" id="acerca-de">
@@ -341,7 +341,7 @@ const hasRecommendationCarousel = recomendaciones.length > 3;
       </section>
     )}
   </div>
-</Layout>
+</GenesisLayout>
 
 <script>
   // Animación de entrada del hero
