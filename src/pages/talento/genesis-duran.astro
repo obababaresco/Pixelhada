@@ -21,10 +21,8 @@ const resolvePath = (path: string | undefined) => {
           <div class="hero-text-genesis">
             <h1 class="hero-greeting-genesis">HOLA, SOY</h1>
             <h1 class="hero-name-genesis">GÉNESIS</h1>
-            <p
-              class="hero-subtitle-genesis"
-              data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan."
-            >
+            <p class="hero-subtitle-genesis"
+              data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.">
               Diseñador UX/UI y creativa visual.<br />Creo en el diseño que
               combina estética + estrategia + propósito para crear experiencias
               digitales que realmente funcionan.
@@ -34,14 +32,7 @@ const resolvePath = (path: string | undefined) => {
                 Hablemos de ideas
               </a>
               <a href="#" class="btn-cv-genesis">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -180,25 +171,115 @@ const resolvePath = (path: string | undefined) => {
         </div>
 
         <div class="process-interactive">
-          <!-- Camino con celdas y Pixelhada -->
-          <div class="process-path">
+          <!-- Vista inicial: Pixelhada y botón Vamos -->
+          <div class="process-start" id="process-start">
+            <div class="pixelhada-container-initial">
+              <div class="pixelhada-wrapper-initial">
+                <img 
+                  src="/images/PIXELHADA.png" 
+                  alt="Pixelhada" 
+                  class="pixelhada-image pixelhada-initial"
+                />
+              </div>
+            </div>
+            <button class="btn-start-process" id="btn-start-process">
+              Vamos
+            </button>
+          </div>
+
+          <!-- Camino con celdas y Pixelhada (oculto inicialmente) -->
+          <div class="process-path" id="process-path" style="display: none;">
             <div class="path-layout">
               <div class="path-container">
+                <!-- Contenedor de Pixelhada para movimiento -->
+                <div class="pixelhada-wrapper" id="pixelhada-wrapper">
+                  <img 
+                    src="/images/PIXELHADA.png" 
+                    alt="Pixelhada" 
+                    class="pixelhada-moving"
+                    id="pixelhada-image"
+                  />
+                  <!-- Mensaje flotante para el hada en posición 3 -->
+                  <div class="floating-message" id="floating-message-3" data-cell="3">
+                    <div class="floating-message-content">
+                      <h3 class="floating-message-title">Pienso con:</h3>
+                      <ul class="floating-message-list">
+                        <li>UX Research</li>
+                        <li>Arquitectura de información</li>
+                        <li>Flujos y journeys</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Mensaje flotante para el hada en posición 6 -->
+                  <div class="floating-message" id="floating-message-6" data-cell="6">
+                    <div class="floating-message-content">
+                      <h3 class="floating-message-title">Construyo con:</h3>
+                      <ul class="floating-message-list">
+                        <li>UI Design</li>
+                        <li>Design systems</li>
+                        <li>Prototipos funcionales</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Mensaje flotante para el hada en posición 9 -->
+                  <div class="floating-message" id="floating-message-9" data-cell="9">
+                    <div class="floating-message-content">
+                      <h3 class="floating-message-title">Me apoyo en:</h3>
+                      <ul class="floating-message-list">
+                        <li>Figma</li>
+                        <li>Photoshop</li>
+                        <li>Illustrator</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Mensaje flotante para la celda 1 (hover) -->
+                  <div class="floating-message floating-message-hover" id="floating-message-1" data-cell="1">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">Observar también es avanzar</p>
+                    </div>
+                  </div>
+                  <!-- Mensajes flotantes para otras celdas (hover) -->
+                  <div class="floating-message floating-message-hover" id="floating-message-2" data-cell="2">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">El proceso importa</p>
+                    </div>
+                  </div>
+                  <div class="floating-message floating-message-hover" id="floating-message-4" data-cell="4">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">Hacer las preguntas correctas cambia todo</p>
+                    </div>
+                  </div>
+                  <div class="floating-message floating-message-hover" id="floating-message-5" data-cell="5">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">Las respuestas no siempre son inmediatas</p>
+                    </div>
+                  </div>
+                  <div class="floating-message floating-message-hover" id="floating-message-7" data-cell="7">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">No todo lo que se diseña se queda</p>
+                    </div>
+                  </div>
+                  <div class="floating-message floating-message-hover" id="floating-message-8" data-cell="8">
+                    <div class="floating-message-content floating-message-simple">
+                      <p class="floating-message-text">Simplificar es parte del trabajo</p>
+                    </div>
+                  </div>
+                </div>
                 <div class="path-cells">
                   <!-- Botón Volver en la celda 1 -->
-                  <button class="btn-nav btn-back path-cell-btn">
+                  <button class="btn-nav btn-back path-cell-btn" id="btn-back">
                     Volver
                   </button>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <div class="path-cell"></div>
-                  <button class="btn-nav btn-forward btn-white path-cell-btn">
+                  <div class="path-cell" data-cell-index="1"></div>
+                  <div class="path-cell" data-cell-index="2"></div>
+                  <div class="path-cell active-cell" data-cell-index="3"></div>
+                  <div class="path-cell" data-cell-index="4"></div>
+                  <div class="path-cell" data-cell-index="5"></div>
+                  <div class="path-cell" data-cell-index="6"></div>
+                  <div class="path-cell" data-cell-index="7"></div>
+                  <div class="path-cell" data-cell-index="8"></div>
+                  <div class="path-cell" data-cell-index="9"></div>
+                  <button class="btn-nav btn-forward btn-white path-cell-btn" id="btn-forward">
                     Avanzar
                   </button>
                 </div>
@@ -750,78 +831,440 @@ const resolvePath = (path: string | undefined) => {
     });
   });
 
-  // Sección del proceso interactivo - COMENTADO TEMPORALMENTE
-  // Solo maquetado y CSS por ahora
-  /*
+  // Sección del proceso interactivo - Movimiento de Pixelhada
   document.addEventListener("DOMContentLoaded", () => {
-    const processStart = document.getElementById("process-start");
-    const processPath = document.getElementById("process-path");
-    const btnStart = document.getElementById("btn-start-process");
-    const pathCells = document.getElementById("path-cells");
-    const pixelhadaWrapper = document.getElementById("pixelhada-wrapper");
+    const processStart = document.getElementById("process-start") as HTMLElement;
+    const processPath = document.getElementById("process-path") as HTMLElement;
+    const btnStart = document.getElementById("btn-start-process") as HTMLButtonElement;
+    const pathCells = document.querySelector(".path-cells") as HTMLElement;
+    const pixelhadaWrapper = document.getElementById("pixelhada-wrapper") as HTMLElement;
+    const btnBack = document.getElementById("btn-back") as HTMLButtonElement;
+    const btnForward = document.getElementById("btn-forward") as HTMLButtonElement;
+    const floatingMessages = pixelhadaWrapper.querySelectorAll(".floating-message") as NodeListOf<HTMLElement>;
 
-    if (!processStart || !processPath || !btnStart || !pathCells || !pixelhadaWrapper) return;
+    if (!processStart || !processPath || !btnStart || !pathCells || !pixelhadaWrapper || !btnBack || !btnForward) return;
 
-    // Crear las 9 celdas del camino
-    const createCells = () => {
-      pathCells.innerHTML = "";
-      for (let i = 0; i < 9; i++) {
-        const cell = document.createElement("div");
-        cell.className = "path-cell";
-        cell.dataset.index = i.toString();
-        pathCells.appendChild(cell);
-      }
-      console.log("Celdas creadas:", pathCells.children.length);
+    // Posiciones objetivo donde Pixelhada puede estar (celdas 3, 6, 9)
+    const targetCells = [3, 6, 9];
+    let currentPosition = 0; // Índice en targetCells (0 = celda 3, 1 = celda 6, 2 = celda 9)
+
+    // Función para obtener una celda por su índice
+    const getCellByIndex = (index: number): HTMLElement | null => {
+      return pathCells.querySelector(`[data-cell-index="${index}"]`) as HTMLElement | null;
     };
 
-    // Mover Pixelhada al recuadro 3 (índice 2)
-    const movePixelhadaToCell3 = () => {
-      const cells = pathCells.querySelectorAll(".path-cell");
-      console.log("Celdas encontradas:", cells.length);
-      if (cells[2]) {
-        const cell = cells[2] as HTMLElement;
-        const cellRect = cell.getBoundingClientRect();
-        const containerRect = pathCells.getBoundingClientRect();
-        
-        console.log("Posición de celda 3:", cellRect);
-        console.log("Posición del contenedor:", containerRect);
-        
-        const left = cellRect.left - containerRect.left + (cellRect.width / 2) - 60;
-        const top = cellRect.top - containerRect.top + (cellRect.height / 2) - 60;
-        
-        pixelhadaWrapper.style.transform = `translate(${left}px, ${top}px)`;
-        console.log("Pixelhada movida a:", left, top);
+    // Función para mostrar/ocultar el mensaje flotante
+    const updateFloatingMessage = (cellIndex: number) => {
+      if (!pixelhadaWrapper) return;
+      
+      // Obtener todos los mensajes flotantes (actualizar en cada llamada por si acaso)
+      const allMessages = pixelhadaWrapper.querySelectorAll(".floating-message") as NodeListOf<HTMLElement>;
+      
+      // Ocultar todos los mensajes primero
+      allMessages.forEach((message) => {
+        if (message) {
+          const messageCell = message.getAttribute("data-cell");
+          if (messageCell === "3" || messageCell === "9") {
+            // Para los mensajes de las celdas 3 y 9, usar display: none para que no ocupen espacio
+            message.style.display = "none";
+            message.style.opacity = "0";
+          } else {
+            // Para otros mensajes, usar opacity
+            message.style.opacity = "0";
+          }
+        }
+      });
+      
+      // Mostrar el mensaje correspondiente a la celda actual (celdas 3, 6 y 9)
+      if (cellIndex === 3 || cellIndex === 6 || cellIndex === 9) {
+        const targetMessage = pixelhadaWrapper.querySelector(`.floating-message[data-cell="${cellIndex}"]`) as HTMLElement;
+        if (targetMessage) {
+          if (cellIndex === 3 || cellIndex === 9) {
+            targetMessage.style.display = "block";
+            targetMessage.style.opacity = "1";
+          } else {
+            targetMessage.style.opacity = "1";
+          }
+        }
+      }
+    };
+
+    // Función para mover Pixelhada a una celda específica
+    const movePixelhadaToCell = (cellIndex: number) => {
+      const cell = getCellByIndex(cellIndex);
+      if (!cell || !pixelhadaWrapper) return;
+
+      const pixelhadaImage = pixelhadaWrapper.querySelector("img") as HTMLImageElement;
+      if (!pixelhadaImage) return;
+
+      const cellRect = cell.getBoundingClientRect();
+      const containerRect = (pathCells.parentElement as HTMLElement).getBoundingClientRect();
+      
+      // Obtener dimensiones reales de la imagen (considerando el tamaño renderizado)
+      const imageWidth = pixelhadaImage.offsetWidth || 120; // Ancho por defecto si no está cargado
+      const imageHeight = pixelhadaImage.offsetHeight || 120; // Altura por defecto si no está cargado
+      
+      // Calcular posición: centrada horizontalmente, pies en la parte inferior de la celda
+      // left: centro de la celda menos la mitad del ancho de la imagen
+      const left = cellRect.left - containerRect.left + (cellRect.width / 2) - (imageWidth / 2);
+      
+      // top: parte inferior de la celda menos la altura completa de la imagen (para que los pies toquen el borde)
+      const top = cellRect.top - containerRect.top + cellRect.height - imageHeight;
+      
+      pixelhadaWrapper.style.transform = `translate(${left}px, ${top}px)`;
+      pixelhadaWrapper.style.opacity = "1";
+      
+      // Actualizar posición del mensaje flotante
+      updateFloatingMessage(cellIndex);
+    };
+
+    // Función para actualizar el resaltado de la celda activa
+    const updateActiveCell = (cellIndex: number) => {
+      // Remover clase activa de todas las celdas
+      const allCells = pathCells.querySelectorAll(".path-cell");
+      allCells.forEach((cell) => {
+        cell.classList.remove("active-cell");
+      });
+
+      // Agregar clase activa a la celda actual
+      const activeCell = getCellByIndex(cellIndex);
+      if (activeCell) {
+        activeCell.classList.add("active-cell");
+      }
+    };
+
+    // Función para volver a la vista inicial
+    const returnToStart = () => {
+      // Ocultar el camino iterativo
+      processPath.style.display = "none";
+      
+      // Mostrar la vista inicial
+      processStart.style.display = "flex";
+      
+      // Resetear la posición actual
+      currentPosition = 0;
+    };
+
+    // Función para actualizar el estado de los botones
+    const updateButtons = () => {
+      // El botón Volver siempre está habilitado (puede volver al inicio desde celda 3)
+      btnBack.disabled = false;
+      btnBack.style.opacity = "1";
+      btnBack.style.cursor = "pointer";
+
+      // Si estamos en la última posición (celda 8), deshabilitar botón Avanzar
+      btnForward.disabled = currentPosition === targetCells.length - 1;
+      if (currentPosition === targetCells.length - 1) {
+        btnForward.style.opacity = "0.5";
+        btnForward.style.cursor = "not-allowed";
       } else {
-        console.error("No se encontró la celda 3");
+        btnForward.style.opacity = "1";
+        btnForward.style.cursor = "pointer";
+      }
+    };
+
+    // Función para mover a la siguiente posición con iluminación progresiva
+    const moveForward = () => {
+      if (currentPosition < targetCells.length - 1) {
+        const fromCell = targetCells[currentPosition];
+        const nextPosition = currentPosition + 1;
+        const toCell = targetCells[nextPosition];
+        
+        // Iluminar celdas progresivamente desde la actual hasta la siguiente
+        illuminateCellsProgressively(fromCell, toCell, () => {
+          currentPosition = nextPosition;
+          movePixelhadaToCell(toCell);
+          updateButtons();
+        });
+      }
+    };
+
+    // Función para mover a la posición anterior con desiluminación progresiva
+    const moveBack = () => {
+      if (currentPosition > 0) {
+        const fromCell = targetCells[currentPosition];
+        const prevPosition = currentPosition - 1;
+        const toCell = targetCells[prevPosition];
+        
+        // Desiluminar celdas progresivamente desde la actual hasta la anterior
+        deilluminateCellsProgressively(fromCell, toCell, () => {
+          currentPosition = prevPosition;
+          movePixelhadaToCell(toCell);
+          updateButtons();
+        });
+      } else {
+        // Si estamos en la primera posición (celda 3), volver al inicio
+        returnToStart();
+      }
+    };
+
+    // Control de scroll del mouse - solo cuando el cursor está sobre el contenedor de celdas
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+    let isScrolling = false;
+    let isMouseOverCells = false;
+
+    // Detectar cuando el mouse entra o sale del contenedor de celdas
+    pathCells.addEventListener("mouseenter", () => {
+      isMouseOverCells = true;
+    });
+
+    pathCells.addEventListener("mouseleave", () => {
+      isMouseOverCells = false;
+    });
+
+    const handleWheel = (e: WheelEvent) => {
+      // Solo procesar si el cursor está sobre el contenedor de celdas
+      if (!isMouseOverCells) return;
+
+      // Verificar que el cursor esté realmente sobre el contenedor
+      const cellsRect = pathCells.getBoundingClientRect();
+      const isInCells = 
+        e.clientY >= cellsRect.top && 
+        e.clientY <= cellsRect.bottom &&
+        e.clientX >= cellsRect.left && 
+        e.clientX <= cellsRect.right;
+
+      if (!isInCells) return;
+
+      // Prevenir scroll si estamos en el contenedor de celdas
+      e.preventDefault();
+
+      // Throttle para evitar múltiples eventos
+      if (isScrolling) return;
+
+      isScrolling = true;
+      
+      if (e.deltaY > 0) {
+        // Scroll hacia abajo = avanzar
+        moveForward();
+      } else if (e.deltaY < 0) {
+        // Scroll hacia arriba = retroceder (o volver al inicio si está en la primera posición)
+        moveBack();
+      }
+
+      // Resetear flag después de un delay
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 500);
+    };
+
+    // Función para iluminar celdas progresivamente (hacia adelante)
+    const illuminateCellsProgressively = (fromCell: number, toCell: number, callback: () => void) => {
+      // Determinar las celdas que deben iluminarse en orden
+      const cellsToIlluminate: number[] = [];
+      for (let i = fromCell; i <= toCell; i++) {
+        cellsToIlluminate.push(i);
+      }
+
+      let currentCellIndex = 0;
+
+      const illuminateNext = () => {
+        if (currentCellIndex < cellsToIlluminate.length) {
+          const cellIndex = cellsToIlluminate[currentCellIndex];
+          const cell = getCellByIndex(cellIndex);
+          
+          if (cell) {
+            // Agregar clase activa para iluminar
+            cell.classList.add("active-cell");
+            
+            // Si es la última celda, ejecutar callback
+            if (currentCellIndex === cellsToIlluminate.length - 1) {
+              setTimeout(() => {
+                callback();
+              }, 200); // Pequeña pausa antes de mover Pixelhada
+            } else {
+              // Continuar con la siguiente celda
+              currentCellIndex++;
+              setTimeout(illuminateNext, 400); // Delay de 400ms entre cada iluminación
+            }
+          }
+        }
+      };
+
+      // Iniciar la iluminación progresiva
+      illuminateNext();
+    };
+
+    // Función para desiluminar celdas progresivamente (hacia atrás)
+    const deilluminateCellsProgressively = (fromCell: number, toCell: number, callback: () => void) => {
+      // Determinar las celdas que deben desiluminarse en orden (de mayor a menor)
+      const cellsToDeilluminate: number[] = [];
+      for (let i = fromCell; i >= toCell; i--) {
+        cellsToDeilluminate.push(i);
+      }
+
+      let currentCellIndex = 0;
+
+      const deilluminateNext = () => {
+        if (currentCellIndex < cellsToDeilluminate.length) {
+          const cellIndex = cellsToDeilluminate[currentCellIndex];
+          const cell = getCellByIndex(cellIndex);
+          
+          if (cell) {
+            // Remover clase activa para desiluminar
+            cell.classList.remove("active-cell");
+            
+            // Si es la última celda, ejecutar callback
+            if (currentCellIndex === cellsToDeilluminate.length - 1) {
+              setTimeout(() => {
+                callback();
+              }, 200); // Pequeña pausa antes de mover Pixelhada
+            } else {
+              // Continuar con la siguiente celda
+              currentCellIndex++;
+              setTimeout(deilluminateNext, 400); // Delay de 400ms entre cada desiluminación
+            }
+          }
+        }
+      };
+
+      // Iniciar la desiluminación progresiva
+      deilluminateNext();
+    };
+
+    // Función para inicializar Pixelhada con animación
+    const initPixelhadaWithAnimation = () => {
+      const pixelhadaImage = pixelhadaWrapper.querySelector("img") as HTMLImageElement;
+      
+      // Limpiar todas las clases activas antes de empezar
+      const allCells = pathCells.querySelectorAll(".path-cell");
+      allCells.forEach((cell) => {
+        cell.classList.remove("active-cell");
+      });
+      
+      // Función para mover Pixelhada después de la iluminación inicial
+      const movePixelhadaAfterIllumination = () => {
+        const initialCellIndex = targetCells[currentPosition]; // celda 3
+        
+        // Mover Pixelhada a la celda 3 con transición suave
+        movePixelhadaToCell(initialCellIndex);
+        updateFloatingMessage(initialCellIndex);
+        updateButtons();
+      };
+
+      // Si la imagen ya está cargada, iniciar animación
+      if (pixelhadaImage && pixelhadaImage.complete) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            // Iluminar celdas progresivamente desde la 1 hasta la 3 y luego mover Pixelhada
+            illuminateCellsProgressively(1, 3, movePixelhadaAfterIllumination);
+          });
+        });
+      } else {
+        // Esperar a que la imagen se cargue
+        if (pixelhadaImage) {
+          pixelhadaImage.addEventListener("load", () => {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                // Iluminar celdas progresivamente desde la 1 hasta la 3 y luego mover Pixelhada
+                illuminateCellsProgressively(1, 3, movePixelhadaAfterIllumination);
+              });
+            });
+          }, { once: true });
+        }
       }
     };
 
     // Event listener para el botón "Vamos"
-    btnStart?.addEventListener("click", () => {
-      // Micro pausa antes de iniciar
+    btnStart.addEventListener("click", () => {
+      // Ocultar Pixelhada inicialmente
+      if (pixelhadaWrapper) {
+        pixelhadaWrapper.style.opacity = "0";
+      }
+      
+      // Micro pausa antes de iniciar (0.2-0.3s)
       setTimeout(() => {
-        // NO ocultar el botón "Vamos", solo mostrar el camino
-        // processStart.style.display = "none";
+        // Ocultar la vista inicial
+        processStart.style.display = "none";
         
-        // Mostrar el contenedor del camino
+        // Mostrar el camino iterativo
         processPath.style.display = "flex";
         
-        // Crear las celdas después de que el contenedor sea visible
-        createCells();
-        
-        // Esperar a que el DOM se actualice completamente
+        // Inicializar Pixelhada con animación después de que el camino sea visible
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            console.log("processPath display:", window.getComputedStyle(processPath).display);
-            console.log("pathCells children:", pathCells.children.length);
-            // Mover Pixelhada al recuadro 3
-            movePixelhadaToCell3();
+            initPixelhadaWithAnimation();
           });
         });
       }, 250);
     });
+
+    // Event listeners para los botones de navegación
+    btnForward.addEventListener("click", moveForward);
+    btnBack.addEventListener("click", moveBack);
+
+    // Event listener para el scroll del mouse
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    // Función genérica para configurar hover de una celda
+    const setupCellHover = (cellIndex: number) => {
+      const cell = getCellByIndex(cellIndex);
+      const floatingMessage = pixelhadaWrapper.querySelector(`.floating-message-hover[data-cell="${cellIndex}"]`) as HTMLElement;
+      
+      if (!cell || !floatingMessage) {
+        return;
+      }
+
+      // Calcular posición del mensaje sobre la celda
+      const updateMessagePosition = () => {
+        const cellRect = cell.getBoundingClientRect();
+        const wrapperRect = pixelhadaWrapper.getBoundingClientRect();
+        
+        // Posicionar el mensaje centrado sobre la celda, más cerca para que parezca que sale de la celda
+        const cellCenterX = cellRect.left + (cellRect.width / 2);
+        const left = cellCenterX - wrapperRect.left;
+        const top = cellRect.top - wrapperRect.top - 50; // 50px arriba de la celda (más cerca)
+        
+        floatingMessage.style.left = `${left}px`;
+        floatingMessage.style.top = `${top}px`;
+      };
+
+      // Mostrar mensaje en hover con animación de emergencia
+      cell.addEventListener("mouseenter", () => {
+        updateMessagePosition();
+        floatingMessage.classList.add("show");
+      });
+
+      // Ocultar mensaje al salir del hover
+      cell.addEventListener("mouseleave", () => {
+        floatingMessage.classList.remove("show");
+      });
+
+      // Recalcular posición en resize
+      window.addEventListener("resize", () => {
+        if (floatingMessage.classList.contains("show")) {
+          updateMessagePosition();
+        }
+      });
+    };
+
+    // Inicializar el hover de todas las celdas con mensajes (1, 2, 4, 5, 7, 8)
+    const setupAllCellHovers = () => {
+      const cellsWithHover = [1, 2, 4, 5, 7, 8];
+      cellsWithHover.forEach(cellIndex => {
+        setupCellHover(cellIndex);
+      });
+    };
+
+    // Inicializar los hovers después de que el camino sea visible
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setupAllCellHovers();
+      });
+    });
+
+    // Recalcular posición en resize para mantener Pixelhada y mensaje flotante en su lugar
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const currentCellIndex = targetCells[currentPosition];
+        movePixelhadaToCell(currentCellIndex);
+        updateFloatingMessage(currentCellIndex);
+      }, 250);
+    });
   });
-  */
 </script>
 
 <style>
@@ -1365,7 +1808,7 @@ const resolvePath = (path: string | undefined) => {
   .process-section {
     padding: 6rem 0;
     scroll-margin-top: 100px;
-    background-color: #201f25;
+    background-color: var(--color-bg-sections);
     position: relative;
   }
 
@@ -1417,11 +1860,25 @@ const resolvePath = (path: string | undefined) => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     gap: 1.5rem;
+    min-height: 400px;
   }
 
   .pixelhada-container-initial {
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* Contenedor wrapper para centrar el hada con respecto al botón */
+  .pixelhada-wrapper-initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px; /* Mismo ancho que el botón */
   }
 
   .pixelhada-image {
@@ -1450,7 +1907,7 @@ const resolvePath = (path: string | undefined) => {
     transition: all 0.3s ease;
     font-family: var(--font-button-selected);
     box-sizing: border-box;
-    min-width: 200px;
+    width: 200px;
     height: 48px;
     cursor: pointer;
   }
@@ -1511,13 +1968,14 @@ const resolvePath = (path: string | undefined) => {
   }
 
   .btn-back.path-cell-btn {
-    background-color: #3b3a40 !important;
+    background-color: var(--color-bg-main) !important;
     color: #ffffff !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
   }
 
   .btn-back.path-cell-btn:hover {
-    background-color: #4a4950 !important;
+    background-color: var(--color-bg-sections) !important;
+    border-color: var(--color-primary) !important;
     transform: translateY(-2px);
   }
 
@@ -1543,6 +2001,14 @@ const resolvePath = (path: string | undefined) => {
     width: 100%;
     margin: 0 auto;
     min-height: 400px;
+  }
+
+  /* Ajustar gap en pantallas más pequeñas */
+  @media (max-width: 1200px) {
+    .path-cells {
+      gap: 1rem;
+      max-width: 100%;
+    }
   }
   
   /* Asegurar que el path-container y el botón avanzar estén alineados */
@@ -1575,33 +2041,39 @@ const resolvePath = (path: string | undefined) => {
     grid-row: 3;
   }
 
-  /* Patrón del camino: 5 horizontales arriba, 2 verticales debajo del 5to, 2 hacia la izquierda */
+  /* Patrón del camino: 5 horizontales arriba, vertical debajo del 5to, luego hacia la izquierda */
   /* Fila 1: 5 rectángulos horizontales (ahora empiezan en columna 2) */
   .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
   .path-cell:nth-child(3) { grid-column: 3; grid-row: 1; }
   .path-cell:nth-child(4) { grid-column: 4; grid-row: 1; }
   .path-cell:nth-child(5) { grid-column: 5; grid-row: 1; }
   .path-cell:nth-child(6) { grid-column: 6; grid-row: 1; }
-  /* Columna 6: 1 rectángulo vertical debajo del 5to (fila 2) */
+  /* Columna 6: 1 rectángulo vertical debajo del 5to (fila 2) - celda 6 */
   .path-cell:nth-child(7) { grid-column: 6; grid-row: 2; }
-  /* Fila 3: 2 rectángulos hacia la izquierda (columna 4 y 5, la columna 3 es el botón Avanzar) */
-  .path-cell:nth-child(8) { grid-column: 5; grid-row: 3; }
-  .path-cell:nth-child(9) { grid-column: 4; grid-row: 3; }
-  /* Columna 6, fila 3: rectángulo movido desde columna 1, fila 2 */
-  .path-cell:nth-child(10) { grid-column: 6; grid-row: 3; }
+  /* Fila 3: rectángulos hacia la izquierda (columna 6, 5 y 4) */
+  /* Celda 7 en columna 6, fila 3 */
+  .path-cell:nth-child(8) { grid-column: 6; grid-row: 3; }
+  /* Celda 8 en columna 5, fila 3 */
+  .path-cell:nth-child(9) { grid-column: 5; grid-row: 3; }
+  /* Celda 9 en columna 4, fila 3 */
+  .path-cell:nth-child(10) { grid-column: 4; grid-row: 3; }
 
   .path-cell {
     aspect-ratio: 1.5 / 1;
     min-width: 200px;
     min-height: 120px;
     width: 100%;
-    background-color: #2c2b31;
+    background-color: var(--color-bg-main);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     display: block;
     opacity: 1;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
   }
+
+  /* Hover en la celda 1 - mostrar mensaje flotante (manejado por JavaScript) */
 
   /* Asegurar que los botones no hereden estilos de path-cell */
   .path-cell-btn {
@@ -1614,41 +2086,271 @@ const resolvePath = (path: string | undefined) => {
     border-radius: inherit !important;
   }
 
-  /* Celda resaltada donde está Pixelhada (celda 3 - fila 1, columna 3) */
-  .path-cell:nth-child(3) {
+  /* Celda resaltada donde está Pixelhada */
+  .path-cell.active-cell {
     background-color: #8a2be2;
     box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
     border-color: #8a2be2;
   }
 
+  /* Contenedor de Pixelhada para movimiento */
   .pixelhada-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
     pointer-events: none;
-    /* Posicionar Pixelhada centrada en la celda 3 (tercera columna, primera fila) */
-    /* La celda 3 está en: columna 3 (66.66% + gaps), fila 1 */
-    /* Calculamos: inicio de columna 3 + mitad de la celda - mitad del ancho de la imagen */
-    transform: translate(
-      calc((2 * (100% / 3)) + (2 * 1.5rem) + (100% / 6) - 60px),
-      calc((100% / 6) - 60px)
-    );
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   }
 
   .pixelhada-moving {
     width: 120px;
     height: auto;
     object-fit: contain;
+    display: block;
+  }
+
+  /* Mensaje flotante */
+  .floating-message {
+    position: absolute;
+    top: -140px;
+    left: 125px;
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Mensajes de las celdas 3 y 9 - usar display none por defecto */
+  .floating-message[data-cell="3"],
+  .floating-message[data-cell="9"] {
+    display: none;
+  }
+
+  /* Mensaje flotante de la celda 6 - lado izquierdo */
+  .floating-message[data-cell="6"] {
+    left: auto;
+    right: 125px;
+  }
+
+  .floating-message-content {
+    background-color: var(--color-primary);
+    border-radius: 25px 25px 25px 0;
+    padding: 1rem;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(43, 228, 194, 0.3);
+    width: fit-content;
+    min-width: 180px;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mensaje de la celda 6 - border radius invertido (esquina inferior derecha sin redondear) */
+  .floating-message[data-cell="6"] .floating-message-content {
+    border-radius: 25px 25px 0 25px;
+  }
+
+  /* Mensaje flotante de la celda 1 - hover (como pensamiento que sale de la celda) */
+  .floating-message-hover {
+    position: absolute;
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 20;
+    pointer-events: none;
+    display: block !important;
+  }
+
+  /* Estado visible del mensaje hover - emerge de la celda */
+  .floating-message-hover.show {
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(0) scale(1) !important;
+  }
+
+  /* Mensaje simple (sin lista) */
+  .floating-message-simple {
+    padding: 0.75rem 1.5rem;
+    min-width: 250px;
+    width: fit-content;
+    max-width: 450px;
+    border-radius: 25px;
+    box-sizing: border-box;
+  }
+
+  /* Sin apuntador para el mensaje simple */
+  .floating-message-simple::after {
+    display: none;
+  }
+
+  .floating-message-text {
+    font-family: var(--font-paragraph);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-button-selected);
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Apuntador del speech bubble (esquina inferior izquierda) */
+  .floating-message-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid var(--color-primary);
+    border-left: 20px solid transparent;
+  }
+
+  /* Apuntador del mensaje de la celda 6 (esquina inferior derecha) */
+  .floating-message[data-cell="6"] .floating-message-content::after {
+    left: auto;
+    right: 0;
+    border-left: none;
+    border-right: 20px solid transparent;
+  }
+
+  .floating-message-title {
+    font-family: var(--font-paragraph);
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--color-text-button-selected);
+    margin: 0 0 0.4rem 0;
+    line-height: 1.4;
+  }
+
+  .floating-message-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .floating-message-list li {
+    font-family: var(--font-paragraph);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--color-text-button-selected);
+    line-height: 1.5;
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .floating-message-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Viñeta personalizada */
+  .floating-message-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-button-selected);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.4;
   }
 
 
+  /* Escritorio mediano - Reducir a 5 columnas */
+  @media (max-width: 1300px) {
+    .path-cells {
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, auto);
+      gap: 1rem;
+    }
+
+    .path-cell {
+      min-width: 160px;
+      min-height: 100px;
+    }
+
+    /* Botón Volver siempre primero */
+    .btn-back.path-cell-btn {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    /* Botón Avanzar en columna 1, fila 3 */
+    .btn-forward.path-cell-btn {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    /* Patrón adaptado para 5 columnas */
+    /* Fila 1: 3 rectángulos horizontales (empiezan en columna 2) */
+    .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .path-cell:nth-child(3) { grid-column: 3; grid-row: 1; }
+    .path-cell:nth-child(4) { grid-column: 4; grid-row: 1; }
+    
+    /* Celda 5 (data-cell-index="5") en columna 5, fila 2 */
+    .path-cell:nth-child(6) { grid-column: 5; grid-row: 2; }
+    
+    /* Fila 3: rectángulos hacia la izquierda (columnas 5, 4, 3 y 2) */
+    /* Celda 6 (data-cell-index="6") en columna 5, fila 3 */
+    .path-cell:nth-child(7) { grid-column: 5; grid-row: 3; }
+    /* Celda 7 (data-cell-index="7") en columna 4, fila 3 */
+    .path-cell:nth-child(8) { grid-column: 4; grid-row: 3; }
+    /* Celda 8 (data-cell-index="8") en columna 3, fila 3 */
+    .path-cell:nth-child(9) { grid-column: 3; grid-row: 3; }
+    /* Celda 9 (data-cell-index="9") en columna 2, fila 3 */
+    .path-cell:nth-child(10) { grid-column: 2; grid-row: 3; }
+  }
+
+  /* Tablet - Patrón en forma de C */
   @media (max-width: 968px) {
     .path-cells {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(5, auto);
+      max-width: 100%;
+      gap: 1rem;
+    }
+
+    .path-cell {
+      min-width: 100px;
+      min-height: 80px;
+    }
+
+    /* Patrón C: horizontal arriba, vertical derecha, horizontal abajo */
+    /* Botón Volver siempre primero */
+    .btn-back.path-cell-btn {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    
+    /* Fila 1: Horizontal (parte superior de la C) */
+    .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .path-cell:nth-child(3) { grid-column: 3; grid-row: 1; }
+    .path-cell:nth-child(4) { grid-column: 4; grid-row: 1; }
+    
+    /* Columna 4: Vertical (lado derecho de la C) */
+    .path-cell:nth-child(5) { grid-column: 4; grid-row: 2; }
+    .path-cell:nth-child(6) { grid-column: 4; grid-row: 3; }
+    .path-cell:nth-child(7) { grid-column: 4; grid-row: 4; }
+    
+    /* Fila 5: Horizontal hacia la izquierda (parte inferior de la C) */
+    .path-cell:nth-child(8) { grid-column: 4; grid-row: 5; }
+    .path-cell:nth-child(9) { grid-column: 3; grid-row: 5; }
+    .path-cell:nth-child(10) { grid-column: 2; grid-row: 5; }
+    
+    /* Botón Avanzar siempre último - columna 1, fila 5 */
+    .btn-forward.path-cell-btn {
+      grid-column: 1;
+      grid-row: 5;
     }
   }
 
+  /* Móvil - Grid más vertical */
   @media (max-width: 640px) {
     .process-section {
       padding: 4rem 0;
@@ -1667,28 +2369,106 @@ const resolvePath = (path: string | undefined) => {
       font-size: 0.95rem;
     }
 
+    .path-layout {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.5rem;
+    }
+
     .path-cells {
       grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(6, auto);
       gap: 1rem;
+      max-width: 100%;
     }
-    
-    /* Ajustar patrón en móvil */
-    .path-cell:nth-child(n) {
-      grid-column: auto;
-      grid-row: auto;
+
+    .path-cell {
+      min-width: auto;
+      min-height: 80px;
+      aspect-ratio: 1.5 / 1;
+    }
+
+    .path-cell-btn {
+      min-height: 48px;
     }
 
     .path-container {
-      min-height: 600px;
+      min-height: auto;
+      padding: 1rem 0;
     }
 
-    .path-layout {
-      flex-direction: column;
-      align-items: center;
+    /* Patrón Z: horizontal arriba, diagonal, horizontal abajo */
+    /* Botón Volver siempre primero */
+    .btn-back.path-cell-btn {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    
+    /* Fila 1: Horizontal (parte superior de la Z) */
+    .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .path-cell:nth-child(3) { grid-column: 3; grid-row: 1; }
+    
+    /* Diagonal de la Z (columna 3 hacia abajo) */
+    .path-cell:nth-child(4) { grid-column: 3; grid-row: 2; }
+    .path-cell:nth-child(5) { grid-column: 3; grid-row: 3; }
+    
+    /* Parte central de la Z (horizontal) */
+    .path-cell:nth-child(6) { grid-column: 2; grid-row: 3; }
+    .path-cell:nth-child(7) { grid-column: 1; grid-row: 3; }
+    
+    /* Continuación diagonal (columna 1 hacia abajo) */
+    .path-cell:nth-child(8) { grid-column: 1; grid-row: 4; }
+    .path-cell:nth-child(9) { grid-column: 1; grid-row: 5; }
+    
+    /* Última celda en columna 2, fila 5 */
+    .path-cell:nth-child(10) { grid-column: 2; grid-row: 5; }
+    
+    /* Botón Avanzar en columna 3, fila 5 */
+    .btn-forward.path-cell-btn {
+      grid-column: 3;
+      grid-row: 5;
+    }
+  }
+
+  /* Móvil pequeño - 2 columnas */
+  @media (max-width: 470px) {
+    .path-cells {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      gap: 0.75rem;
     }
 
-    .btn-back {
-      align-self: center;
+    .path-cell {
+      min-height: 70px;
+    }
+
+    .path-cell-btn {
+      min-height: 44px;
+      padding: 0.75rem 1.5rem !important;
+      font-size: 0.875rem;
+    }
+
+    /* Botón Volver en columna 1, fila 1 */
+    .btn-back.path-cell-btn {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    /* Reorganizar patrón para 2 columnas */
+    .path-cell:nth-child(2) { grid-column: 2; grid-row: 1; }
+    .path-cell:nth-child(3) { grid-column: 1; grid-row: 2; }
+    .path-cell:nth-child(4) { grid-column: 2; grid-row: 2; }
+    .path-cell:nth-child(5) { grid-column: 1; grid-row: 3; }
+    .path-cell:nth-child(6) { grid-column: 2; grid-row: 3; }
+    .path-cell:nth-child(7) { grid-column: 1; grid-row: 4; }
+    .path-cell:nth-child(8) { grid-column: 2; grid-row: 4; }
+    .path-cell:nth-child(9) { grid-column: 1; grid-row: 5; }
+    .path-cell:nth-child(10) { grid-column: 2; grid-row: 5; }
+
+    /* Botón Avanzar en columna 2, fila 6 */
+    .btn-forward.path-cell-btn {
+      grid-column: 2;
+      grid-row: 6;
     }
   }
 </style>
