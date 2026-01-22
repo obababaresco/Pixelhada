@@ -809,6 +809,7 @@ const resolvePath = (path: string | undefined) => {
 
     let currentPhraseIndex = 0;
     let isChanging = false;
+    let autoChangeInterval: ReturnType<typeof setInterval> | null = null;
 
     const changePhrase = () => {
       if (isChanging) return;
@@ -825,9 +826,69 @@ const resolvePath = (path: string | undefined) => {
       }, 150);
     };
 
-    // Hover solo en el título - cambia a la siguiente frase
-    titleSection.addEventListener("mouseenter", () => {
-      changePhrase();
+    // Función para verificar si estamos en tablet o móvil
+    const isTabletOrMobile = () => {
+      return window.matchMedia("(max-width: 968px)").matches;
+    };
+
+    // Función para iniciar el cambio automático
+    const startAutoChange = () => {
+      // Limpiar intervalo anterior si existe
+      if (autoChangeInterval) {
+        clearInterval(autoChangeInterval);
+        autoChangeInterval = null;
+      }
+      
+      // Iniciar intervalo para cambiar cada 1000ms
+      autoChangeInterval = setInterval(() => {
+        changePhrase();
+      }, 1000);
+    };
+
+    // Función para detener el cambio automático
+    const stopAutoChange = () => {
+      if (autoChangeInterval) {
+        clearInterval(autoChangeInterval);
+        autoChangeInterval = null;
+      }
+    };
+
+    // Función para inicializar según el tamaño de pantalla
+    const initializeBehavior = () => {
+      if (isTabletOrMobile()) {
+        // Tablet/móvil: cambio automático
+        stopAutoChange(); // Asegurar que no hay intervalos previos
+        startAutoChange();
+        // Remover el listener de hover si existe
+        titleSection.removeEventListener("mouseenter", changePhrase);
+      } else {
+        // Escritorio: solo hover
+        stopAutoChange();
+        // Agregar listener de hover
+        titleSection.addEventListener("mouseenter", changePhrase);
+      }
+    };
+
+    // Inicializar comportamiento según el tamaño inicial
+    initializeBehavior();
+
+    // Escuchar cambios en el tamaño de la ventana
+    const mediaQuery = window.matchMedia("(max-width: 968px)");
+    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      initializeBehavior();
+    };
+
+    // Agregar listener para cambios en media query
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", handleMediaChange);
+    } else {
+      // Fallback para navegadores antiguos
+      mediaQuery.addListener(handleMediaChange);
+    }
+
+    // Limpiar intervalo al desmontar (si es necesario)
+    window.addEventListener("beforeunload", () => {
+      stopAutoChange();
     });
   });
 
@@ -2390,6 +2451,10 @@ const resolvePath = (path: string | undefined) => {
 
   /* Móvil - Grid más vertical */
   @media (max-width: 640px) {
+
+    .hero-section-genesis {
+      padding: 6rem 0 0 0;;
+    }
     .process-section {
       padding: 4rem 0;
     }
