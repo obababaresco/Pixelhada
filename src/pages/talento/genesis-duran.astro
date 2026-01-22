@@ -860,18 +860,11 @@ const resolvePath = (path: string | undefined) => {
       // Obtener todos los mensajes flotantes (actualizar en cada llamada por si acaso)
       const allMessages = pixelhadaWrapper.querySelectorAll(".floating-message") as NodeListOf<HTMLElement>;
       
-      // Ocultar todos los mensajes primero
+      // Ocultar todos los mensajes primero usando display: none para que no ocupen espacio
       allMessages.forEach((message) => {
         if (message) {
-          const messageCell = message.getAttribute("data-cell");
-          if (messageCell === "3" || messageCell === "9") {
-            // Para los mensajes de las celdas 3 y 9, usar display: none para que no ocupen espacio
-            message.style.display = "none";
-            message.style.opacity = "0";
-          } else {
-            // Para otros mensajes, usar opacity
-            message.style.opacity = "0";
-          }
+          message.style.display = "none";
+          message.style.opacity = "0";
         }
       });
       
@@ -879,12 +872,18 @@ const resolvePath = (path: string | undefined) => {
       if (cellIndex === 3 || cellIndex === 6 || cellIndex === 9) {
         const targetMessage = pixelhadaWrapper.querySelector(`.floating-message[data-cell="${cellIndex}"]`) as HTMLElement;
         if (targetMessage) {
-          if (cellIndex === 3 || cellIndex === 9) {
+          // Esperar 300ms para que primero cargue la imagen y luego el mensaje
+          setTimeout(() => {
+            // Primero establecer display: block con opacity: 0
             targetMessage.style.display = "block";
-            targetMessage.style.opacity = "1";
-          } else {
-            targetMessage.style.opacity = "1";
-          }
+            targetMessage.style.opacity = "0";
+            // Luego en el siguiente frame, cambiar a opacity: 1 para que la transición funcione
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                targetMessage.style.opacity = "1";
+              });
+            });
+          }, 300);
         }
       }
     };
@@ -1222,13 +1221,32 @@ const resolvePath = (path: string | undefined) => {
 
       // Mostrar mensaje en hover con animación de emergencia
       cell.addEventListener("mouseenter", () => {
+        // Verificar si estamos en tablet o móvil (donde los mensajes hover están ocultos)
+        const isTabletOrMobile = window.matchMedia("(max-width: 968px)").matches;
+        if (isTabletOrMobile) {
+          return; // No mostrar mensajes hover en tablet y móvil
+        }
+        
         updateMessagePosition();
-        floatingMessage.classList.add("show");
+        // Primero establecer display: block
+        floatingMessage.style.display = "block";
+        // Luego en el siguiente frame, aplicar la clase show para la transición
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            floatingMessage.classList.add("show");
+          });
+        });
       });
 
       // Ocultar mensaje al salir del hover
       cell.addEventListener("mouseleave", () => {
         floatingMessage.classList.remove("show");
+        // Ocultar con display: none después de la transición para que no ocupe espacio
+        setTimeout(() => {
+          if (!floatingMessage.classList.contains("show")) {
+            floatingMessage.style.display = "none";
+          }
+        }, 300); // Esperar a que termine la transición
       });
 
       // Recalcular posición en resize
@@ -2118,14 +2136,9 @@ const resolvePath = (path: string | undefined) => {
     left: 125px;
     z-index: 15;
     pointer-events: none;
+    display: none; /* Oculto por defecto para que no ocupe espacio */
     opacity: 0;
     transition: opacity 0.3s ease;
-  }
-
-  /* Mensajes de las celdas 3 y 9 - usar display none por defecto */
-  .floating-message[data-cell="3"],
-  .floating-message[data-cell="9"] {
-    display: none;
   }
 
   /* Mensaje flotante de la celda 6 - lado izquierdo */
@@ -2160,11 +2173,12 @@ const resolvePath = (path: string | undefined) => {
     transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 20;
     pointer-events: none;
-    display: block !important;
+    display: none; /* Oculto por defecto para que no ocupe espacio */
   }
 
   /* Estado visible del mensaje hover - emerge de la celda */
   .floating-message-hover.show {
+    display: block !important;
     opacity: 1 !important;
     transform: translateX(-50%) translateY(0) scale(1) !important;
   }
@@ -2321,6 +2335,30 @@ const resolvePath = (path: string | undefined) => {
       min-height: 80px;
     }
 
+    /* Ocultar mensajes hover en tablet y móvil */
+    .floating-message-hover {
+      display: none !important;
+    }
+
+    /* Mensaje flotante de la celda 3 - lado izquierdo en tablet */
+    .floating-message[data-cell="3"] {
+      left: auto;
+      right: 125px;
+    }
+
+    /* Mensaje de la celda 3 - border radius invertido (esquina inferior derecha sin redondear) */
+    .floating-message[data-cell="3"] .floating-message-content {
+      border-radius: 25px 25px 0 25px;
+    }
+
+    /* Apuntador del mensaje de la celda 3 (esquina inferior derecha) */
+    .floating-message[data-cell="3"] .floating-message-content::after {
+      left: auto;
+      right: 0;
+      border-left: none;
+      border-right: 20px solid transparent;
+    }
+
     /* Patrón C: horizontal arriba, vertical derecha, horizontal abajo */
     /* Botón Volver siempre primero */
     .btn-back.path-cell-btn {
@@ -2428,6 +2466,63 @@ const resolvePath = (path: string | undefined) => {
       grid-column: 3;
       grid-row: 5;
     }
+
+    /* Mensaje flotante de la celda 3 - lado izquierdo en móvil */
+    .floating-message[data-cell="3"] {
+      left: auto;
+      right: 125px;
+    }
+
+    /* Mensaje de la celda 3 - border radius invertido (esquina inferior derecha sin redondear) en móvil */
+    .floating-message[data-cell="3"] .floating-message-content {
+      border-radius: 25px 25px 0 25px;
+    }
+
+    /* Apuntador del mensaje de la celda 3 (esquina inferior derecha) en móvil */
+    .floating-message[data-cell="3"] .floating-message-content::after {
+      left: auto;
+      right: 0;
+      border-left: none;
+      border-right: 20px solid transparent;
+    }
+
+    /* Mensaje flotante de la celda 6 - lado derecho en móvil */
+    .floating-message[data-cell="6"] {
+      left: 125px;
+      right: auto;
+    }
+
+    /* Mensaje de la celda 6 - border radius normal (esquina inferior izquierda sin redondear) en móvil */
+    .floating-message[data-cell="6"] .floating-message-content {
+      border-radius: 25px 25px 25px 0;
+    }
+
+    /* Apuntador del mensaje de la celda 6 (esquina inferior izquierda) en móvil */
+    .floating-message[data-cell="6"] .floating-message-content::after {
+      left: 0;
+      right: auto;
+      border-left: 20px solid transparent;
+      border-right: none;
+    }
+
+    /* Mensaje flotante de la celda 9 - lado derecho en móvil */
+    .floating-message[data-cell="9"] {
+      left: 125px;
+      right: auto;
+    }
+
+    /* Mensaje de la celda 9 - border radius normal (esquina inferior izquierda sin redondear) en móvil */
+    .floating-message[data-cell="9"] .floating-message-content {
+      border-radius: 25px 25px 25px 0;
+    }
+
+    /* Apuntador del mensaje de la celda 9 (esquina inferior izquierda) en móvil */
+    .floating-message[data-cell="9"] .floating-message-content::after {
+      left: 0;
+      right: auto;
+      border-left: 20px solid transparent;
+      border-right: none;
+    }
   }
 
   /* Móvil pequeño - 2 columnas */
@@ -2469,6 +2564,25 @@ const resolvePath = (path: string | undefined) => {
     .btn-forward.path-cell-btn {
       grid-column: 2;
       grid-row: 6;
+    }
+
+    /* Mensaje flotante de la celda 9 - lado izquierdo en móvil pequeño */
+    .floating-message[data-cell="9"] {
+      left: auto;
+      right: 125px;
+    }
+
+    /* Mensaje de la celda 9 - border radius invertido (esquina inferior derecha sin redondear) en móvil pequeño */
+    .floating-message[data-cell="9"] .floating-message-content {
+      border-radius: 25px 25px 0 25px;
+    }
+
+    /* Apuntador del mensaje de la celda 9 (esquina inferior derecha) en móvil pequeño */
+    .floating-message[data-cell="9"] .floating-message-content::after {
+      left: auto;
+      right: 0;
+      border-left: none;
+      border-right: 20px solid transparent;
     }
   }
 </style>
