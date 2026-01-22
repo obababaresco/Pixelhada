@@ -1,5 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import genesisData from "../../data/genesis-duran.json";
+
+interface Recommendation {
+  autor: string;
+  cargo: string;
+  relacion?: string;
+  fecha?: string;
+  mensaje: string;
+}
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
@@ -10,6 +19,10 @@ const resolvePath = (path: string | undefined) => {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return `${BASE_URL}${cleanPath}`;
 };
+
+const recomendaciones = genesisData.recomendaciones || [];
+const hasRecommendations = recomendaciones.length > 0;
+const hasRecommendationCarousel = recomendaciones.length > 3;
 ---
 
 <Layout title="Portafolio de Génesis Durán">
@@ -302,6 +315,31 @@ const resolvePath = (path: string | undefined) => {
         </div>
       </div>
     </section>
+
+    {hasRecommendations && (
+      <section class="recommendations-section" id="recomendaciones">
+        <div class="section-container">
+          <h2 class="section-title">Recomendaciones</h2>
+          <div class={`recommendations-wrapper ${hasRecommendationCarousel ? 'carousel-active' : ''}`} data-carousel={hasRecommendationCarousel ? 'true' : 'false'}>
+            <div class={`recommendations-list ${hasRecommendationCarousel ? 'is-carousel' : ''}`}>
+              {recomendaciones.map((rec: Recommendation) => (
+                <article class="recommendation-card">
+                  <div class="recommendation-header">
+                    <div>
+                      <h3 class="recommendation-author">{rec.autor}</h3>
+                      <p class="recommendation-role">{rec.cargo}</p>
+                    </div>
+                    {rec.fecha && <span class="recommendation-date">{rec.fecha}</span>}
+                  </div>
+                  {rec.relacion && <p class="recommendation-relationship">{rec.relacion}</p>}
+                  <p class="recommendation-message">{rec.mensaje}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
   </div>
 </Layout>
 
@@ -1376,6 +1414,145 @@ const resolvePath = (path: string | undefined) => {
       }, 250);
     });
   });
+
+  // Carrusel de recomendaciones
+  document.addEventListener('DOMContentLoaded', () => {
+    const carouselWrappers = document.querySelectorAll('.recommendations-wrapper[data-carousel="true"]');
+
+    carouselWrappers.forEach(wrapperNode => {
+      const wrapper = wrapperNode as HTMLElement;
+      const list = wrapper.querySelector('.recommendations-list.is-carousel') as HTMLElement | null;
+      const cards = wrapper.querySelectorAll('.recommendation-card') as NodeListOf<HTMLElement>;
+      if (!list || cards.length <= 3) return;
+
+      let currentIndex = 0;
+      let visibleCards = 3;
+      let cardWidth = 0;
+      let gap = 0;
+      let maxIndex = 0;
+      let maxTranslate = 0;
+      let currentTranslate = 0;
+      let intervalId: ReturnType<typeof setInterval> | null = null;
+      let isDragging = false;
+      let startX = 0;
+      let startTranslate = 0;
+      let isHovering = false;
+      const defaultTransition = 'transform 1.2s ease';
+
+      const getGap = () => {
+        const styles = window.getComputedStyle(list);
+        const rawGap = styles.columnGap || styles.gap || '0';
+        return parseFloat(rawGap) || 0;
+      };
+
+      const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+      const applyTranslate = (translate: number, animate = false) => {
+        currentTranslate = clamp(translate, 0, maxTranslate);
+        list.style.transition = animate ? defaultTransition : 'none';
+        list.style.transform = `translateX(-${currentTranslate}px)`;
+      };
+
+      const updateMetrics = () => {
+        const firstCard = cards[0];
+        if (!firstCard) return;
+        cardWidth = firstCard.clientWidth;
+        gap = getGap();
+        const totalCardWidth = cardWidth + gap;
+        visibleCards = Math.max(1, Math.round(wrapper.clientWidth / totalCardWidth));
+        maxIndex = Math.max(0, cards.length - visibleCards);
+        maxTranslate = totalCardWidth * maxIndex;
+      };
+
+      const goTo = (index: number, animate = true) => {
+        currentIndex = clamp(index, 0, maxIndex);
+        const targetTranslate = (cardWidth + gap) * currentIndex;
+        applyTranslate(targetTranslate, animate);
+      };
+
+      const startAutoSlide = () => {
+        if (isHovering) return;
+        stopAutoSlide();
+        if (maxIndex <= 0) return;
+        intervalId = setInterval(() => {
+          let nextIndex = currentIndex + 1;
+          if (nextIndex > maxIndex) {
+            nextIndex = 0;
+          }
+          goTo(nextIndex, true);
+        }, 6000);
+      };
+
+      const stopAutoSlide = () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+      };
+
+      const handlePointerDown = (event: PointerEvent) => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        event.preventDefault();
+        isDragging = true;
+        list.setPointerCapture(event.pointerId);
+        list.classList.add('is-grabbing');
+        startX = event.clientX;
+        startTranslate = currentTranslate;
+        list.style.transition = 'none';
+        stopAutoSlide();
+      };
+
+      const handlePointerMove = (event: PointerEvent) => {
+        if (!isDragging) return;
+        const delta = event.clientX - startX;
+        const nextTranslate = startTranslate - delta;
+        applyTranslate(nextTranslate, false);
+      };
+
+      const endDrag = (event: PointerEvent) => {
+        if (!isDragging) return;
+        isDragging = false;
+        if (list.hasPointerCapture && list.hasPointerCapture(event.pointerId)) {
+          list.releasePointerCapture(event.pointerId);
+        }
+        list.classList.remove('is-grabbing');
+        const nearestIndex = Math.round(currentTranslate / (cardWidth + gap));
+        goTo(nearestIndex, true);
+        if (!isHovering) {
+          startAutoSlide();
+        }
+      };
+
+      list.addEventListener('pointerdown', handlePointerDown);
+      list.addEventListener('pointermove', handlePointerMove);
+      list.addEventListener('pointerup', endDrag);
+      list.addEventListener('pointercancel', endDrag);
+      list.addEventListener('pointerleave', (event: PointerEvent) => {
+        if (isDragging) {
+          endDrag(event);
+        }
+      });
+
+      wrapper.addEventListener('mouseenter', () => {
+        isHovering = true;
+        stopAutoSlide();
+      });
+
+      wrapper.addEventListener('mouseleave', () => {
+        isHovering = false;
+        startAutoSlide();
+      });
+
+      window.addEventListener('resize', () => {
+        updateMetrics();
+        goTo(currentIndex, false);
+      });
+
+      updateMetrics();
+      goTo(0, false);
+      startAutoSlide();
+    });
+  });
 </script>
 
 <style>
@@ -1690,7 +1867,7 @@ const resolvePath = (path: string | undefined) => {
     font-family: var(--font-heading);
     font-weight: 500;
     line-height: 1.2;
-    margin: 0;
+    margin: 0 0 1rem 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -2738,6 +2915,143 @@ const resolvePath = (path: string | undefined) => {
       right: 0;
       border-left: none;
       border-right: 20px solid transparent;
+    }
+  }
+
+  /* Section Title Styles */
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-heading);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-text-white);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  }
+
+  /* Recommendations Section */
+  .recommendations-section {
+    padding: 6rem 0 8rem;
+    scroll-margin-top: 100px;
+    background: var(--color-bg-main);
+  }
+
+  .recommendations-wrapper {
+    position: relative;
+  }
+
+  .recommendations-wrapper.carousel-active {
+    overflow: hidden;
+  }
+
+  .recommendations-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .recommendations-list.is-carousel {
+    display: flex;
+    gap: 1.5rem;
+    grid-template-columns: none;
+    transition: transform 1.2s ease;
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .recommendations-list.is-carousel .recommendation-card {
+    flex: 0 0 calc(33.333% - 1rem);
+    min-width: 280px;
+  }
+
+  .recommendations-list.is-carousel.is-grabbing {
+    cursor: grabbing;
+  }
+
+  .recommendation-card {
+    background: var(--color-bg-sections);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .recommendation-card::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 5rem;
+    color: rgba(43, 228, 194, 0.15);
+    font-family: var(--font-heading);
+  }
+
+  .recommendation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .recommendation-author {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--color-text-white);
+  }
+
+  .recommendation-role {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .recommendation-date {
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .recommendation-relationship {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .recommendation-message {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+
+  /* Responsive para recomendaciones */
+  @media (max-width: 968px) {
+    .recommendations-list.is-carousel .recommendation-card {
+      flex: 0 0 calc(50% - 1rem);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .recommendations-list.is-carousel .recommendation-card {
+      flex: 0 0 100%;
     }
   }
 </style>

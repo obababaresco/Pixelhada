@@ -15,5 +15,27 @@
   "skills": [],
   "proyectos": [],
   "cursos": [],
-  "recomendaciones": []
+  "recomendaciones": [
+    {
+      "autor": "Ejemplo Persona 1",
+      "cargo": "CEO, Empresa Ejemplo",
+      "relacion": "Cliente",
+      "fecha": "2024",
+      "mensaje": "Génesis es una diseñadora excepcional que combina creatividad con estrategia. Su trabajo en UX/UI ha transformado nuestra plataforma digital y mejorado significativamente la experiencia de nuestros usuarios."
+    },
+    {
+      "autor": "Ejemplo Persona 2",
+      "cargo": "Director de Producto",
+      "relacion": "Colega",
+      "fecha": "2024",
+      "mensaje": "Trabajar con Génesis ha sido una experiencia increíble. Su atención al detalle y su capacidad para entender las necesidades del usuario hacen que cada proyecto sea un éxito."
+    },
+    {
+      "autor": "Ejemplo Persona 3",
+      "cargo": "Fundador, Startup Tech",
+      "relacion": "Cliente",
+      "fecha": "2023",
+      "mensaje": "Génesis tiene un talento único para crear diseños que no solo se ven bien, sino que funcionan perfectamente. Su enfoque en la experiencia del usuario es impecable."
+    }
+  ]
 }
