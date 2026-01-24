@@ -134,26 +134,25 @@ const whatsappLink = genesis?.whatsapp
             <div class="projects-track">
               {proyectos.map((p) => (
                 <div class="project-card" data-category={p.category}>
-                  <div class="project-card-image-wrapper">
+                  <div class="project-image-wrapper">
                     <img
                       src={resolvePath(p.image)}
                       alt={p.title}
-                      class="project-card-image"
+                      class="project-image"
                     />
+                    <div class="project-overlay">
+                      <button class="project-link" type="button">
+                        Ver Proyecto →
+                      </button>
+                    </div>
                   </div>
                   <div class="project-card-content">
                     <h3 class="project-card-title">{p.title}</h3>
-                    <div class="project-card-categories">
-                      {p.tags.join(" · ")}
+                    <div class="project-tags">
+                      {p.tags.map((tag) => (
+                        <span class="project-tag tag">{tag}</span>
+                      ))}
                     </div>
-                    <a
-                      href={p.link === "#" ? "#" : p.link.startsWith("http") ? p.link : resolvePath(p.link)}
-                      class="project-card-link"
-                      target={p.link.startsWith("http") ? "_blank" : undefined}
-                      rel={p.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                    >
-                      Ver más →
-                    </a>
                   </div>
                 </div>
               ))}
@@ -570,26 +569,11 @@ const whatsappLink = genesis?.whatsapp
       }
       projectsTrack.style.transform = `translateX(${translateX}px)`;
 
-      // Aplicar efecto de tarjetas de naipes según la posición
-      visibleCards.forEach((card, index) => {
-        const distance = Math.abs(index - currentIndex);
-        
-        if (distance === 0) {
-          // Tarjeta activa - escala completa y opacidad total
-          card.style.opacity = "1";
-          card.style.transform = "scale(1)";
-          card.style.zIndex = "10";
-        } else if (distance === 1) {
-          // Tarjetas adyacentes - ligeramente reducidas
-          card.style.opacity = "0.8";
-          card.style.transform = "scale(0.95)";
-          card.style.zIndex = "5";
-        } else {
-          // Tarjetas más lejanas - más reducidas
-          card.style.opacity = "0.6";
-          card.style.transform = "scale(0.9)";
-          card.style.zIndex = "1";
-        }
+      // Todas las cards igual de visibles y mismo tamaño
+      visibleCards.forEach((card) => {
+        card.style.opacity = "1";
+        card.style.transform = "scale(1)";
+        card.style.zIndex = "1";
       });
     };
 
@@ -2020,20 +2004,57 @@ const whatsappLink = genesis?.whatsapp
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   }
 
-  .project-card-image-wrapper {
+  .project-image-wrapper {
+    position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     flex-shrink: 0;
   }
 
-  .project-card-image {
+  .project-image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    border-radius: 12px;
-    display: block;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .project-card:hover .project-image {
+    transform: scale(1.1);
+  }
+
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(43, 228, 194, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-link {
+    color: var(--color-text-button-selected);
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.75rem 2rem;
+    background: var(--color-text-white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .project-link:hover {
+    transform: scale(1.05);
   }
 
   .project-card-content {
@@ -2054,29 +2075,25 @@ const whatsappLink = genesis?.whatsapp
     flex: 1;
   }
 
-  .project-card-categories {
-    font-family: var(--font-paragraph);
-    font-size: 0.875rem;
-    color: var(--color-primary);
-    font-weight: 400;
-    line-height: 1.6;
-    margin: 0 0 0.75rem 0;
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
-  .project-card-link {
-    font-family: var(--font-paragraph);
-    font-size: 0.95rem;
+  .project-tag {
+    padding: 0.4rem 1rem;
+    background: var(--color-button-normal-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 0.85rem;
     color: var(--color-text-white);
-    text-decoration: none;
-    font-weight: 400;
-    margin-top: auto;
-    transition: opacity 0.3s ease;
-    display: inline-block;
-    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
-  .project-card-link:hover {
-    opacity: 0.8;
+  .project-card:hover .project-tag {
+    border-color: var(--color-primary);
+    background: rgba(43, 228, 194, 0.1);
   }
 
 
@@ -2169,9 +2186,12 @@ const whatsappLink = genesis?.whatsapp
       margin: 0 0 0.75rem 0;
     }
 
-    .project-card-categories {
+    .project-tags {
+      margin-bottom: 0.5rem;
+    }
+
+    .project-tag {
       font-size: 0.8rem;
-      margin: 0 0 0.5rem 0;
     }
 
     .projects-track {
@@ -2786,7 +2806,7 @@ const whatsappLink = genesis?.whatsapp
   @media (max-width: 640px) {
 
     .hero-section-genesis {
-      padding: 6rem 0 0 0;;
+      padding: 3rem 0 0 0;
     }
     .process-section {
       padding: 4rem 0;
@@ -3034,6 +3054,9 @@ const whatsappLink = genesis?.whatsapp
       right: 0;
       border-left: none;
       border-right: 20px solid transparent;
+    }
+    .genesis-photo {
+      object-position: center center;
     }
   }
 
