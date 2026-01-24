@@ -1,41 +1,138 @@
-{
-  "slug": "genesis-duran",
-  "nombre": "",
-  "apellido": "",
-  "roles": [],
-  "bio": "",
-  "foto": "",
-  "social": {
-    "instagram": "",
-    "linkedin": "",
-    "github": ""
-  },
-  "whatsapp": "",
-  "cv": "",
-  "skills": [],
-  "proyectos": [],
-  "cursos": [],
-  "recomendaciones": [
-    {
-      "autor": "Ejemplo Persona 1",
-      "cargo": "CEO, Empresa Ejemplo",
-      "relacion": "Cliente",
-      "fecha": "2024",
-      "mensaje": "Génesis es una diseñadora excepcional que combina creatividad con estrategia. Su trabajo en UX/UI ha transformado nuestra plataforma digital y mejorado significativamente la experiencia de nuestros usuarios."
+[
+  {
+    "slug": "genesis-duran",
+    "nombre": "Génesis",
+    "apellido": "Durán",
+    "bio": "Diseñadora UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.",
+    "foto": "/images/genesis.png",
+    "social": {
+      "instagram": "#",
+      "linkedin": "https://www.linkedin.com/in/g%C3%A9nesis-andreina-dur%C3%A1n-lin%C3%A1rez-9a46711b4/"
     },
-    {
-      "autor": "Ejemplo Persona 2",
-      "cargo": "Director de Producto",
-      "relacion": "Colega",
-      "fecha": "2024",
-      "mensaje": "Trabajar con Génesis ha sido una experiencia increíble. Su atención al detalle y su capacidad para entender las necesidades del usuario hacen que cada proyecto sea un éxito."
-    },
-    {
-      "autor": "Ejemplo Persona 3",
-      "cargo": "Fundador, Startup Tech",
-      "relacion": "Cliente",
-      "fecha": "2023",
-      "mensaje": "Génesis tiene un talento único para crear diseños que no solo se ven bien, sino que funcionan perfectamente. Su enfoque en la experiencia del usuario es impecable."
-    }
-  ]
-}
+    "whatsapp": "+584127734830",
+    "cv": "/cv/cv-genesis-duran.pdf",
+    "proyectos": [
+      {
+        "title": "Convertir datos de ventas en decisiones diarias",
+        "description": "Diseño de todas las pantallas de la web optimizada para el CMS HubSpot. Uso de Design Thinking, Google Analytics y Tests A/B.",
+        "tags": ["SaaS", "Dashboard", "UX/UI", "Restaurantes"],
+        "image": "/images/Proyectos/genesis/proyecto-1.png",
+        "link": "",
+        "category": "web"
+      },
+      {
+        "title": "Pedir en un restaurante sin fricción ni confusión",
+        "description": "Diseño de todas las pantallas de la web optimizada para el CMS HubSpot. Uso de Design Thinking, Google Analytics y Tests A/B.",
+        "tags": ["App mobile", "UX/UI", "Foodtech"],
+        "image": "/images/Proyectos/genesis/proyecto-2.png",
+        "link": "",
+        "category": "web"
+      },
+      {
+        "title": "Gestionar talento y vacantes sin procesos innecesarios",
+        "description": "Diseño de pantallas para el software de gestión de trabajos remotos bajo metodología SCRUM y Kanban.",
+        "tags": ["Plataforma web", "UX/UI", "Talent Tech"],
+        "image": "/images/Proyectos/genesis/proyecto-3.png",
+        "link": "#",
+        "category": "web"
+      },
+      {
+        "title": "Traducir una propuesta educativa en una web clara y confiable",
+        "description": "Diseño de página web e-commerce pensada para vender filtros de agua con Nanotecnología, bajo diseño centrado en el usuario.",
+        "tags": ["Web informativa", "UX/UI", "Educación"],
+        "image": "/images/Proyectos/genesis/proyecto-4.png",
+        "link": "#",
+        "category": "web"
+      },
+      {
+        "title": "Comunicar una marca país en el contexto de FITUR",
+        "description": "Diseño de sistema de aprendizaje OnLine y pantallas para desarrollo en PHP.",
+        "tags": ["Landing page", "UX/UI", "Turismo", "Evento internacional"],
+        "image": "/images/Proyectos/genesis/proyecto-5.png",
+        "link": "#",
+        "category": "web"
+      },
+      {
+        "title": "My HBL (Herbalife)",
+        "description": "Diseño de sistema para gestionar el reclutamiento y entrenamiento de distribuidores de la marca.",
+        "tags": ["System Design", "UX Research", "Figma", "Balsamiq"],
+        "image": "/images/Proyectos/myhbl.png",
+        "link": "#",
+        "category": "otros"
+      },
+      {
+        "title": "ViralSolutionss",
+        "description": "Gestión de cuentas y diseño de grillas semanales para redes sociales.",
+        "tags": ["Social Media", "Graphic Design", "Branding"],
+        "image": "/images/Proyectos/genesis/proyecto-1.png",
+        "link": "#",
+        "category": "social"
+      }
+    ],
+    "recomendaciones": [
+      {
+        "autor": "Geraldine Tovitto",
+        "cargo": "Customer Success & Operations | AI Automation | Talent & Business Growth | Startups",
+        "relacion": "Supervisaba directamente a Génesis Andreina",
+        "fecha": "17 de mayo de 2023",
+        "mensaje": "Recomiendo a Génesis como una talentosa diseñadora gráfica. Durante nuestra colaboración, pude apreciar su enfoque creativo y su habilidad para desarrollar conceptos de marca innovadores. Génesis se destaca por su capacidad de escucha activa, lo que garantiza una ejecución precisa de los requerimientos. Además, es una excelente colaboradora de equipo, con habilidades de comunicación asertiva y empatía, cumpliendo con los plazos establecidos y aportando su toque personal en cada diseño que realiza. Recomiendo a Génesis como una profesional talentosa y apasionada que dejará una huella significativa en cualquier proyecto de diseño."
+      },
+      {
+        "autor": "Nancy Bravo",
+        "cargo": "Especialista en RH Estratégico | Atracción, Retención y Desarrollo de Talento",
+        "relacion": "Ocupaba un cargo superior al de Génesis Andreina, pero no la supervisaba directamente",
+        "fecha": "12 de abril de 2023",
+        "mensaje": "Creativa, apasionada y comprometida, así considero a Genesis. Tuve la suerte de contar con su valiosa ayuda en proyectos que ayudaron enormemente al departamento de Talent, a toda idea supo darle color, completamente satisfecha con su dedicación, habilidades y entrega."
+      },
+      {
+        "autor": "Aurora Pérez Paz",
+        "cargo": "Co-Founder / Head of People en Interfell: Expertos en el mejor talento tech de LATAM #SmartHiring / Head of People @Simera",
+        "relacion": "Supervisaba directamente a Génesis Andreina",
+        "fecha": "20 de marzo de 2023",
+        "mensaje": "He tenido la oportunidad de trabajar con Génesis en los últimos 4 años, durante los cuales pude ser testigo de su evolución profesional y personal. A nivel de diseño, su experiencia va desde diseño de marca, creación de piezas para eventos, hasta la creación de páginas web y landing pages, con diseño nativo y también optimizadas para Wordpress y Hubspot (ya que conoce el funcionamiento de ambos CMS). Es sumamente apasionada por su trabajo, y hacer equipo con ella, fue realmente gratificante para mí. Cualquier agencia o cliente, será afortunado de poder sumarla a su equipo."
+      },
+      {
+        "autor": "Gerson Abdiel Vera Morales",
+        "cargo": "Gerencia de Proyectos de Tecnología | Magíster en Administración Mención Gerencia | Ingeniero de Sistemas | Ingeniero Industrial | Profesor Universitario",
+        "relacion": "Ocupaba un cargo superior al de Génesis Andreina, pero no la supervisaba directamente",
+        "fecha": "6 de marzo de 2023",
+        "mensaje": "Génesis tiene un alto nivel creativo, siempre dispuesta a proponer soluciones con estándares de conciencia y calidad, diseña pensando en la experiencia de los usuarios, altamente recomendada como diseñadora gráfica y web."
+      },
+      {
+        "autor": "Juanma Rodríguez",
+        "cargo": "Fundador @Interfell & SVP of Product & Partner @Simera",
+        "relacion": "Supervisaba directamente a Génesis Andreina",
+        "fecha": "6 de marzo de 2023",
+        "mensaje": "Recomiendo a Génesis encarecidamente. Durante dos años diseñamos proyectos que hoy en día dan de qué hablar. Su adaptación gráfica, iniciativa y compromiso son ejemplares."
+      },
+      {
+        "autor": "María Auxiliadora Martínez Paredes",
+        "cargo": "Project Manager | HRBP | People Management | Especialista en Talento Humano y Gestión Empresarial | RRHH | Administradora | Virtual Assistant | Consultora de Negocios",
+        "relacion": "Ocupaba un cargo superior al de Génesis Andreina, pero no la supervisaba directamente",
+        "fecha": "6 de marzo de 2023",
+        "mensaje": "Apasionada, Creativa, inteligente, resolutiva y ¡cree en lo que hace! Génesis ha trabajado en Interfell durante los últimos tres años. Su rol mientras fuimos compañeras fue clave, ya que nos aportó a todo el equipo su experiencia y conocimientos con mucha generosidad, siempre colaborativa y a la vanguardia de los colores y diseños más TOP del medio. Si alguien tiene la oportunidad de tenerla en el equipo como diseñadora, ¡no lo duden ni un minuto! No los va a defraudar. Su lealtad es invaluable."
+      },
+      {
+        "autor": "Andrea E. Pérez Rivas",
+        "cargo": "Chief Operating Officer en Interfell - Expertos en el mejor talento tech de LATAM #SmartHiring",
+        "relacion": "Supervisaba directamente a Génesis Andreina",
+        "fecha": "6 de marzo de 2023",
+        "mensaje": "Genesis es un excelente profesional, su creatividad logró hacer de nuestra marca algo hermoso. ¡Súper recomendada!"
+      },
+      {
+        "autor": "Ricardo Ollarves",
+        "cargo": "Content writer / SEO / Ingeniero en Informática",
+        "relacion": "Trabajaba con Génesis Andreina en el mismo equipo",
+        "fecha": "6 de marzo de 2023",
+        "mensaje": "Elige una historia y Génesis se encargará de darle todo el color que necesita. Es una excelente profesional y diseñador gráfico, con experiencia, capacidad de adaptación y un buen trabajo en equipo. Posee mucha creatividad y originalidad, lo que cualquier marca desea para sus proyectos. Totalmente recomendada."
+      },
+      {
+        "autor": "Daniel Juárez",
+        "cargo": "Fundador @ Interfell - Chief Strategy Officer @ Simera",
+        "relacion": "Supervisaba directamente a Génesis Andreina",
+        "fecha": "3 de marzo de 2023",
+        "mensaje": "Genesis es de las mejores diseñadoras con las que he trabajado, ha sido pilar fundamental de la construcción y evolución de la marca de Interfell estos últimos años. Tiene una capacidad increíble para adaptarse a cualquier formato, sean redes sociales, ebooks o web. Es una profesional comprometida y con mucha capacidad de sacar proyectos adelante. 100% recomendada."
+      }
+    ]
+  }
+]

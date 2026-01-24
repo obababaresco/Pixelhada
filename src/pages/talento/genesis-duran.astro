@@ -10,6 +10,15 @@ interface Recommendation {
   mensaje: string;
 }
 
+interface Proyecto {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  link: string;
+  category: string;
+}
+
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const resolvePath = (path: string | undefined) => {
@@ -20,31 +29,48 @@ const resolvePath = (path: string | undefined) => {
   return `${BASE_URL}${cleanPath}`;
 };
 
-const recomendaciones = genesisData.recomendaciones || [];
+const genesis = Array.isArray(genesisData) ? genesisData[0] : genesisData;
+const recomendaciones = genesis?.recomendaciones ?? [];
+const proyectos = (genesis?.proyectos ?? []) as Proyecto[];
 const hasRecommendations = recomendaciones.length > 0;
 const hasRecommendationCarousel = recomendaciones.length > 3;
+
+const whatsappLink = genesis?.whatsapp
+  ? `https://wa.me/${genesis.whatsapp.replace(/\D/g, "")}`
+  : "#";
 ---
 
-<GenesisLayout title="Portafolio de Génesis Durán">
+<GenesisLayout
+  title={`Portafolio de ${genesis?.nombre ?? ""} ${genesis?.apellido ?? ""}`}
+  whatsapp={whatsappLink}
+  linkedin={genesis?.social?.linkedin ?? "#"}
+  instagram={genesis?.social?.instagram ?? "#"}
+  showRecommendations={hasRecommendations}
+>
   <div class="portfolio-container">
-    <!-- Secci?n Hero -->
+    <!-- Sección Hero -->
     <header class="hero-section-genesis" id="acerca-de">
       <div class="hero-banner-genesis">
         <div class="hero-content-genesis">
           <div class="hero-text-genesis">
             <h1 class="hero-greeting-genesis">HOLA, SOY</h1>
-            <h1 class="hero-name-genesis">GÉNESIS</h1>
-            <p class="hero-subtitle-genesis"
-              data-bio="Diseñador UX/UI y creativa visual.[BR]Creo en el diseño que combina estética + estrategia + propósito para crear experiencias digitales que realmente funcionan.">
-              Diseñador UX/UI y creativa visual.<br />Creo en el diseño que
-              combina estética + estrategia + propósito para crear experiencias
-              digitales que realmente funcionan.
-            </p>
+            <h1 class="hero-name-genesis">{genesis?.nombre?.toUpperCase() ?? ""}</h1>
+            <p
+              class="hero-subtitle-genesis"
+              data-bio={genesis?.bio ?? ""}
+              set:html={genesis?.bio ? genesis.bio.replace(/\[BR\]/g, "<br />") : ""}
+            ></p>
             <div class="hero-buttons-genesis">
               <a href="#contacto" class="btn-contact-genesis">
                 Hablemos de ideas
               </a>
-              <a href="#" class="btn-cv-genesis">
+              <a
+                href={genesis?.cv ? resolvePath(genesis.cv) : "#"}
+                class="btn-cv-genesis"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                   <polyline points="7 10 12 15 17 10"></polyline>
@@ -57,8 +83,8 @@ const hasRecommendationCarousel = recomendaciones.length > 3;
         </div>
         <div class="hero-image-genesis">
           <img
-            src={resolvePath("/images/genesis.png")}
-            alt="Génesis Durán"
+            src={resolvePath(genesis?.foto)}
+            alt={`${genesis?.nombre ?? ""} ${genesis?.apellido ?? ""}`}
             class="genesis-photo"
           />
         </div>
@@ -106,18 +132,31 @@ const hasRecommendationCarousel = recomendaciones.length > 3;
         <div class="projects-carousel-wrapper">
           <div class="projects-carousel-container">
             <div class="projects-track">
-              <div class="project-card" data-category="web">
-                <!-- Contenido del proyecto se agregará más adelante -->
-              </div>
-              <div class="project-card" data-category="social">
-                <!-- Contenido del proyecto se agregará más adelante -->
-              </div>
-              <div class="project-card" data-category="sales">
-                <!-- Contenido del proyecto se agregará más adelante -->
-              </div>
-              <div class="project-card" data-category="web">
-                <!-- Contenido del proyecto se agregará más adelante -->
-              </div>
+              {proyectos.map((p) => (
+                <div class="project-card" data-category={p.category}>
+                  <div class="project-card-image-wrapper">
+                    <img
+                      src={resolvePath(p.image)}
+                      alt={p.title}
+                      class="project-card-image"
+                    />
+                  </div>
+                  <div class="project-card-content">
+                    <h3 class="project-card-title">{p.title}</h3>
+                    <div class="project-card-categories">
+                      {p.tags.join(" · ")}
+                    </div>
+                    <a
+                      href={p.link === "#" ? "#" : p.link.startsWith("http") ? p.link : resolvePath(p.link)}
+                      class="project-card-link"
+                      target={p.link.startsWith("http") ? "_blank" : undefined}
+                      rel={p.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                    >
+                      Ver más →
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1960,18 +1999,84 @@ const hasRecommendationCarousel = recomendaciones.length > 3;
   }
 
   .project-card {
-    background-color: #d8d8d8;
+    background-color: var(--color-bg-main);
     border-radius: 20px;
-    min-height: 400px;
-    width: 320px;
+    min-height: 300px;
+    width: 350px;
     flex-shrink: 0;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.6s ease;
+      opacity 0.6s ease, box-shadow 0.3s ease;
     transform-origin: center;
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    pointer-events: none;
+    pointer-events: auto;
     user-select: none;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .project-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .project-card-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 1.25rem 1.75rem 1.25rem;
+    gap: 0;
+  }
+
+  .project-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--color-text-white);
+    line-height: 1.4;
+    margin: 0 0 1rem 0;
+    flex: 1;
+  }
+
+  .project-card-categories {
+    font-family: var(--font-paragraph);
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .project-card-link {
+    font-family: var(--font-paragraph);
+    font-size: 0.95rem;
+    color: var(--color-text-white);
+    text-decoration: none;
+    font-weight: 400;
+    margin-top: auto;
+    transition: opacity 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .project-card-link:hover {
+    opacity: 0.8;
   }
 
 
@@ -2051,8 +2156,22 @@ const hasRecommendationCarousel = recomendaciones.length > 3;
 
 
     .project-card {
-      width: 280px;
-      min-height: 350px;
+      width: 210px;
+      min-height: 210px;
+    }
+
+    .project-card-content {
+      padding: 1rem 1rem 1.25rem 1rem;
+    }
+
+    .project-card-title {
+      font-size: 1.15rem;
+      margin: 0 0 0.75rem 0;
+    }
+
+    .project-card-categories {
+      font-size: 0.8rem;
+      margin: 0 0 0.5rem 0;
     }
 
     .projects-track {
