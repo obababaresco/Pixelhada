@@ -30,6 +30,10 @@
           "description": "Diseño y maquetación de componentes UI responsivos aplicando buenas prácticas para documentar el código. ",
           "tags": ["Angular", "TypeScript", "Bootstrap", "Figma", "UI Design", "HTML5 & CSS3"],
           "image": "/images/Proyectos/Salware.png",
+          "images": [
+            "/images/Proyectos/Salware.png",
+            "/images/Proyectos/Interfell.png"
+          ],
           "link": "https://app.fundacionsalware.org/auth/login",
           "pais": "España"
         },
