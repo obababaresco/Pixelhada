@@ -19,6 +19,8 @@ interface Proyecto {
   link: string;
   category: string;
   pais?: string;
+  reto?: string;
+  solucion?: string;
 }
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -124,9 +126,6 @@ const whatsappLink = genesis?.whatsapp
           >
           <button class="filter-btn" data-category="sales"
             >Sales</button
-          >
-          <button class="filter-btn" data-category="otros"
-            >Otros</button
           >
         </div>
 
@@ -435,9 +434,21 @@ const whatsappLink = genesis?.whatsapp
             <div class="modal-tags" id="modal-tags"></div>
           </div>
 
+          <div class="modal-pais" id="modal-pais" style="display: none;">
+            <span class="modal-pais-icon">🌍</span>
+            <span class="modal-pais-text" id="modal-pais-text"></span>
+          </div>
+
           <div class="modal-description">
             <p class="modal-description-short" id="modal-description-short"></p>
-            <p class="modal-description-detailed" id="modal-description-detailed"></p>
+
+            <div class="modal-reto" id="modal-reto" style="display: none;">
+              <p><strong>Reto:</strong> <span id="modal-reto-text"></span></p>
+            </div>
+
+            <div class="modal-solucion" id="modal-solucion" style="display: none;">
+              <p><strong>Solución:</strong> <span id="modal-solucion-text"></span></p>
+            </div>
           </div>
 
           <div class="modal-actions">
@@ -687,6 +698,14 @@ const whatsappLink = genesis?.whatsapp
       event.preventDefault();
       const currentPosition = getPositionX(event);
       currentTranslate = prevTranslate + currentPosition - startX;
+      
+      // Limitar el arrastre en los bordes para evitar efecto rebote
+      if (currentIndex === 0 && currentTranslate > 0) {
+        currentTranslate = 0;
+      }
+      if (currentIndex >= visibleCards.length - 1 && currentTranslate < 0) {
+        currentTranslate = 0;
+      }
       
       updateCarousel(false);
     };
@@ -1531,7 +1550,12 @@ const whatsappLink = genesis?.whatsapp
     const modalTitle = document.getElementById('modal-title') as HTMLElement;
     const modalTags = document.getElementById('modal-tags') as HTMLElement;
     const modalDescriptionShort = document.getElementById('modal-description-short') as HTMLElement;
-    const modalDescriptionDetailed = document.getElementById('modal-description-detailed') as HTMLElement;
+    const modalPais = document.getElementById('modal-pais') as HTMLElement;
+    const modalPaisText = document.getElementById('modal-pais-text') as HTMLElement;
+    const modalReto = document.getElementById('modal-reto') as HTMLElement;
+    const modalRetoText = document.getElementById('modal-reto-text') as HTMLElement;
+    const modalSolucion = document.getElementById('modal-solucion') as HTMLElement;
+    const modalSolucionText = document.getElementById('modal-solucion-text') as HTMLElement;
     const modalLinkBtn = document.getElementById('modal-link-btn') as HTMLAnchorElement;
     const sliderPrev = document.getElementById('slider-prev') as HTMLElement;
     const sliderNext = document.getElementById('slider-next') as HTMLElement;
@@ -1540,7 +1564,7 @@ const whatsappLink = genesis?.whatsapp
     const modalNavNext = document.getElementById('modal-nav-next') as HTMLElement;
 
     if (!modal || !modalOverlay || !modalClose || !modalImage || !modalTitle || !modalTags ||
-        !modalDescriptionShort || !modalDescriptionDetailed || !modalLinkBtn ||
+        !modalDescriptionShort || !modalLinkBtn ||
         !sliderPrev || !sliderNext || !sliderIndicators || !modalNavPrev || !modalNavNext) return;
 
     let currentImageIndex = 0;
@@ -1660,7 +1684,30 @@ const whatsappLink = genesis?.whatsapp
       // Llenar el modal con la información del proyecto
       modalTitle.textContent = proyecto.title;
       modalDescriptionShort.textContent = proyecto.description;
-      modalDescriptionDetailed.style.display = 'none';
+
+      // País
+      if (proyecto.pais && proyecto.pais.trim() !== '' && modalPais && modalPaisText) {
+        modalPaisText.textContent = proyecto.pais;
+        modalPais.style.display = 'flex';
+      } else if (modalPais) {
+        modalPais.style.display = 'none';
+      }
+
+      // Reto
+      if (proyecto.reto && proyecto.reto.trim() !== '' && modalReto && modalRetoText) {
+        modalRetoText.textContent = proyecto.reto;
+        modalReto.style.display = 'block';
+      } else if (modalReto) {
+        modalReto.style.display = 'none';
+      }
+
+      // Solución
+      if (proyecto.solucion && proyecto.solucion.trim() !== '' && modalSolucion && modalSolucionText) {
+        modalSolucionText.textContent = proyecto.solucion;
+        modalSolucion.style.display = 'block';
+      } else if (modalSolucion) {
+        modalSolucion.style.display = 'none';
+      }
 
       // Tags
       modalTags.innerHTML = '';
@@ -3836,23 +3883,54 @@ const whatsappLink = genesis?.whatsapp
     white-space: nowrap;
   }
 
+  .modal-pais {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .modal-pais-icon {
+    font-size: 1.1rem;
+  }
+
+  .modal-pais-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    font-family: var(--font-tag);
+  }
+
   .modal-description {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .modal-description-short,
-  .modal-description-detailed {
+  .modal-description-short {
     font-size: 1rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
   }
 
-  .modal-description-detailed {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
+  .modal-reto,
+  .modal-solucion {
+    margin: 0;
+  }
+
+  .modal-reto p,
+  .modal-solucion p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .modal-reto strong,
+  .modal-solucion strong {
+    color: var(--color-primary);
+    font-weight: 700;
   }
 
   .modal-actions {
