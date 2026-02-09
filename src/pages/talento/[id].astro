@@ -11,13 +11,13 @@ interface Skill {
 
 interface Proyecto {
   title: string;
-  description: string;
+  shortDescription: string;
+  longDescription: string;
   tags: string[];
   image: string;
   images?: string[]; // Array de imágenes para el carrusel
   link?: string;
   pais: string;
-  detailedDescription?: string; // Descripción detallada para el modal
 }
 
 interface Curso {
@@ -251,7 +251,7 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
                 <div class="project-header">
                   <h3 class="project-title">{proyecto.title}</h3>
                 </div>
-                <p class="project-description">{proyecto.description}</p>
+                <p class="project-description">{proyecto.shortDescription}</p>
                 <div class="project-tags">
                   {proyecto.tags.map((tag) => (
                     <span class="project-tag tag">{tag}</span>
@@ -1170,11 +1170,11 @@ const hasRecommendationCarousel = dev.recomendaciones && dev.recomendaciones.len
 
       // Llenar el modal con la información del proyecto
       modalTitle.textContent = proyecto.title;
-      modalDescriptionShort.textContent = proyecto.description;
+      modalDescriptionShort.textContent = proyecto.shortDescription;
       
-      // Descripción detallada (si existe)
-      if (proyecto.detailedDescription) {
-        modalDescriptionDetailed.textContent = proyecto.detailedDescription;
+      // Descripción larga para el detalle
+      if (proyecto.longDescription) {
+        modalDescriptionDetailed.textContent = proyecto.longDescription;
         modalDescriptionDetailed.style.display = 'block';
       } else {
         modalDescriptionDetailed.style.display = 'none';

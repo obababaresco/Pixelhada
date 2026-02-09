@@ -27,7 +27,8 @@
       "proyectos": [
         {
           "title": "Software educativo online",
-          "description": "Diseño y maquetación de componentes UI responsivos aplicando buenas prácticas para documentar el código. ",
+          "shortDescription": "Componentes UI responsivos con buenas prácticas de documentación.",
+          "longDescription": "Diseño y maquetación de componentes UI responsivos aplicando buenas prácticas para documentar el código.",
           "tags": ["Angular", "TypeScript", "Bootstrap", "Figma", "UI Design", "HTML5 & CSS3"],
           "image": "/images/Proyectos/Salware.png",
           "images": [
@@ -39,97 +40,121 @@
         },
         {
           "title": "CMS Dinámico HubSpot",
-          "description": "Desarrollo de temas personalizados, módulos dinámicos y consumo de API para integración de vacantes IT.",
+          "shortDescription": "Temas personalizados y módulos dinámicos en HubSpot.",
+          "longDescription": "Desarrollo de temas personalizados, módulos dinámicos y consumo de API para integración de vacantes IT.",
           "tags": ["HubSpot", "API Integration", "JavaScript", "HTML5 & CSS3"],
           "image": "/images/Proyectos/Interfell.png",
+          "images": ["/images/Proyectos/Interfell.png"],
           "link": "https://www.interfell.com/",
           "pais": "Colombia"
         },
         {
           "title": "Sistema de Gestión Académica Intisana",
-          "description": "Maquetación de flujos de UI completos para 4 roles de usuario (Admin, Profesor, Padres, Alumnos) y dashboards de métricas.",
+          "shortDescription": "Flujos de UI para 4 roles de usuario y dashboards de métricas.",
+          "longDescription": "Maquetación de flujos de UI completos para 4 roles de usuario (Admin, Profesor, Padres, Alumnos) y dashboards de métricas.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap"],
           "image": "/images/Proyectos/Intisana.png",
+          "images": ["/images/Proyectos/Intisana.png"],
           "link": "#",
           "pais": "Ecuador"
         },
         {
           "title": "Sitio Web de Diseño Interior",
-          "description": "Portal corporativo con diseño personalizado de alto impacto visual y optimización SEO.",
+          "shortDescription": "Portal corporativo de alto impacto visual con optimización SEO.",
+          "longDescription": "Portal corporativo con diseño personalizado de alto impacto visual y optimización SEO.",
           "tags": ["WordPress", "Elementor", "Figma"],
           "image": "/images/Proyectos/alexandrias-desing.png",
+          "images": ["/images/Proyectos/alexandrias-desing.png"],
           "link": "https://alexandriasdesign.com/",
           "pais": "Estados Unidos"
         },
         {
           "title": "Portal de servicio técnico industrial",
-          "description": "Web informativa con custom post types a la medida y diseño personalizado",
+          "shortDescription": "Web informativa con custom post types y diseño personalizado.",
+          "longDescription": "Web informativa con custom post types a la medida y diseño personalizado.",
           "tags": ["WordPress", "Elementor", "Figma"],
           "image": "/images/Proyectos/ORBIT.png",
+          "images": ["/images/Proyectos/ORBIT.png"],
           "link": "https://orbitvibra.com/",
           "pais": "Venezuela"
         },
         {
           "title": "Directorio Turístico Geolocalizado",
-          "description": "Plataforma de gestión de locales con filtrado avanzado, integración de mapas y rutas en tiempo real.",
+          "shortDescription": "Gestión de locales con filtrado avanzado e integración de mapas.",
+          "longDescription": "Plataforma de gestión de locales con filtrado avanzado, integración de mapas y rutas en tiempo real.",
           "tags": ["WordPress", "Elementor", "API Integration", "JavaScript"],
           "image": "/images/Proyectos/devuelta-al-centro.jpg",
+          "images": ["/images/Proyectos/devuelta-al-centro.jpg"],
           "link": "https://www.devueltaalcentro.com/",
           "pais": "Ecuador"
         },
         {
           "title": "E-commerce Tecnológico",
-          "description": "Tienda virtual completa con diseño a medida, gestión de inventario y optimización de conversión.",
+          "shortDescription": "Tienda virtual con gestión de inventario y optimización de conversión.",
+          "longDescription": "Tienda virtual completa con diseño a medida, gestión de inventario y optimización de conversión.",
           "tags": ["WordPress", "Elementor", "WooCommerce", "Figma"],
           "image": "/images/Proyectos/compu-job.png",
+          "images": ["/images/Proyectos/compu-job.png"],
           "link": "https://compujob.com.ec/",
           "pais": "Ecuador"
         },
         {
           "title": "Interfaz de Software ATM",
-          "description": "Maquetación integral de 400 pantallas para telecajero, abarcando flujos transaccionales complejos y módulos de mantenimiento.",
+          "shortDescription": "Maquetación de 400 pantallas para telecajero con flujos complejos.",
+          "longDescription": "Maquetación integral de 400 pantallas para telecajero, abarcando flujos transaccionales complejos y módulos de mantenimiento.",
           "tags": ["HTML5 & CSS3", "Figma", "UI Design"],
           "image": "/images/Proyectos/Telecajero.png",
+          "images": ["/images/Proyectos/Telecajero.png"],
           "link": "#",
           "pais": "Ecuador"
         },
         {
           "title": "Web Corporativa Data Science",
-          "description": "Sitio informativo optimizado para agencias de tecnología con enfoque en velocidad y SEO.",
+          "shortDescription": "Sitio optimizado para agencias tech con enfoque en velocidad y SEO.",
+          "longDescription": "Sitio informativo optimizado para agencias de tecnología con enfoque en velocidad y SEO.",
           "tags": ["WordPress", "Figma", "Elementor"],
           "image": "/images/Proyectos/fastdatascience.png",
+          "images": ["/images/Proyectos/fastdatascience.png"],
           "link": "https://fastdatascience.com/",
           "pais": "Estados Unidos"
         },
         {
           "title": "Plataforma E-Learning GMAT",
-          "description": "Sistema educativo con aulas virtuales en vivo, simulación de exámenes y paneles administrativos.",
+          "shortDescription": "Sistema educativo con aulas virtuales y simulación de exámenes.",
+          "longDescription": "Sistema educativo con aulas virtuales en vivo, simulación de exámenes y paneles administrativos.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap", "Angular", "UI Design"],
           "image": "/images/Proyectos/Gmatdudes.png",
+          "images": ["/images/Proyectos/Gmatdudes.png"],
           "link": "https://gmat.gmatdudes.com/",
           "pais": "Perú"
         },
         {
           "title": "Sistema de Entrenamiento MLM",
-          "description": "Software para reclutamiento y capacitación de distribuidores con gestión de usuarios multinivel.",
-          "tags": ["HTML5 & CSS3","JavaScript", "Bootstrap", "Angular", "UI Design"],
+          "shortDescription": "Software para reclutamiento y capacitación de distribuidores multinivel.",
+          "longDescription": "Software para reclutamiento y capacitación de distribuidores con gestión de usuarios multinivel.",
+          "tags": ["HTML5 & CSS3", "JavaScript", "Bootstrap", "Angular", "UI Design"],
           "image": "/images/Proyectos/myhbl.png",
+          "images": ["/images/Proyectos/myhbl.png"],
           "link": "https://myhbl.com/",
           "pais": "Colombia"
         },
         {
           "title": "Web Marca Personal",
-          "description": "Desarrollo frontend de alto rendimiento enfocado en la identidad digital y posicionamiento web.",
+          "shortDescription": "Frontend de alto rendimiento para identidad digital y posicionamiento.",
+          "longDescription": "Desarrollo frontend de alto rendimiento enfocado en la identidad digital y posicionamiento web.",
           "tags": ["HTML5 & CSS3", "JavaScript", "Figma", "UI Design"],
           "image": "/images/Proyectos/alex-fernandez.png",
+          "images": ["/images/Proyectos/alex-fernandez.png"],
           "link": "https://alexfernandez.com/",
           "pais": "Estados Unidos"
         },
         {
           "title": "Sistema de Gestión Gubernamental",
-          "description": "Análisis, modelado de datos y arquitectura de software para administración de recursos estatales (SIARE).",
+          "shortDescription": "Modelado de datos y arquitectura para administración de recursos estatales.",
+          "longDescription": "Análisis, modelado de datos y arquitectura de software para administración de recursos estatales (SIARE).",
           "tags": ["Angular", "TypeScript", "Data Analysis"],
           "image": "/images/Proyectos/Siare.png",
+          "images": ["/images/Proyectos/Siare.png"],
           "link": "#",
           "pais": "México"
         }

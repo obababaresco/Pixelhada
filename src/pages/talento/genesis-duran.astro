@@ -19,7 +19,6 @@ interface Proyecto {
   link: string;
   category: string;
   pais?: string;
-  detailedDescription?: string;
 }
 
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -1661,14 +1660,7 @@ const whatsappLink = genesis?.whatsapp
       // Llenar el modal con la información del proyecto
       modalTitle.textContent = proyecto.title;
       modalDescriptionShort.textContent = proyecto.description;
-      
-      // Descripción detallada (si existe)
-      if (proyecto.detailedDescription) {
-        modalDescriptionDetailed.textContent = proyecto.detailedDescription;
-        modalDescriptionDetailed.style.display = 'block';
-      } else {
-        modalDescriptionDetailed.style.display = 'none';
-      }
+      modalDescriptionDetailed.style.display = 'none';
 
       // Tags
       modalTags.innerHTML = '';

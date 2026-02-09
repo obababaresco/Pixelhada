@@ -17,56 +17,70 @@
         "description": "Diseño de todas las pantallas de la web optimizada para el CMS HubSpot. Uso de Design Thinking, Google Analytics y Tests A/B.",
         "tags": ["SaaS", "Dashboard", "UX/UI", "Restaurantes"],
         "image": "/images/Proyectos/genesis/proyecto-1.png",
+        "images": ["/images/Proyectos/genesis/proyecto-1.png"],
         "link": "",
-        "category": "web"
+        "category": "web",
+        "pais": "Venezuela"
       },
       {
         "title": "Pedir en un restaurante sin fricción ni confusión",
         "description": "Diseño de todas las pantallas de la web optimizada para el CMS HubSpot. Uso de Design Thinking, Google Analytics y Tests A/B.",
         "tags": ["App mobile", "UX/UI", "Foodtech"],
         "image": "/images/Proyectos/genesis/proyecto-2.png",
+        "images": ["/images/Proyectos/genesis/proyecto-2.png"],
         "link": "",
-        "category": "web"
+        "category": "web",
+        "pais": "Venezuela"
       },
       {
         "title": "Gestionar talento y vacantes sin procesos innecesarios",
         "description": "Diseño de pantallas para el software de gestión de trabajos remotos bajo metodología SCRUM y Kanban.",
         "tags": ["Plataforma web", "UX/UI", "Talent Tech"],
         "image": "/images/Proyectos/genesis/proyecto-3.png",
+        "images": ["/images/Proyectos/genesis/proyecto-3.png"],
         "link": "#",
-        "category": "web"
+        "category": "web",
+        "pais": "Colombia"
       },
       {
         "title": "Traducir una propuesta educativa en una web clara y confiable",
         "description": "Diseño de página web e-commerce pensada para vender filtros de agua con Nanotecnología, bajo diseño centrado en el usuario.",
         "tags": ["Web informativa", "UX/UI", "Educación"],
         "image": "/images/Proyectos/genesis/proyecto-4.png",
+        "images": ["/images/Proyectos/genesis/proyecto-4.png"],
         "link": "#",
-        "category": "web"
+        "category": "web",
+        "pais": "España"
       },
       {
         "title": "Comunicar una marca país en el contexto de FITUR",
         "description": "Diseño de sistema de aprendizaje OnLine y pantallas para desarrollo en PHP.",
         "tags": ["Landing page", "UX/UI", "Turismo", "Evento internacional"],
         "image": "/images/Proyectos/genesis/proyecto-5.png",
+        "images": ["/images/Proyectos/genesis/proyecto-5.png"],
         "link": "#",
-        "category": "web"
+        "category": "web",
+        "pais": "España"
       },
       {
         "title": "My HBL (Herbalife)",
         "description": "Diseño de sistema para gestionar el reclutamiento y entrenamiento de distribuidores de la marca.",
         "tags": ["System Design", "UX Research", "Figma", "Balsamiq"],
         "image": "/images/Proyectos/myhbl.png",
+        "images": ["/images/Proyectos/myhbl.png"],
         "link": "#",
-        "category": "otros"
+        "category": "otros",
+        "pais": "Colombia"
       },
       {
         "title": "ViralSolutionss",
         "description": "Gestión de cuentas y diseño de grillas semanales para redes sociales.",
         "tags": ["Social Media", "Graphic Design", "Branding"],
         "image": "/images/Proyectos/genesis/proyecto-1.png",
+        "images": ["/images/Proyectos/genesis/proyecto-1.png"],
         "link": "#",
-        "category": "social"
+        "category": "social",
+        "pais": "Venezuela"
       }
     ],
     "recomendaciones": [
