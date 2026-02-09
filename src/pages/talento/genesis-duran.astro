@@ -1,6 +1,7 @@
 ---
 import GenesisLayout from "../../layouts/GenesisLayout.astro";
 import genesisData from "../../data/genesis-duran.json";
+import genesisDataEn from "../../data/genesis-duran-en.json";
 
 interface Recommendation {
   autor: string;
@@ -34,8 +35,11 @@ const resolvePath = (path: string | undefined) => {
 };
 
 const genesis = Array.isArray(genesisData) ? genesisData[0] : genesisData;
+const genesisEn = Array.isArray(genesisDataEn) ? genesisDataEn[0] : genesisDataEn;
 const recomendaciones = genesis?.recomendaciones ?? [];
+const recomendacionesEn = genesisEn?.recomendaciones ?? [];
 const proyectos = (genesis?.proyectos ?? []) as Proyecto[];
+const proyectosEn = (genesisEn?.proyectos ?? []) as Proyecto[];
 const hasRecommendations = recomendaciones.length > 0;
 const hasRecommendationCarousel = recomendaciones.length > 3;
 
@@ -57,7 +61,7 @@ const whatsappLink = genesis?.whatsapp
       <div class="hero-banner-genesis">
         <div class="hero-content-genesis">
           <div class="hero-text-genesis">
-            <h1 class="hero-greeting-genesis">HOLA, SOY</h1>
+            <h1 class="hero-greeting-genesis" data-i18n="hero.greeting">HOLA, SOY</h1>
             <h1 class="hero-name-genesis">{genesis?.nombre?.toUpperCase() ?? ""}</h1>
             <p
               class="hero-subtitle-genesis"
@@ -65,7 +69,7 @@ const whatsappLink = genesis?.whatsapp
               set:html={genesis?.bio ? genesis.bio.replace(/\[BR\]/g, "<br />") : ""}
             ></p>
             <div class="hero-buttons-genesis">
-              <a href="#contacto" class="btn-contact-genesis">
+              <a href="#contacto" class="btn-contact-genesis" data-i18n="hero.cta">
                 Hablemos de ideas
               </a>
               <a
@@ -80,7 +84,7 @@ const whatsappLink = genesis?.whatsapp
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Descargar CV
+                <span data-i18n="hero.cv">Descargar CV</span>
               </a>
             </div>
           </div>
@@ -100,9 +104,9 @@ const whatsappLink = genesis?.whatsapp
       <div class="section-container">
         <div class="projects-header">
           <h2 class="projects-title">
-            <span class="projects-title-line1">EXPERIENCIAS DISEÑADAS</span>
+            <span class="projects-title-line1" data-i18n="projects.title.line1">EXPERIENCIAS DISEÑADAS</span>
             <span class="projects-title-line2">
-              CON PROPÓSITO.
+              <span data-i18n="projects.title.line2">CON PROPÓSITO.</span>
               <img
                 src="/images/estrella.png"
                 alt="Estrella"
@@ -110,21 +114,21 @@ const whatsappLink = genesis?.whatsapp
               />
             </span>
           </h2>
-          <p class="projects-subtitle">
+          <p class="projects-subtitle" data-i18n="projects.subtitle">
             Cada experiencia responde a un contexto distinto.
           </p>
         </div>
 
         <!-- Filtros de categoría -->
         <div class="projects-filters">
-          <button class="filter-btn active" data-category="all"
+          <button class="filter-btn active" data-category="all" data-i18n="projects.filter.all"
             >Todos los proyectos</button
           >
-          <button class="filter-btn" data-category="web">Web</button>
-          <button class="filter-btn" data-category="social"
+          <button class="filter-btn" data-category="web" data-i18n="projects.filter.web">Web</button>
+          <button class="filter-btn" data-category="social" data-i18n="projects.filter.social"
             >Social Media</button
           >
-          <button class="filter-btn" data-category="sales"
+          <button class="filter-btn" data-category="sales" data-i18n="projects.filter.sales"
             >Sales</button
           >
         </div>
@@ -142,7 +146,7 @@ const whatsappLink = genesis?.whatsapp
                       class="project-image"
                     />
                     <div class="project-overlay">
-                      <button class="project-link" type="button" data-project-index={index}>
+                      <button class="project-link" type="button" data-project-index={index} data-i18n="projects.view">
                         Ver Proyecto →
                       </button>
                     </div>
@@ -168,11 +172,11 @@ const whatsappLink = genesis?.whatsapp
       <div class="section-container">
         <div class="text-section-content">
           <h2 class="text-section-title">
-            <span class="title-line title-line-1">NO LLEGUÉ AL DISEÑO</span>
-            <span class="title-line title-line-2">POR CASUALIDAD.</span>
-            <span class="title-line title-line-3">LLEGUÉ BUSCANDO</span>
+            <span class="title-line title-line-1" data-i18n="design.line1">NO LLEGUÉ AL DISEÑO</span>
+            <span class="title-line title-line-2" data-i18n="design.line2">POR CASUALIDAD.</span>
+            <span class="title-line title-line-3" data-i18n="design.line3">LLEGUÉ BUSCANDO</span>
             <span class="title-line title-line-4">
-              RESPUESTAS.
+              <span data-i18n="design.line4">RESPUESTAS.</span>
               <img
                 src="/images/paleta-de-color.png"
                 alt="Paleta de colores"
@@ -180,7 +184,7 @@ const whatsappLink = genesis?.whatsapp
               />
             </span>
           </h2>
-          <p class="text-section-paragraph">
+          <p class="text-section-paragraph" data-i18n="design.paragraph" data-i18n-html="true">
             Siempre me ha interesado entender por qué las personas hacen lo que hacen, qué las frustra, qué las confunde y qué las hace sentir tranquilas cuando interactúan con un producto digital. El diseño se convirtió para mi, en el punto donde pude unir <strong class="highlight-word" data-word="lógica">lógica</strong>, <strong class="highlight-word" data-word="sensibilidad">sensibilidad</strong> y <strong class="highlight-word" data-word="estructura">estructura</strong>.
           </p>
         </div>
@@ -192,7 +196,7 @@ const whatsappLink = genesis?.whatsapp
       <div class="section-container">
         <div class="text-section-content">
           <h2 class="text-section-title-work">
-            <span class="title-part-static">DISEÑO PARA QUE</span>
+            <span class="title-part-static" data-i18n="designwork.static">DISEÑO PARA QUE</span>
             <span class="title-part-dynamic-wrapper">
               <span class="title-part-dynamic" data-phrase="0">FUNCIONE</span>
               <img
@@ -202,22 +206,22 @@ const whatsappLink = genesis?.whatsapp
               />
             </span>
           </h2>
-          <p class="text-section-paragraph">
+          <p class="text-section-paragraph" data-i18n="designwork.paragraph" data-i18n-html="true">
             Trabajo en UX/UI desde hace más de 6 años, principalmente en <strong>entornos remotos</strong> y multidisciplinarios. Me enfoco en simplificar lo complejo, tomar decisiones con criterio y crear experiencias que se sientan claras, humanas y posibles de usar en la vida real.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Secci?n Acomp?ñame en mi proceso -->
+    <!-- Sección Acompáñame en mi proceso -->
     <section class="process-section" id="proceso">
       <div class="section-container">
         <div class="process-header">
           <h2 class="process-title">
-            <span class="process-title-line1">ACOMPÁÑAME EN</span>
-            <span class="process-title-line2">MI PROCESO</span>
+            <span class="process-title-line1" data-i18n="process.title.line1">ACOMPÁÑAME EN</span>
+            <span class="process-title-line2" data-i18n="process.title.line2">MI PROCESO</span>
           </h2>
-          <p class="process-subtitle">
+          <p class="process-subtitle" data-i18n="process.subtitle">
             Nada ocurre de golpe. Todo se construye paso a paso.
           </p>
         </div>
@@ -234,7 +238,7 @@ const whatsappLink = genesis?.whatsapp
                 />
               </div>
             </div>
-            <button class="btn-start-process" id="btn-start-process">
+            <button class="btn-start-process" id="btn-start-process" data-i18n="process.btn.start">
               Vamos
             </button>
           </div>
@@ -254,7 +258,7 @@ const whatsappLink = genesis?.whatsapp
                   <!-- Mensaje flotante para el hada en posición 3 -->
                   <div class="floating-message" id="floating-message-3" data-cell="3">
                     <div class="floating-message-content">
-                      <h3 class="floating-message-title">Pienso con:</h3>
+                      <h3 class="floating-message-title" data-i18n="process.msg3.title">Pienso con:</h3>
                       <ul class="floating-message-list">
                         <li>UX Research</li>
                         <li>Arquitectura de información</li>
@@ -265,7 +269,7 @@ const whatsappLink = genesis?.whatsapp
                   <!-- Mensaje flotante para el hada en posición 6 -->
                   <div class="floating-message" id="floating-message-6" data-cell="6">
                     <div class="floating-message-content">
-                      <h3 class="floating-message-title">Construyo con:</h3>
+                      <h3 class="floating-message-title" data-i18n="process.msg6.title">Construyo con:</h3>
                       <ul class="floating-message-list">
                         <li>UI Design</li>
                         <li>Design systems</li>
@@ -276,7 +280,7 @@ const whatsappLink = genesis?.whatsapp
                   <!-- Mensaje flotante para el hada en posición 9 -->
                   <div class="floating-message" id="floating-message-9" data-cell="9">
                     <div class="floating-message-content">
-                      <h3 class="floating-message-title">Me apoyo en:</h3>
+                      <h3 class="floating-message-title" data-i18n="process.msg9.title">Me apoyo en:</h3>
                       <ul class="floating-message-list">
                         <li>Figma</li>
                         <li>Photoshop</li>
@@ -287,39 +291,39 @@ const whatsappLink = genesis?.whatsapp
                   <!-- Mensaje flotante para la celda 1 (hover) -->
                   <div class="floating-message floating-message-hover" id="floating-message-1" data-cell="1">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">Observar también es avanzar</p>
+                      <p class="floating-message-text" data-i18n="process.hover1">Observar también es avanzar</p>
                     </div>
                   </div>
                   <!-- Mensajes flotantes para otras celdas (hover) -->
                   <div class="floating-message floating-message-hover" id="floating-message-2" data-cell="2">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">El proceso importa</p>
+                      <p class="floating-message-text" data-i18n="process.hover2">El proceso importa</p>
                     </div>
                   </div>
                   <div class="floating-message floating-message-hover" id="floating-message-4" data-cell="4">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">Hacer las preguntas correctas cambia todo</p>
+                      <p class="floating-message-text" data-i18n="process.hover4">Hacer las preguntas correctas cambia todo</p>
                     </div>
                   </div>
                   <div class="floating-message floating-message-hover" id="floating-message-5" data-cell="5">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">Las respuestas no siempre son inmediatas</p>
+                      <p class="floating-message-text" data-i18n="process.hover5">Las respuestas no siempre son inmediatas</p>
                     </div>
                   </div>
                   <div class="floating-message floating-message-hover" id="floating-message-7" data-cell="7">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">No todo lo que se diseña se queda</p>
+                      <p class="floating-message-text" data-i18n="process.hover7">No todo lo que se diseña se queda</p>
                     </div>
                   </div>
                   <div class="floating-message floating-message-hover" id="floating-message-8" data-cell="8">
                     <div class="floating-message-content floating-message-simple">
-                      <p class="floating-message-text">Simplificar es parte del trabajo</p>
+                      <p class="floating-message-text" data-i18n="process.hover8">Simplificar es parte del trabajo</p>
                     </div>
                   </div>
                 </div>
                 <div class="path-cells">
                   <!-- Botón Volver en la celda 1 -->
-                  <button class="btn-nav btn-back path-cell-btn" id="btn-back">
+                  <button class="btn-nav btn-back path-cell-btn" id="btn-back" data-i18n="process.btn.back">
                     Volver
                   </button>
                   <div class="path-cell" data-cell-index="1"></div>
@@ -331,7 +335,7 @@ const whatsappLink = genesis?.whatsapp
                   <div class="path-cell" data-cell-index="7"></div>
                   <div class="path-cell" data-cell-index="8"></div>
                   <div class="path-cell" data-cell-index="9"></div>
-                  <button class="btn-nav btn-forward btn-white path-cell-btn" id="btn-forward">
+                  <button class="btn-nav btn-forward btn-white path-cell-btn" id="btn-forward" data-i18n="process.btn.forward">
                     Avanzar
                   </button>
                 </div>
@@ -358,7 +362,7 @@ const whatsappLink = genesis?.whatsapp
     {hasRecommendations && (
       <section class="recommendations-section" id="recomendaciones">
         <div class="section-container">
-          <h2 class="section-title">Recomendaciones</h2>
+          <h2 class="section-title" data-i18n="recommendations.title">Recomendaciones</h2>
           <div class={`recommendations-wrapper ${hasRecommendationCarousel ? 'carousel-active' : ''}`} data-carousel={hasRecommendationCarousel ? 'true' : 'false'}>
             <div class={`recommendations-list ${hasRecommendationCarousel ? 'is-carousel' : ''}`}>
               {recomendaciones.map((rec: Recommendation) => (
@@ -443,11 +447,11 @@ const whatsappLink = genesis?.whatsapp
             <p class="modal-description-short" id="modal-description-short"></p>
 
             <div class="modal-reto" id="modal-reto" style="display: none;">
-              <p><strong>Reto:</strong> <span id="modal-reto-text"></span></p>
+              <p><strong data-i18n="modal.reto">Reto:</strong> <span id="modal-reto-text"></span></p>
             </div>
 
             <div class="modal-solucion" id="modal-solucion" style="display: none;">
-              <p><strong>Solución:</strong> <span id="modal-solucion-text"></span></p>
+              <p><strong data-i18n="modal.solucion">Solución:</strong> <span id="modal-solucion-text"></span></p>
             </div>
           </div>
 
@@ -458,7 +462,7 @@ const whatsappLink = genesis?.whatsapp
                 <polyline points="15 3 21 3 21 9"></polyline>
                 <line x1="10" y1="14" x2="21" y2="3"></line>
               </svg>
-              Visitar Sitio Web
+              <span data-i18n="modal.visitsite">Visitar Sitio Web</span>
             </a>
           </div>
         </div>
@@ -472,6 +476,18 @@ const whatsappLink = genesis?.whatsapp
     image: resolvePath(p.image),
     images: p.images ? p.images.map((img: string) => resolvePath(img)) : undefined
   })))}></script>
+
+<script id="genesis-proyectos-data-en" type="application/json" set:html={JSON.stringify(proyectosEn.map(p => ({
+    ...p,
+    image: resolvePath(p.image),
+    images: p.images ? p.images.map((img: string) => resolvePath(img)) : undefined
+  })))}></script>
+
+<script id="genesis-bio-data-es" type="text/plain" set:html={genesis?.bio ?? ''}></script>
+<script id="genesis-bio-data-en" type="text/plain" set:html={genesisEn?.bio ?? ''}></script>
+
+<script id="genesis-recs-data-es" type="application/json" set:html={JSON.stringify(recomendaciones)}></script>
+<script id="genesis-recs-data-en" type="application/json" set:html={JSON.stringify(recomendacionesEn)}></script>
 
 <script>
   // Animación de entrada del hero
@@ -974,7 +990,7 @@ const whatsappLink = genesis?.whatsapp
 
     if (!dynamicText || !titleSection) return;
 
-    const phrases = [
+    let phrases = (window as any).__i18nPhrases || [
       "FUNCIONE",
       "se entienda",
       "no frustre",
@@ -987,6 +1003,11 @@ const whatsappLink = genesis?.whatsapp
 
     const changePhrase = () => {
       if (isChanging) return;
+      
+      // Actualizar frases desde i18n si están disponibles
+      if ((window as any).__i18nPhrases) {
+        phrases = (window as any).__i18nPhrases;
+      }
       
       isChanging = true;
       // Avanzar a la siguiente frase
@@ -1541,7 +1562,18 @@ const whatsappLink = genesis?.whatsapp
   // Modal de Proyecto con Slider
   document.addEventListener('DOMContentLoaded', () => {
     // Datos de proyectos para el modal
-    const proyectosData = JSON.parse(document.getElementById('genesis-proyectos-data')?.textContent || '[]');
+    const proyectosDataEs = JSON.parse(document.getElementById('genesis-proyectos-data')?.textContent || '[]');
+    const proyectosDataEn = JSON.parse(document.getElementById('genesis-proyectos-data-en')?.textContent || '[]');
+    
+    // Función para obtener los datos de proyectos en el idioma actual
+    const getProyectosData = () => {
+      const i18n = (window as any).__i18n;
+      const lang = i18n ? i18n.getCurrentLang() : 'es';
+      return lang === 'en' ? proyectosDataEn : proyectosDataEs;
+    };
+    
+    // Referencia dinámica
+    let proyectosData = getProyectosData();
     const modal = document.getElementById('project-modal') as HTMLElement;
     const modalOverlay = document.getElementById('modal-overlay') as HTMLElement;
     const modalClose = document.getElementById('modal-close') as HTMLElement;
@@ -1666,6 +1698,10 @@ const whatsappLink = genesis?.whatsapp
 
     // Función para abrir el modal
     const openModal = (projectIndex: number, updateCurrentIndex = true) => {
+      // Refrescar datos en el idioma actual
+      proyectosData = getProyectosData();
+      totalProjects = proyectosData.length;
+      
       if (updateCurrentIndex) {
         currentProjectIndex = projectIndex;
       }
