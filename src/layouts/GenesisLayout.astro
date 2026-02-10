@@ -706,6 +706,16 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
           });
         };
 
+        // Función para actualizar el enlace de descarga del CV según el idioma
+        const applyCvTranslation = () => {
+          const cvBtn = document.querySelector('.btn-cv-genesis') as HTMLAnchorElement;
+          if (!cvBtn) return;
+          const cvUrl = currentLang === 'en' 
+            ? cvBtn.getAttribute('data-cv-en') 
+            : cvBtn.getAttribute('data-cv-es');
+          if (cvUrl) cvBtn.setAttribute('href', cvUrl);
+        };
+
         // Función para actualizar las frases dinámicas de "Diseño para que"
         const updateDynamicPhrases = () => {
           const phrasesStr = t('designwork.phrases');
@@ -755,6 +765,7 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
           applyProjectTranslations();
           applyBioTranslation();
           applyRecommendationTranslations();
+          applyCvTranslation();
           updateDynamicPhrases();
           updateProcessMessages();
         };
