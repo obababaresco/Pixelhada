@@ -234,7 +234,7 @@ const whatsappLink = genesis?.whatsapp
             <div class="pixelhada-container-initial">
               <div class="pixelhada-wrapper-initial">
                 <img 
-                  src="/images/PIXELHADA.png" 
+                  src="/images/pixel-hada.png" 
                   alt="Pixelhada" 
                   class="pixelhada-image pixelhada-initial"
                 />
@@ -252,7 +252,7 @@ const whatsappLink = genesis?.whatsapp
                 <!-- Contenedor de Pixelhada para movimiento -->
                 <div class="pixelhada-wrapper" id="pixelhada-wrapper">
                   <img 
-                    src="/images/PIXELHADA.png" 
+                    src="/images/pixel-hada.png" 
                     alt="Pixelhada" 
                     class="pixelhada-moving"
                     id="pixelhada-image"
@@ -1032,16 +1032,13 @@ const whatsappLink = genesis?.whatsapp
     updateHighlight();
   });
 
-  // Interacción hover para cambiar frase en título "Diseño para que"
+  // Cambio automático de frase en título "Diseño para que"
   document.addEventListener("DOMContentLoaded", () => {
     const dynamicText = document.querySelector(
       ".title-part-dynamic",
     ) as HTMLElement;
-    const titleSection = document.querySelector(
-      ".text-section-title-work",
-    ) as HTMLElement;
 
-    if (!dynamicText || !titleSection) return;
+    if (!dynamicText) return;
 
     let phrases = (window as any).__i18nPhrases || [
       "FUNCIONE",
@@ -1074,69 +1071,17 @@ const whatsappLink = genesis?.whatsapp
       }, 150);
     };
 
-    // Función para verificar si estamos en tablet o móvil
-    const isTabletOrMobile = () => {
-      return window.matchMedia("(max-width: 968px)").matches;
-    };
+    // Iniciar cambio automático cada 1000ms
+    autoChangeInterval = setInterval(() => {
+      changePhrase();
+    }, 1000);
 
-    // Función para iniciar el cambio automático
-    const startAutoChange = () => {
-      // Limpiar intervalo anterior si existe
-      if (autoChangeInterval) {
-        clearInterval(autoChangeInterval);
-        autoChangeInterval = null;
-      }
-      
-      // Iniciar intervalo para cambiar cada 1000ms
-      autoChangeInterval = setInterval(() => {
-        changePhrase();
-      }, 1000);
-    };
-
-    // Función para detener el cambio automático
-    const stopAutoChange = () => {
-      if (autoChangeInterval) {
-        clearInterval(autoChangeInterval);
-        autoChangeInterval = null;
-      }
-    };
-
-    // Función para inicializar según el tamaño de pantalla
-    const initializeBehavior = () => {
-      if (isTabletOrMobile()) {
-        // Tablet/móvil: cambio automático
-        stopAutoChange(); // Asegurar que no hay intervalos previos
-        startAutoChange();
-        // Remover el listener de hover si existe
-        titleSection.removeEventListener("mouseenter", changePhrase);
-      } else {
-        // Escritorio: solo hover
-        stopAutoChange();
-        // Agregar listener de hover
-        titleSection.addEventListener("mouseenter", changePhrase);
-      }
-    };
-
-    // Inicializar comportamiento según el tamaño inicial
-    initializeBehavior();
-
-    // Escuchar cambios en el tamaño de la ventana
-    const mediaQuery = window.matchMedia("(max-width: 968px)");
-    const handleMediaChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      initializeBehavior();
-    };
-
-    // Agregar listener para cambios en media query
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleMediaChange);
-    } else {
-      // Fallback para navegadores antiguos
-      mediaQuery.addListener(handleMediaChange);
-    }
-
-    // Limpiar intervalo al desmontar (si es necesario)
+    // Limpiar intervalo al desmontar
     window.addEventListener("beforeunload", () => {
-      stopAutoChange();
+      if (autoChangeInterval) {
+        clearInterval(autoChangeInterval);
+        autoChangeInterval = null;
+      }
     });
   });
 
@@ -2765,7 +2710,7 @@ const whatsappLink = genesis?.whatsapp
   }
 
   .pixelhada-image {
-    width: 120px;
+    width: 150px;
     height: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -2993,7 +2938,7 @@ const whatsappLink = genesis?.whatsapp
   }
 
   .pixelhada-moving {
-    width: 120px;
+    width: 150px;
     height: auto;
     object-fit: contain;
     display: block;
