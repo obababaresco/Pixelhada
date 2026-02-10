@@ -588,33 +588,84 @@ const whatsappLink = genesis?.whatsapp
     // Primero hacemos visible el contenedor del subtítulo
     heroSubtitle.style.opacity = "1";
 
-    let currentCharIndex = 0;
-    const showNextChar = () => {
-      if (currentCharIndex < bio.length) {
-        // Verificar si es un marcador de salto de línea
-        if (bio.substring(currentCharIndex, currentCharIndex + 4) === "[BR]") {
-          const br = document.createElement("br");
-          heroSubtitle.appendChild(br);
-          currentCharIndex += 4;
-          setTimeout(showNextChar, 100);
-          return;
+    // Pre-procesar el bio en tokens (palabras, espacios y [BR])
+    // para poder agrupar letras por palabra y evitar cortes de palabra en pantallas pequeñas
+    const tokens: { type: "word" | "space" | "br"; text: string }[] = [];
+    let i = 0;
+    while (i < bio.length) {
+      if (bio.substring(i, i + 4) === "[BR]") {
+        tokens.push({ type: "br", text: "[BR]" });
+        i += 4;
+      } else if (bio[i] === " ") {
+        tokens.push({ type: "space", text: " " });
+        i++;
+      } else {
+        let word = "";
+        while (i < bio.length && bio[i] !== " " && bio.substring(i, i + 4) !== "[BR]") {
+          word += bio[i];
+          i++;
+        }
+        tokens.push({ type: "word", text: word });
+      }
+    }
+
+    // Construir todos los elementos del DOM de una vez, pero con opacidad 0
+    // Cada palabra se envuelve en un inline-block para que no se corte entre líneas
+    const allCharSpans: HTMLSpanElement[] = [];
+    const delaysPerChar: number[] = [];
+
+    tokens.forEach((token) => {
+      if (token.type === "br") {
+        const br = document.createElement("br");
+        heroSubtitle.appendChild(br);
+        // Agregar un "delay slot" para la pausa del BR
+        allCharSpans.push(null as any); // placeholder
+        delaysPerChar.push(100);
+      } else if (token.type === "space") {
+        const spaceSpan = document.createElement("span");
+        spaceSpan.textContent = "\u00A0";
+        spaceSpan.style.opacity = "0";
+        spaceSpan.style.display = "inline";
+        heroSubtitle.appendChild(spaceSpan);
+        allCharSpans.push(spaceSpan);
+        delaysPerChar.push(100); // Pausa más larga en espacios
+      } else {
+        // Palabra: envolver en un contenedor inline-block para evitar cortes
+        const wordWrapper = document.createElement("span");
+        wordWrapper.style.display = "inline-block";
+        wordWrapper.style.whiteSpace = "nowrap";
+
+        for (const char of token.text) {
+          const charSpan = document.createElement("span");
+          charSpan.textContent = char;
+          charSpan.style.opacity = "0";
+          charSpan.style.display = "inline";
+          wordWrapper.appendChild(charSpan);
+          allCharSpans.push(charSpan);
+          delaysPerChar.push(50); // Velocidad normal entre letras
         }
 
-        const char = bio[currentCharIndex];
-        const span = document.createElement("span");
-        span.textContent = char === " " ? "\u00A0" : char;
-        span.style.opacity = "0";
-        span.style.display = "inline";
-        heroSubtitle.appendChild(span);
+        heroSubtitle.appendChild(wordWrapper);
+      }
+    });
 
-        setTimeout(() => {
-          span.style.transition = "opacity 0.2s ease-in-out";
-          span.style.opacity = "1";
-        }, 10);
+    // Animar mostrando cada carácter secuencialmente
+    let currentCharIndex = 0;
+    const showNextChar = () => {
+      if (currentCharIndex < allCharSpans.length) {
+        const span = allCharSpans[currentCharIndex];
+        const delay = delaysPerChar[currentCharIndex];
+
+        if (span) {
+          // Es un carácter real, animarlo
+          setTimeout(() => {
+            span.style.transition = "opacity 0.2s ease-in-out";
+            span.style.opacity = "1";
+          }, 10);
+        }
+        // Si span es null, es un placeholder de [BR], solo avanzamos con delay
 
         currentCharIndex++;
-        // Velocidad de lectura: delay entre letras
-        const delay = char === " " ? 100 : 50; // Pausa más larga en espacios
         setTimeout(showNextChar, delay);
       }
     };
