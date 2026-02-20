@@ -9,6 +9,7 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title} | Pixelhada</title>
+    <link rel="icon" type="image/png" href="/images/logo-.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@ const { title } = Astro.props;
     <nav class="navbar navbar-home">
       <div class="navbar-container">
         <a href="/" class="navbar-logo">
-          <span class="logo-mark">✦</span>
+          <span class="logo-mark">&#10022;</span>
           <span class="logo-text">Pixelhada</span>
         </a>
 
@@ -29,23 +30,18 @@ const { title } = Astro.props;
 
         <ul class="navbar-menu">
           <li>
-            <a href="#servicios" class="nav-link">
-              <span>Servicios</span>
+            <a href="#quienes-somos" class="nav-link">
+              <span>Quiénes somos</span>
             </a>
           </li>
           <li>
-            <a href="#equipo" class="nav-link">
+            <a href="#esencia" class="nav-link">
+              <span>Esencia</span>
+            </a>
+          </li>
+          <li>
+            <a href="/talento" class="nav-link">
               <span>Talento</span>
-            </a>
-          </li>
-          <li>
-            <a href="#contacto" class="nav-link">
-              <span>Contacto</span>
-            </a>
-          </li>
-          <li>
-            <a href="/talento/oswaldo-teran" class="nav-link nav-link-cta">
-              <span>Ver portafolios</span>
             </a>
           </li>
         </ul>
@@ -55,17 +51,6 @@ const { title } = Astro.props;
     <div class="page-wrapper">
       <slot />
     </div>
-
-    <footer class="footer">
-      <div class="footer-content">
-        <p>© 2025 Pixelhada. Todos los derechos reservados.</p>
-        <div class="footer-links">
-          <a href="#privacidad">Privacidad</a>
-          <a href="#terminos">Términos</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </div>
-    </footer>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -98,5 +83,3 @@ const { title } = Astro.props;
     </script>
   </body>
 </html>
-
-

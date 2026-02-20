@@ -8,7 +8,14 @@
   --color-bg-sections: #2F2E3E;
   --color-bg-main: #1E1E1E;
   --color-emphasis: #FCF603;
-  
+
+  /* Colores pastel (vibe mágico) */
+  --color-lavender: #C4B5E0;
+  --color-periwinkle: #8B9FD6;
+  --color-soft-pink: #E8A0BF;
+  --color-soft-lilac: #D4BBEA;
+  --color-pastel-mint: #A8E6CF;
+
   /* Fuentes */
   --font-paragraph: 'Inter', sans-serif;
   --font-button-selected: 'Inter', sans-serif;
@@ -96,6 +103,28 @@ button:not(.selected),
 /* Color de énfasis */
 .emphasis {
   color: var(--color-emphasis);
+}
+
+/* Navbar Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--color-text-white);
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  position: absolute;
+  left: 0;
+}
+
+.logo-mark {
+  color: var(--color-emphasis);
+  font-size: 1.1rem;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
 }
 
 /* Navbar */
@@ -282,7 +311,7 @@ button:not(.selected),
   flex-shrink: 0;
   background-color: var(--color-bg-sections);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem 0;
+  padding: 2.5rem 0 2rem;
 }
 
 .footer-content {
@@ -290,10 +319,64 @@ button:not(.selected),
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
   gap: 1rem;
+}
+
+.footer-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-text-white);
+}
+
+.footer-brand-logo {
+  width: 28px;
+  height: auto;
+}
+
+.footer-brand-mark {
+  color: var(--color-emphasis);
+  font-size: 1rem;
+}
+
+.footer-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-text-white);
+}
+
+.footer-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-nav-item {
+  color: var(--color-text-white);
+  text-decoration: none;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.footer-nav-item:hover {
+  opacity: 1;
+  color: var(--color-lavender);
+}
+
+.footer-nav-sep {
+  color: var(--color-text-white);
+  opacity: 0.3;
+  font-size: 1.1rem;
+}
+
+.footer-copy {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  opacity: 0.4;
 }
 
 .footer-content p {
@@ -441,4 +524,62 @@ button:not(.selected),
   background-color: var(--color-primary);
   color: var(--color-text-button-selected);
   border-color: var(--color-primary);
+}
+
+/* ============================================
+   ANIMACIONES GLOBALES
+   ============================================ */
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 4px rgba(196, 181, 224, 0.3); }
+  50% { text-shadow: 0 0 16px rgba(196, 181, 224, 0.8), 0 0 32px rgba(212, 187, 234, 0.4); }
+}
+
+@keyframes softRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Scroll reveal */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glow word hover */
+.glow-word {
+  transition: text-shadow 0.4s ease, color 0.4s ease;
+  cursor: default;
+}
+
+.glow-word:hover {
+  color: var(--color-lavender);
+  text-shadow: 0 0 12px rgba(196, 181, 224, 0.7), 0 0 24px rgba(212, 187, 234, 0.4);
 }

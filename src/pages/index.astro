@@ -1,57 +1,349 @@
 ---
 import HomeLayout from '../layouts/HomeLayout.astro';
+import StarField from '../components/StarField.astro';
+import MagicCard from '../components/MagicCard.astro';
+import ManifestoItem from '../components/ManifestoItem.astro';
+import BentoGallery from '../components/BentoGallery.astro';
+import FooterHome from '../components/FooterHome.astro';
 ---
 
-
 <HomeLayout title="Inicio">
-  <main class="main-container">
-    <section class="hero-section">
-      <h1 class="hero-title">
-        Bienvenidos a <span class="highlight">Pixelhada</span>
-      </h1>
-      <p class="hero-subtitle">
-        Desarrollamos el futuro de la web con creatividad e innovación.
-      </p>
-    </section>
-    
-    <section id="servicios" class="content-section">
-      <h2 class="section-title">Nuestros Servicios</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <h3 class="service-card-title">Desarrollo Web</h3>
-          <p class="service-card-text">Creamos experiencias web modernas y funcionales.</p>
-        </div>
-        <div class="service-card">
-          <h3 class="service-card-title">Diseño UI/UX</h3>
-          <p class="service-card-text">Diseños intuitivos que conectan con tus usuarios.</p>
-        </div>
-        <div class="service-card">
-          <h3 class="service-card-title">Consultoría</h3>
-          <p class="service-card-text">Asesoramiento estratégico para tu proyecto digital.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="equipo" class="content-section">
-      <h2 class="section-title">Nuestro Talento</h2>
-      <div class="section-content">
-        <p class="section-text">
-          Conoce a nuestro equipo de profesionales apasionados por la tecnología.
+  <main>
+    <!-- 1. Hero Mágico -->
+    <section class="hero">
+      <StarField count={60} />
+      <div class="hero-content">
+        <img
+          src="/images/pixel-hada.png"
+          alt="Pixelhada logo"
+          class="hero-logo"
+          width="180"
+          height="180"
+        />
+        <h1 class="hero-title">Pixelhada</h1>
+        <p class="hero-tagline">Donde la magia y la personalización se encuentran.</p>
+        <p class="hero-subtext">
+          Damos vida a ideas a través del diseño y el desarrollo, uniendo
+          creatividad y tecnología para transformar lo cotidiano en extraordinario.
         </p>
-        <a href="/talento/oswaldo-teran" class="btn-primary">
-          Ver portafolio de Oswaldo
-        </a>
+      </div>
+      <div class="hero-gradient-orb hero-orb-1" aria-hidden="true"></div>
+      <div class="hero-gradient-orb hero-orb-2" aria-hidden="true"></div>
+    </section>
+
+    <!-- 2. Quiénes somos -->
+    <section id="quienes-somos" class="section-about">
+      <div class="section-container">
+        <h2 class="section-heading animate-on-scroll">Un toque de magia digital</h2>
+        <p class="about-text animate-on-scroll">
+          Pixelhada nace de la unión entre dos mundos: el arte del diseño y el poder
+          del desarrollo. Somos un dúo creativo que transforma ideas en experiencias
+          visuales y funcionales.
+        </p>
+        <p class="about-subtext animate-on-scroll">
+          Juntos, mezclamos <span class="glow-word">pixeles</span> y <span class="glow-word">hechizos</span> para
+          crear productos <span class="glow-word">únicos</span>, llenos de <span class="glow-word">alma</span> y <span class="glow-word">detalle</span>.
+        </p>
+
+        <div class="cards-duo animate-on-scroll">
+          <MagicCard
+            title="Génesis Durán"
+            description="Explora el mundo visual de Gene."
+            href="/talento/genesis-duran"
+            icon="design"
+          />
+          <MagicCard
+            title="Oswaldo Terán"
+            description="Descubre el código encantado de Oswaldo."
+            href="/talento/oswaldo-teran"
+            icon="code"
+          />
+        </div>
       </div>
     </section>
 
-    <section id="contacto" class="content-section section-content">
-      <h2 class="section-title">¿Listo para comenzar?</h2>
-      <p class="section-text-large">
-        Contáctanos y convirtamos tus ideas en realidad.
-      </p>
-      <a href="mailto:contacto@pixelhada.com" class="btn-secondary">
-        Contactar
-      </a>
+    <!-- 3. Nuestra esencia (Manifesto) -->
+    <section id="esencia" class="section-manifesto">
+      <div class="section-container">
+        <h2 class="section-heading animate-on-scroll">Nuestra esencia</h2>
+        <div class="manifesto-list">
+          <ManifestoItem text="Creemos en los detalles que brillan." icon="fairy" delay={0} />
+          <ManifestoItem text="En interfaces que cuentan historias." icon="wand" delay={100} />
+          <ManifestoItem text="En código que respira, vive y conecta." icon="code" delay={200} />
+          <ManifestoItem text="Y en diseños que tocan el alma." icon="heart" delay={300} />
+        </div>
+      </div>
     </section>
+
+    <!-- 4. Universo Visual -->
+    <section class="section-universe">
+      <div class="section-container">
+        <h2 class="section-heading animate-on-scroll">Así se siente Pixelhada</h2>
+        <BentoGallery />
+        <p class="universe-closing animate-on-scroll">
+          Creamos con el corazón, diseñamos con propósito y desarrollamos con precisión.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. Futuro -->
+    <section class="section-future">
+      <StarField count={25} class="future-stars" />
+      <div class="section-container">
+        <div class="future-content animate-on-scroll">
+          <h2 class="section-heading">¿A dónde va Pixelhada?</h2>
+          <p class="future-text">
+            Pixelhada está en evolución constante. Hoy sembramos las primeras estrellas
+            de nuestro universo creativo. Muy pronto, expandiremos la magia con nuevas
+            propuestas y creaciones.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Footer -->
+    <FooterHome />
   </main>
 </HomeLayout>
+
+<style>
+  /* ========================
+     HERO
+     ======================== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 2rem 2rem;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  .hero-logo {
+    width: clamp(120px, 20vw, 180px);
+    height: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 30px rgba(196, 181, 224, 0.2));
+    animation: floatLogo 6s ease-in-out infinite;
+  }
+
+  @keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    margin: 0 0 1rem;
+    background: linear-gradient(135deg, var(--color-text-white) 0%, var(--color-lavender) 50%, var(--color-soft-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-heading);
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: var(--color-lavender);
+    margin: 0 0 1.5rem;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-subtext {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    line-height: 1.75;
+    opacity: 0.7;
+    margin: 0;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-orb-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(196, 181, 224, 0.15) 0%, transparent 70%);
+    top: 10%;
+    left: -5%;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .hero-orb-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(232, 160, 191, 0.12) 0%, transparent 70%);
+    bottom: 10%;
+    right: -5%;
+    animation: float 10s ease-in-out infinite 2s;
+  }
+
+  /* ========================
+     SECCIONES COMUNES
+     ======================== */
+  .section-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    text-align: center;
+    margin: 0 0 2.5rem;
+    color: var(--color-text-white);
+  }
+
+  /* ========================
+     QUIÉNES SOMOS
+     ======================== */
+  .section-about {
+    padding: 6rem 0;
+  }
+
+  .about-text {
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.85;
+    max-width: 650px;
+    margin: 0 auto 2rem;
+  }
+
+  .about-subtext {
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.75;
+    max-width: 600px;
+    margin: 0 auto 3.5rem;
+  }
+
+  .cards-duo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .cards-duo {
+      grid-template-columns: 1fr;
+      max-width: 360px;
+    }
+  }
+
+  /* ========================
+     MANIFESTO
+     ======================== */
+  .section-manifesto {
+    padding: 6rem 0;
+  }
+
+  .manifesto-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  /* ========================
+     UNIVERSO VISUAL
+     ======================== */
+  .section-universe {
+    padding: 6rem 0;
+  }
+
+  .universe-closing {
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    opacity: 0.7;
+    font-style: italic;
+    margin: 2.5rem auto 0;
+    max-width: 550px;
+  }
+
+  /* ========================
+     FUTURO
+     ======================== */
+  .section-future {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+  }
+
+  .future-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .future-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.75;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ========================
+     ANIMACIONES DE ENTRADA
+     ======================== */
+  .hero-content {
+    animation: fadeInUp 1.2s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

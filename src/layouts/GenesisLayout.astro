@@ -17,6 +17,7 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/images/logo-.png" />
     <title>{title} | Pixelhada</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +114,18 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
               </svg>
             </a>
           </div>
+        </div>
+        <div class="footer-pixelhada-nav">
+          <a href="/" class="footer-pixelhada-brand">
+            <img src="/images/pixel-hada.png" alt="Pixelhada" class="footer-pixelhada-logo" width="28" height="28" />
+            <span class="footer-pixelhada-mark">&#10022;</span>
+            <span class="footer-pixelhada-name">Pixelhada</span>
+          </a>
+          <nav class="footer-pixelhada-links" aria-label="Navegación Pixelhada">
+            <a href="/" class="footer-pixelhada-link" data-i18n="footer.nav.home">Inicio</a>
+            <span class="footer-pixelhada-sep" aria-hidden="true">&#183;</span>
+            <a href="/talento" class="footer-pixelhada-link" data-i18n="footer.nav.talent">Talento</a>
+          </nav>
         </div>
         <div class="footer-genesis-copyright">
           <p data-i18n="footer.copyright">© 2026 Pixelhada. Todos los derechos reservados.</p>
@@ -273,9 +286,67 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
         height: 28px;
       }
 
+      .footer-pixelhada-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 2rem 0 0.5rem;
+        background-color: var(--color-bg-main);
+      }
+
+      .footer-pixelhada-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--color-text-white);
+      }
+
+      .footer-pixelhada-logo {
+        width: 28px;
+        height: auto;
+      }
+
+      .footer-pixelhada-mark {
+        color: var(--color-emphasis);
+        font-size: 1rem;
+      }
+
+      .footer-pixelhada-name {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        color: var(--color-text-white);
+      }
+
+      .footer-pixelhada-links {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .footer-pixelhada-link {
+        color: var(--color-text-white);
+        text-decoration: none;
+        font-size: 0.85rem;
+        opacity: 0.6;
+        transition: opacity 0.3s ease, color 0.3s ease;
+      }
+
+      .footer-pixelhada-link:hover {
+        opacity: 1;
+        color: var(--color-primary);
+      }
+
+      .footer-pixelhada-sep {
+        color: var(--color-text-white);
+        opacity: 0.3;
+        font-size: 1.1rem;
+      }
+
       .footer-genesis-copyright {
         text-align: center;
-        padding: 2rem 0;
+        padding: 1.5rem 0 2rem;
         background-color: var(--color-bg-main);
       }
 
@@ -283,6 +354,7 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
         margin: 0;
         font-size: 0.875rem;
         color: var(--color-text-white);
+        opacity: 0.5;
       }
 
       @media (max-width: 968px) {
@@ -482,6 +554,8 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
             'footer.title': 'CADA GRAN PROYECTO<br />EMPIEZA CON UNA<br />BUENA CONVERSACIÓN.',
             'footer.subtitle': 'Cuéntame qué necesitas y te ayudaré a<br />hacerlo posible.',
             'footer.copyright': '© 2026 Pixelhada. Todos los derechos reservados.',
+            'footer.nav.home': 'Inicio',
+            'footer.nav.talent': 'Talento',
             // Hero
             'hero.greeting': 'HOLA, SOY',
             'hero.cta': 'Hablemos de ideas',
@@ -542,6 +616,8 @@ const { title, whatsapp = "#", linkedin = "#", instagram = "#", showRecommendati
             'footer.title': 'EVERY GREAT PROJECT<br />STARTS WITH A<br />GOOD CONVERSATION.',
             'footer.subtitle': 'Tell me what you need and I\'ll help<br />make it happen.',
             'footer.copyright': '© 2026 Pixelhada. All rights reserved.',
+            'footer.nav.home': 'Home',
+            'footer.nav.talent': 'Talent',
             // Hero
             'hero.greeting': 'HI, I\'M',
             'hero.cta': 'Let\'s talk ideas',

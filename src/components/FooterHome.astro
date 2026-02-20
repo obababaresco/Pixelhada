@@ -1,0 +1,139 @@
+---
+
+---
+
+<footer class="footer-home">
+  <div class="footer-home-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <img
+          src="/images/pixel-hada.png"
+          alt="Pixelhada"
+          class="footer-logo-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          width="40"
+          height="40"
+        />
+        <span class="footer-logo-fallback">
+          <span class="footer-logo-mark">&#10022;</span>
+          Pixelhada
+        </span>
+      </a>
+    </div>
+
+    <nav class="footer-nav" aria-label="Portafolios">
+      <a href="/talento/genesis-duran" class="footer-link">Génesis Durán</a>
+      <span class="footer-divider" aria-hidden="true">&#183;</span>
+      <a href="/talento/oswaldo-teran" class="footer-link">Oswaldo Terán</a>
+    </nav>
+
+    <p class="footer-magic-phrase">Gracias por creer en la magia.</p>
+
+    <p class="footer-copyright">&copy; 2026 Pixelhada. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  .footer-home {
+    position: relative;
+    padding: 4rem 2rem 2.5rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(47, 46, 62, 0.4) 100%);
+    border-top: 1px solid rgba(196, 181, 224, 0.08);
+  }
+
+  .footer-home-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text-white);
+  }
+
+  .footer-logo-img {
+    height: 64px;
+    width: auto;
+  }
+
+  .footer-logo-fallback {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-text-white);
+  }
+
+  .footer-logo-mark {
+    color: var(--color-emphasis);
+    font-size: 1.4rem;
+  }
+
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-link {
+    color: var(--color-text-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    opacity: 1;
+    color: var(--color-lavender);
+  }
+
+  .footer-divider {
+    color: var(--color-text-white);
+    opacity: 0.3;
+    font-size: 1.2rem;
+  }
+
+  .footer-magic-phrase {
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.5;
+    margin: 1rem 0 0;
+    color: var(--color-soft-lilac);
+  }
+
+  .footer-copyright {
+    font-size: 0.8rem;
+    opacity: 0.4;
+    margin: 0.5rem 0 0;
+    color: var(--color-text-white);
+  }
+
+  @media (max-width: 480px) {
+    .footer-home {
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .footer-nav {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-divider {
+      display: none;
+    }
+  }
+</style>

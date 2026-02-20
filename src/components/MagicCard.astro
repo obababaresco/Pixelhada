@@ -1,0 +1,126 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon: 'design' | 'code';
+}
+
+const { title, description, href, icon } = Astro.props;
+---
+
+<a href={href} class="magic-card">
+  <div class="magic-card-icon" aria-hidden="true">
+    {icon === 'design' ? (
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <rect x="4" y="6" width="30" height="22" rx="3" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M4 14h30" stroke="currentColor" stroke-width="1" opacity="0.3" />
+        <rect x="8" y="18" width="10" height="6" rx="1" stroke="var(--color-soft-pink)" stroke-width="1" fill="none" opacity="0.6" />
+        <path d="M22 18h8M22 22h6" stroke="var(--color-lavender)" stroke-width="1" stroke-linecap="round" opacity="0.5" />
+        <circle cx="7" cy="10" r="1" fill="var(--color-soft-pink)" />
+        <circle cx="11" cy="10" r="1" fill="var(--color-lavender)" />
+        <circle cx="15" cy="10" r="1" fill="var(--color-periwinkle)" />
+        <path d="M36 18l6-8M42 10l1 3-3 1" stroke="var(--color-periwinkle)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M36 18l-2 8 8-2-6-6z" stroke="var(--color-lavender)" stroke-width="1.3" fill="none" stroke-linejoin="round" />
+        <circle cx="34" cy="26" r="0.8" fill="var(--color-soft-pink)" opacity="0.5" />
+        <path d="M40 30l1-1M43 28l1 0M41 33l1 1" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.25" />
+      </svg>
+    ) : (
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
+        <rect x="6" y="10" width="36" height="26" rx="4" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M6 18h36" stroke="currentColor" stroke-width="1" opacity="0.3" />
+        <circle cx="10" cy="14" r="1" fill="var(--color-soft-pink)" />
+        <circle cx="14" cy="14" r="1" fill="var(--color-lavender)" />
+        <circle cx="18" cy="14" r="1" fill="var(--color-periwinkle)" />
+        <path d="M14 24l4 4-4 4" stroke="var(--color-lavender)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M22 32h8" stroke="var(--color-soft-pink)" stroke-width="1.5" stroke-linecap="round" />
+        <path d="M38 8l2-2M40 12l2 0M38 16l2 2" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.3" />
+      </svg>
+    )}
+  </div>
+  <h3 class="magic-card-title">{title}</h3>
+  <p class="magic-card-description">{description}</p>
+  <span class="magic-card-cta">Explorar &rarr;</span>
+</a>
+
+<style>
+  .magic-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(47, 46, 62, 0.8), rgba(30, 30, 30, 0.9));
+    border: 1px solid rgba(196, 181, 224, 0.15);
+    text-decoration: none;
+    color: var(--color-text-white);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .magic-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--color-lavender), var(--color-periwinkle), var(--color-soft-pink));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .magic-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+      0 8px 32px rgba(196, 181, 224, 0.15),
+      0 0 60px rgba(139, 159, 214, 0.08);
+  }
+
+  .magic-card:hover::before {
+    opacity: 1;
+  }
+
+  .magic-card-icon {
+    margin-bottom: 1.5rem;
+    color: var(--color-lavender);
+    transition: transform 0.4s ease;
+  }
+
+  .magic-card:hover .magic-card-icon {
+    transform: scale(1.1);
+  }
+
+  .magic-card-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+    font-family: var(--font-heading);
+    color: var(--color-text-white);
+  }
+
+  .magic-card-description {
+    font-size: 0.95rem;
+    opacity: 0.75;
+    line-height: 1.6;
+    margin: 0 0 1.5rem;
+  }
+
+  .magic-card-cta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-lavender);
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+  }
+
+  .magic-card:hover .magic-card-cta {
+    color: var(--color-soft-pink);
+    letter-spacing: 1px;
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+interface BentoItem {
+  gradient: string;
+  area: string;
+  image?: string;
+  alt?: string;
+}
+
+const items: BentoItem[] = [
+  {
+    image: '/images/Talentos/genesis-duran/proyectos/fitur/asuaire-fitur-1.png',
+    gradient: 'linear-gradient(135deg, rgba(196,181,224,0.3), rgba(139,159,214,0.2))',
+    area: 'a',
+    alt: 'FITUR',
+  },
+  {
+    image: '/images/Talentos/genesis-duran/proyectos/wibo/wibo-1.png',
+    gradient: 'linear-gradient(135deg, rgba(232,160,191,0.25), rgba(212,187,234,0.2))',
+    area: 'b',
+    alt: 'Wibo',
+  },
+  {
+    image: '/images/Talentos/genesis-duran/proyectos/social/proyecto-1/proyecto-1-01.png',
+    gradient: 'linear-gradient(145deg, rgba(139,159,214,0.3), rgba(43,228,194,0.15))',
+    area: 'c',
+    alt: 'Climate Week NYC',
+  },
+  {
+    image: '/images/Talentos/oswaldo-teran/proyectos/devuelta-al-centro.jpg',
+    gradient: 'linear-gradient(120deg, rgba(212,187,234,0.3), rgba(196,181,224,0.15))',
+    area: 'd',
+    alt: 'Devuelta al Centro',
+  },
+  {
+    image: '/images/Talentos/oswaldo-teran/proyectos/Intisana.png',
+    gradient: 'linear-gradient(160deg, rgba(43,228,194,0.2), rgba(168,230,207,0.15))',
+    area: 'e',
+    alt: 'Intisana',
+  },
+  {
+    image: '/images/Talentos/oswaldo-teran/proyectos/Salware.png',
+    gradient: 'linear-gradient(135deg, rgba(232,160,191,0.2), rgba(139,159,214,0.25))',
+    area: 'f',
+    alt: 'Salware',
+  },
+];
+---
+
+<div class="bento-grid animate-on-scroll">
+  {items.map((item) => (
+    <div
+      class={`bento-cell bento-${item.area}`}
+      style={`background: ${item.gradient};${item.image ? `background-image: url(${item.image}); background-size: cover; background-position: center;` : ''}`}
+      data-area={item.area}
+      role="img"
+      aria-label={item.alt}
+    >
+      <div class="bento-shimmer" />
+    </div>
+  ))}
+</div>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px 200px;
+    grid-template-areas:
+      'a a b'
+      'c d e';
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bento-a { grid-area: a; }
+  .bento-b { grid-area: b; }
+  .bento-c { grid-area: c; }
+  .bento-d { grid-area: d; }
+  .bento-e { grid-area: e; }
+  .bento-f { display: none; }
+
+  .bento-cell {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(196, 181, 224, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .bento-cell:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 24px rgba(196, 181, 224, 0.12);
+  }
+
+  .bento-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.04) 50%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .bento-cell:hover .bento-shimmer {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 160px 160px 160px;
+      grid-template-areas:
+        'a a'
+        'b c'
+        'd e';
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bento-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(5, 140px);
+      grid-template-areas:
+        'a'
+        'b'
+        'c'
+        'd'
+        'e';
+    }
+  }
+</style>
