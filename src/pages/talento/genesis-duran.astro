@@ -109,11 +109,7 @@ const whatsappLink = genesis?.whatsapp
             <span class="projects-title-line1" data-i18n="projects.title.line1">EXPERIENCIAS DISEÑADAS</span>
             <span class="projects-title-line2">
               <span data-i18n="projects.title.line2">CON PROPÓSITO.</span>
-              <img
-                src="/images/estrella.png"
-                alt="Estrella"
-                class="star-icon"
-              />
+              <span class="star-mark" aria-hidden="true">&#10022;</span>
             </span>
           </h2>
           <p class="projects-subtitle" data-i18n="projects.subtitle">
@@ -1277,10 +1273,8 @@ const whatsappLink = genesis?.whatsapp
     });
 
     const handleWheel = (e: WheelEvent) => {
-      // Solo procesar si el cursor está sobre el contenedor de celdas
       if (!isMouseOverCells) return;
 
-      // Verificar que el cursor esté realmente sobre el contenedor
       const cellsRect = pathCells.getBoundingClientRect();
       const isInCells = 
         e.clientY >= cellsRect.top && 
@@ -1290,23 +1284,30 @@ const whatsappLink = genesis?.whatsapp
 
       if (!isInCells) return;
 
-      // Prevenir scroll si estamos en el contenedor de celdas
+      // Si estamos en la última posición y el usuario hace scroll hacia abajo,
+      // permitir el scroll normal para pasar a la siguiente sección
+      if (currentPosition === targetCells.length - 1 && e.deltaY > 0) {
+        return;
+      }
+
+      // Si estamos en la primera posición y el usuario hace scroll hacia arriba,
+      // permitir el scroll normal (moveBack ya maneja volver al inicio)
+      if (currentPosition === 0 && e.deltaY < 0) {
+        return;
+      }
+
       e.preventDefault();
 
-      // Throttle para evitar múltiples eventos
       if (isScrolling) return;
 
       isScrolling = true;
       
       if (e.deltaY > 0) {
-        // Scroll hacia abajo = avanzar
         moveForward();
       } else if (e.deltaY < 0) {
-        // Scroll hacia arriba = retroceder (o volver al inicio si está en la primera posición)
         moveBack();
       }
 
-      // Resetear flag después de un delay
       if (scrollTimeout) clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         isScrolling = false;
@@ -1469,6 +1470,9 @@ const whatsappLink = genesis?.whatsapp
     // Event listener para el scroll del mouse
     window.addEventListener("wheel", handleWheel, { passive: false });
 
+    // Mapa de timeouts para cancelar correctamente al re-entrar
+    const hoverTimeouts = new Map<number, ReturnType<typeof setTimeout>>();
+
     // Función genérica para configurar hover de una celda
     const setupCellHover = (cellIndex: number) => {
       const cell = getCellByIndex(cellIndex);
@@ -1478,32 +1482,42 @@ const whatsappLink = genesis?.whatsapp
         return;
       }
 
-      // Calcular posición del mensaje sobre la celda
       const updateMessagePosition = () => {
         const cellRect = cell.getBoundingClientRect();
         const wrapperRect = pixelhadaWrapper.getBoundingClientRect();
         
-        // Posicionar el mensaje centrado sobre la celda, más cerca para que parezca que sale de la celda
         const cellCenterX = cellRect.left + (cellRect.width / 2);
         const left = cellCenterX - wrapperRect.left;
-        const top = cellRect.top - wrapperRect.top - 50; // 50px arriba de la celda (más cerca)
+        const top = cellRect.top - wrapperRect.top - 50;
         
         floatingMessage.style.left = `${left}px`;
         floatingMessage.style.top = `${top}px`;
       };
 
-      // Mostrar mensaje en hover con animación de emergencia
+      const hideMessage = () => {
+        floatingMessage.classList.remove("show");
+        const prevTimeout = hoverTimeouts.get(cellIndex);
+        if (prevTimeout) clearTimeout(prevTimeout);
+
+        hoverTimeouts.set(cellIndex, setTimeout(() => {
+          if (!floatingMessage.classList.contains("show")) {
+            floatingMessage.style.display = "none";
+          }
+          hoverTimeouts.delete(cellIndex);
+        }, 350));
+      };
+
       cell.addEventListener("mouseenter", () => {
-        // Verificar si estamos en tablet o móvil (donde los mensajes hover están ocultos)
-        const isTabletOrMobile = window.matchMedia("(max-width: 968px)").matches;
-        if (isTabletOrMobile) {
-          return; // No mostrar mensajes hover en tablet y móvil
+        if (window.matchMedia("(max-width: 968px)").matches) return;
+
+        const prevTimeout = hoverTimeouts.get(cellIndex);
+        if (prevTimeout) {
+          clearTimeout(prevTimeout);
+          hoverTimeouts.delete(cellIndex);
         }
-        
+
         updateMessagePosition();
-        // Primero establecer display: block
         floatingMessage.style.display = "block";
-        // Luego en el siguiente frame, aplicar la clase show para la transición
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             floatingMessage.classList.add("show");
@@ -1511,18 +1525,17 @@ const whatsappLink = genesis?.whatsapp
         });
       });
 
-      // Ocultar mensaje al salir del hover
       cell.addEventListener("mouseleave", () => {
-        floatingMessage.classList.remove("show");
-        // Ocultar con display: none después de la transición para que no ocupe espacio
-        setTimeout(() => {
-          if (!floatingMessage.classList.contains("show")) {
-            floatingMessage.style.display = "none";
-          }
-        }, 300); // Esperar a que termine la transición
+        hideMessage();
       });
 
-      // Recalcular posición en resize
+      // Seguro adicional: ocultar al hacer scroll
+      window.addEventListener("scroll", () => {
+        if (floatingMessage.classList.contains("show")) {
+          hideMessage();
+        }
+      }, { passive: true });
+
       window.addEventListener("resize", () => {
         if (floatingMessage.classList.contains("show")) {
           updateMessagePosition();
@@ -2310,15 +2323,15 @@ const whatsappLink = genesis?.whatsapp
     letter-spacing: 1px;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.15em;
+    white-space: nowrap;
   }
 
-  .star-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+  .star-mark {
+    font-size: 0.75em;
+    color: var(--color-emphasis);
     flex-shrink: 0;
-    display: inline-block;
+    line-height: 1;
   }
 
   .projects-subtitle {
@@ -2549,11 +2562,6 @@ const whatsappLink = genesis?.whatsapp
 
     .projects-title {
       font-size: 2rem;
-    }
-
-    .star-icon {
-      width: 20px;
-      height: 20px;
     }
 
     .projects-subtitle {

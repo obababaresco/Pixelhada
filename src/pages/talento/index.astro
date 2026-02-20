@@ -264,6 +264,80 @@ const developers = developersData as Developer[];
     gap: 1.5rem;
   }
 
+  .talent-grid:has(> :only-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .talent-grid > :global(:only-child) {
+    flex-direction: row;
+    text-align: left;
+    gap: 2.5rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(47, 46, 62, 0.8), rgba(30, 30, 30, 0.6));
+    border: 1px solid rgba(196, 181, 224, 0.15);
+    position: relative;
+  }
+
+  .talent-grid > :global(:only-child::before) {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--color-lavender), var(--color-periwinkle), var(--color-soft-pink));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    transition: opacity 0.4s ease;
+  }
+
+  .talent-grid > :global(:only-child:hover::before) {
+    opacity: 0.8;
+  }
+
+  .talent-grid > :global(:only-child .talent-card-image) {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 0;
+  }
+
+  .talent-grid > :global(:only-child .talent-card-info) {
+    align-items: flex-start;
+  }
+
+  .talent-grid > :global(:only-child .talent-card-name) {
+    font-size: 1.6rem;
+  }
+
+  .talent-grid > :global(:only-child .talent-card-desc) {
+    font-size: 0.95rem;
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    .talent-grid > :global(:only-child) {
+      flex-direction: column;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      gap: 1.5rem;
+    }
+
+    .talent-grid > :global(:only-child .talent-card-info) {
+      align-items: center;
+    }
+
+    .talent-grid > :global(:only-child .talent-card-image) {
+      width: 120px;
+      height: 120px;
+    }
+
+    .talent-grid > :global(:only-child .talent-card-desc) {
+      max-width: none;
+    }
+  }
+
   /* Back */
   .talent-back {
     text-align: center;
