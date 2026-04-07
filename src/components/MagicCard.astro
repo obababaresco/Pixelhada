@@ -9,7 +9,7 @@ interface Props {
 const { title, description, href, icon } = Astro.props;
 ---
 
-<a href={href} class="magic-card">
+<a href={href} target="_blank" rel="noopener noreferrer" class="magic-card">
   <div class="magic-card-icon" aria-hidden="true">
     {icon === 'design' ? (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
@@ -40,7 +40,7 @@ const { title, description, href, icon } = Astro.props;
   </div>
   <h3 class="magic-card-title">{title}</h3>
   <p class="magic-card-description">{description}</p>
-  <span class="magic-card-cta">Explorar &rarr;</span>
+  <span class="magic-card-cta">Visitar &rarr;</span>
 </a>
 
 <style>
