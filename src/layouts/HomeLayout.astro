@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 const { title } = Astro.props;
 ---
 
@@ -49,6 +50,7 @@ const { title } = Astro.props;
     </div>
 
     <Analytics />
+    <SpeedInsights />
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const toggle = document.querySelector('.navbar-toggle') as HTMLButtonElement;
